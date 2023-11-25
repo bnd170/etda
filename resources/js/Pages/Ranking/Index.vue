@@ -1,0 +1,34 @@
+<script setup>
+import Default  from "~/Layout/Default.vue";
+import Spacer   from "~/Components/Layout/Spacer.vue";
+import Table    from "~/Components/Ranking/Table.vue";
+import Menu     from "~/Components/Ranking/Menu.vue";
+import NewsHome from "~/Components/News/Home.vue";
+
+defineProps({
+    season: {
+        type: Object,
+        required: true
+    },
+})
+
+defineOptions({layout: Default})
+</script>
+
+<template>
+    <Menu/>
+
+    <Spacer/>
+    <div class="flex flex-col w-full mb-5">
+        <h2 class="section-header">Clasificación {{ season.name }}</h2>
+    </div>
+    <Table/>
+
+    <Spacer/>
+    <div class="flex flex-col w-full mb-5">
+        <h2 class="section-header">Actualidad</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5">
+        <NewsHome/>
+    </div>
+</template>
