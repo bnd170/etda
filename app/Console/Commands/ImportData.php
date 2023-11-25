@@ -13,14 +13,14 @@ class ImportData extends Command implements PromptsForMissingInput
      *
      * @var string
      */
-    protected $signature = 'app:import {filePath}';
+    protected $signature = 'app:import {sheetId}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import data from XLSX template';
+    protected $description = 'Import data from Google Sheets';
 
     public function __construct(private readonly SeasonImport $seasonImport)
     {
@@ -29,21 +29,36 @@ class ImportData extends Command implements PromptsForMissingInput
 
     public function handle(): void
     {
-        $filePath = $this->argument('filePath');
+        $sheetId = $this->argument('sheetId');
 
-        $this->info(sprintf('Importing data from %s', $filePath));
+        $client = new \Google_Client();
+        $client->setApplicationName('Google Sheets API');
+        $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+        $client->setAccessType('offline');
+        $client->setAuthConfig(base_path('config/google/credentials.json'));
 
-        $this->info('Importing seasons');
-        $this->seasonImport->__invoke($filePath);
+        $service = new \Google_Service_Sheets($client);
+        $spreadsheet = $service->spreadsheets->get($sheetId);
+        $sheets = $spreadsheet->getSheets();
 
-        $this->info('Import process finished successfully');
+        foreach ($sheets as $sheet) {
+            $title = $sheet->getProperties()->getTitle();
+            $range = $sheet->getProperties()->getTitle() . '!A1:Z';
+            $response = $service->spreadsheets_values->get($sheetId, $range);
+            $values = $response->getValues();
+
+            if (empty($values)) {
+                continue;
+            }
+
+            dd($values);
+        }
     }
-
 
     protected function promptForMissingArgumentsUsing()
     {
         return [
-            'filePath' => 'What is the path of the file?',
+            'sheetId' => 'Enter the Google Sheet ID:',
         ];
     }
 }
