@@ -66,6 +66,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('season_id')->constrained('seasons');
             $table->foreignId('team_id')->constrained('teams');
+            $table->integer('points');
             $table->integer('wins');
             $table->integer('losses');
             $table->integer('ties');

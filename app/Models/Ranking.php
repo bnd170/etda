@@ -10,6 +10,7 @@ class Ranking extends Model
     use HasFactory;
 
     protected $table = 'rankings';
+    public $timestamps = false;
 
     protected $fillable
         = [
