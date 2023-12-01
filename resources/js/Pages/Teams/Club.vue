@@ -8,14 +8,14 @@ import Roster                    from "~/Components/Team/Roster.vue";
 
 defineOptions({layout: Default})
 
-const team = ref({
-    name: 'SD Eibar',
-    logo: 'https://upload.wikimedia.org/wikipedia/an/thumb/3/3b/SD_Eibar_logo_2016.svg/1200px-SD_Eibar_logo_2016.svg.png',
-    header: 'https://www.fedpc.org/wp-content/uploads/CARTEL-LNF7-2023-NAVALMORAL-1.png',
-    location: 'Eibar, Gipuzkoa',
-    president: 'Ander Romarate',
-    coach: 'Andoni Igartua',
-    description: 'La Sociedad Deportiva Eibar es un club de fútbol de la ciudad de Eibar, Guipúzcoa, España. Fue fundado en 1940 y juega en la Primera División de España. Disputa sus partidos como local en el Estadio Municipal de Ipurúa, con capacidad para 7.083 espectadores.',
+defineProps({
+    team: {
+        type: Object,
+        required: true
+    },
+})
+
+const tim = ref({
     awards: [
         {
             year: '2023',
@@ -37,6 +37,7 @@ const team = ref({
         },
     ]
 })
+
 </script>
 
 <template>
@@ -46,14 +47,14 @@ const team = ref({
         <h2 class="section-header">{{ team.name }}</h2>
     </div>
 
-    <Hero class="h-[32rem] mb-24">
+    <Hero class="mb-18">
         <HeroContent class="flex-col sm:flex-row">
             <img
                 :src="team.logo"
-                class="w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem] object-contain"
+                class="w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem] object-contain mb-6 sm:mb-0"
             >
             <div class="md:ml-10">
-                <Text size="5xl" bold class="block">
+                <Text size="5xl" bold class="hidden md:block">
                     {{ team.name }}
                 </Text>
                 <Text size="2xl">
@@ -62,11 +63,11 @@ const team = ref({
                 <Text is="p" class="py-6">
                     {{ team.description }}
                 </Text>
-                <Text size="2xl" class="block">
-                    Presidente/Responsable: <span class="font-bold">{{ team.president }}</span>
+                <Text size="xl" class="block">
+                    Responsable <div class="font-bold">{{ team.president }}</div>
                 </Text>
-                <Text size="2xl" class="block">
-                    Entrenador: <span class="font-bold">{{ team.coach }}</span>
+                <Text size="xl" class="block mt-3">
+                    Entrenador <div class="font-bold">{{ team.coach }}</div>
                 </Text>
             </div>
         </HeroContent>
@@ -76,8 +77,8 @@ const team = ref({
     <div class="flex flex-col w-full mb-5">
         <h2 class="section-header">Palmarés</h2>
     </div>
-    <div class="grid grid-cols-6">
-        <div class="flex flex-col items-center" v-for="award in team.awards">
+    <div class="grid lg:grid-cols-6 grid-cols-2">
+        <div class="flex flex-col items-center" v-for="award in tim.awards">
             <Text class="py-3 text-5xl">
                 {{ award.position_icon }}
             </Text>

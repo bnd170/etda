@@ -1,11 +1,10 @@
 <template>
     <div class="container mx-auto">
         <header>
-            <Navbar />
+            <Navbar>
+                <slot />
+            </Navbar>
         </header>
-        <main>
-            <slot/>
-        </main>
         <Spacer />
         <Footer/>
     </div>

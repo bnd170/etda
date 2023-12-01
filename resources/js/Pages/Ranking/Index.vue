@@ -10,6 +10,10 @@ defineProps({
         type: Object,
         required: true
     },
+    ranking: {
+        type: Array,
+        required: true
+    },
 })
 
 defineOptions({layout: Default})
@@ -17,18 +21,17 @@ defineOptions({layout: Default})
 
 <template>
     <Menu/>
-
     <Spacer/>
     <div class="flex flex-col w-full mb-5">
         <h2 class="section-header">Clasificación {{ season.name }}</h2>
     </div>
-    <Table/>
+    <Table :ranking="ranking" />
 
     <Spacer/>
-    <div class="flex flex-col w-full mb-5">
+    <div class="flex flex-col w-full mb-10">
         <h2 class="section-header">Actualidad</h2>
     </div>
-    <div class="grid md:grid-cols-2 gap-5">
+    <div class="grid md:grid-cols-2 gap-10">
         <NewsHome/>
     </div>
 </template>

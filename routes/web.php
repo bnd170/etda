@@ -23,7 +23,7 @@ Route::prefix('/')->group(static function () {
     Route::prefix('/liga-nacional')->group(static function () {
         Route::get('', [NationalLeagueController::class, 'index'])->name('national-league.index');
         Route::get('/equipos', [NationalLeagueController::class, 'teams'])->name('national-league.teams');
-        Route::get('/equipo/sd-eibar', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
+        Route::get('/equipo/{team:sheet_name}', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
     });
 
     Route::prefix('/noticias')->group(static function () {
