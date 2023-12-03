@@ -9,7 +9,7 @@
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.8.0",
         "vite": "^4.0.0",
-        "daisy-ui-kit": "^4.0.3"
+        "daisy-ui-kit": "^3.0.8"
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.0.14",

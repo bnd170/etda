@@ -23,10 +23,12 @@ RUN apk update
 # Install the `npm` package
 RUN apk add --no-cache npm
 
+RUN npm install --global yarn
+
 # Install NPM dependencies
-RUN npm install
+RUN yarn install
 
 # Build Vite assets
-RUN npm run build
+RUN yarn build
 
 CMD ["/start.sh"]
