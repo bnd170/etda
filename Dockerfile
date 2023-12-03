@@ -28,6 +28,8 @@ RUN npm install --global yarn
 # Install NPM dependencies
 RUN yarn install
 
+RUN composer install --no-dev --working-dir=/var/www/html
+
 # Build Vite assets
 RUN yarn build
 
