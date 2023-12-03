@@ -3,10 +3,10 @@ echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
 echo "Running yarn install..."
-RUN yarn install
+yarn install
 
 echo "Building assets..."
-RUN yarn build
+yarn build
 
 echo "Caching config..."
 php artisan config:cache
