@@ -17,20 +17,8 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-
 RUN apk update
-
-# Install the `npm` package
 RUN apk add --no-cache npm
-
 RUN npm install --global yarn
-
-# Install NPM dependencies
-RUN yarn install
-
-RUN composer install --no-dev --working-dir=/var/www/html
-
-# Build Vite assets
-RUN yarn build
 
 CMD ["/start.sh"]
