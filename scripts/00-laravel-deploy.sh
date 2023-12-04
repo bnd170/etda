@@ -2,6 +2,9 @@
 echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
+echo "Generating Ziggy routes..."
+php artisan ziggy:generate
+
 echo "Running yarn install..."
 yarn install
 
@@ -17,5 +20,3 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-echo "Generating Ziggy routes..."
-php artisan ziggy:generate
