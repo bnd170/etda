@@ -21,4 +21,6 @@ RUN apk update
 RUN apk add --no-cache npm
 RUN npm install --global yarn
 
+RUN crontab -l | { cat; echo "* * * * * php artisan schedule:run"; } | crontab -
+
 CMD ["/start.sh"]
