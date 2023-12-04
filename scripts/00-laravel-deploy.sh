@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+echo "Setting Google Cloud credentials..."
+touch config/google/credentials.json
+echo $AUTH > config/google/credentials.json
+
 echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
