@@ -19,7 +19,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN apk update
 RUN apk add --no-cache npm
-RUN npm install --global yarn
+RUN npm install --global yarn openssh-server
 
 RUN crontab -l | { cat; echo "* * * * * php artisan schedule:run"; } | crontab -
 
