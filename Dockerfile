@@ -30,4 +30,5 @@ RUN npm install --global yarn
 
 RUN crontab -l | { cat; echo "* * * * * php artisan schedule:run"; } | crontab -
 
+EXPOSE 22
 CMD ["/start.sh"]
