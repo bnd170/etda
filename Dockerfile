@@ -18,8 +18,8 @@ ENV LOG_CHANNEL stderr
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN apk update
-RUN apk add --no-cache npm
-RUN npm install --global yarn openssh-server
+RUN apk add --no-cache npm openssh-server
+RUN npm install --global yarn
 
 RUN crontab -l | { cat; echo "* * * * * php artisan schedule:run"; } | crontab -
 
