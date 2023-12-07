@@ -1,7 +1,11 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
+USER root
 RUN apk update && apk upgrade
 RUN apk add --no-cache openssh-server
+
+# Create a new user and give it shell access
+RUN adduser -D user && echo "user:password" | chpasswd && addgroup user root
 
 COPY . .
 
