@@ -4,7 +4,7 @@
         <div class="drawer-content flex flex-col">
             <!-- Navbar -->
             <div class="w-full navbar">
-                <div class="flex-1 px-2 mx-2 text-xl font-bold">El Talón de Aquiles</div>
+                <a href="/" class="flex-1 px-2 mx-2 text-xl font-bold">El Talón de Aquiles</a>
                 <div class="flex-none hidden lg:block">
                     <ul class="menu menu-horizontal">
                         <Menu />
