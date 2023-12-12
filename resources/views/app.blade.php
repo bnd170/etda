@@ -7,6 +7,8 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Istok+Web&family=Josefin+Sans:wght@300&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
 
         @routes

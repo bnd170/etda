@@ -22,10 +22,9 @@ const hour = computed(() => formatDate({hour: '2-digit', minute: '2-digit'}));
 </script>
 
 <template>
-    <div class="border-2 border-neutral flex flex-col">
+    <div class="border-2 border-neutral lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col">
         <div class="bg-neutral flex flex-row px-5 py-2 font-bold">
-            <span class="w-1/2">{{ day }} {{ date }}</span>
-            <span class="w-1/2 text-right">{{ hour }}</span>
+            Jornada {{ game.journey }}
         </div>
         <div class="flex flex-row py-3 px-5 items-start flex-grow">
             <Team :team="game.home_team"/>
@@ -33,10 +32,14 @@ const hour = computed(() => formatDate({hour: '2-digit', minute: '2-digit'}));
             <Team :team="game.away_team"/>
         </div>
         <div class="flex flex-row px-5 py-2 font-bold items-center bg-neutral">
-            <span class="w-1/2">📍 {{ game.venue }}</span>
-            <span class="w-1/2 text-right" v-if="game.streaming">
-                <a :href="game.streaming" target="_blank" class="btn btn-ghost btn-sm"> Ver en directo</a>
-            </span>
+            <div class="w-1/2">
+                <p>{{ day }} {{ date }}</p>
+                <p class="font-bold">{{ hour }}</p>
+            </div>
+            <div class="w-1/2 text-right">
+                <p>{{ game.location }}</p>
+                <p>{{ game.province }}</p>
+            </div>
         </div>
     </div>
 </template>
