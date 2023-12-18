@@ -16,10 +16,12 @@
         "@jambonn/vue-concise-carousel": "^2.1.31",
         "@tailwindcss/typography": "^0.5.10",
         "@vitejs/plugin-vue": "^4.4.1",
+        "apexcharts": "^3.45.0",
         "autoprefixer": "^10.4.16",
         "daisyui": "^4.0.3",
         "postcss": "^8.4.31",
         "tailwindcss": "^3.3.5",
-        "vue": "^3.3.8"
+        "vue": "^3.3.8",
+        "vue3-apexcharts": "^1.4.4"
     }
 }

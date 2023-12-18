@@ -2,9 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Game;
 use App\Models\Ranking;
 use App\Models\Season;
 use App\Models\Team;
+use App\Services\GoogleSheets\GameStatusTranslator;
+use Carbon\Carbon;
 use Google\Service\Sheets\Sheet;
 use Google_Client;
 use Google_Service_Sheets;
@@ -32,7 +35,9 @@ class ImportData extends Command implements PromptsForMissingInput
 
     private string $sheetId;
 
-    public function __construct(private readonly SeasonImport $seasonImport)
+    private string $seasonYear;
+
+    public function __construct()
     {
         parent::__construct();
     }
@@ -55,11 +60,12 @@ class ImportData extends Command implements PromptsForMissingInput
             $title = $sheet->getProperties()->getTitle();
             switch ($title) {
                 case 'Temporada':
+                    $this->seasonYear = $this->getSeasonYear($sheet);
                     $this->importRanking($sheet);
                     break;
-                //                case 'Partidos':
-                //                    $this->importMatches($sheet);
-                //                    break;
+                case 'Partidos':
+                    $this->importGames($sheet);
+                    break;
             }
 
             $this->info("Importing $title...");
@@ -73,11 +79,42 @@ class ImportData extends Command implements PromptsForMissingInput
         ];
     }
 
-    private function importRanking(Sheet $sheet)
+    private function importGames(Sheet $sheet)
     {
-        $seasonYear = $this->getSeasonYear($sheet);
+        $season   = $this->findSeason();
+        $range    = $sheet->getProperties()->getTitle().'!A2:J30';
+        $response = $this->service->spreadsheets_values->get($this->sheetId, $range);
+        $rows     = $this->rowsToJson($response->getValues());
 
-        $season   = Season::where('year', $seasonYear)->first();
+        foreach ($rows as $row) {
+            Game::updateOrCreate([
+                                     'season_id' => $season->id,
+                                     'sheet_id'  => $row['sheet_id'],
+                                 ], [
+                                     'date'            => Carbon::createFromFormat('j/m/Y H:i:s', $row['FECHA']),
+                                     'location'        => $row['LOCALIDAD'],
+                                     'home_team_id'    => $row['LOCAL'] === '-' ? null : Team::where(
+                                         'sheet_name',
+                                         $row['LOCAL']
+                                     )->first()->id,
+                                     'away_team_id'    => $row['VISITANTE'] === '-' ? null : Team::where(
+                                         'sheet_name',
+                                         $row['VISITANTE']
+                                     )->first()->id,
+                                     'home_team_score' => $row['GOLES LOCAL'] === '-' ? null : $row['GOLES LOCAL'],
+                                     'away_team_score' => $row['GOLES VISITANTE'] === '-' ? null : $row['GOLES VISITANTE'],
+                                     'season_id'       => $season->id,
+                                     'sheet_id'        => $row['sheet_id'],
+                                     'state'           => $row['PROVINCIA'],
+                                     'round'           => str_replace('J', '', $row['JORNADA']),
+                                     'status'          => GameStatusTranslator::translate($row['ESTADO']),
+                                 ]);
+        }
+    }
+
+    private function importRanking(Sheet $sheet): void
+    {
+        $season   = $this->findSeason();
         $range    = $sheet->getProperties()->getTitle().'!A3:I10';
         $response = $this->service->spreadsheets_values->get($this->sheetId, $range);
         $rows     = $this->rowsToJson($response->getValues());
@@ -119,5 +156,10 @@ class ImportData extends Command implements PromptsForMissingInput
         }
 
         return $array;
+    }
+
+    private function findSeason(): Season
+    {
+        return Season::where('year', $this->seasonYear)->first();
     }
 }

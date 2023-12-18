@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Ranking;
 use App\Models\Season;
 use App\Models\Team;
@@ -20,6 +21,13 @@ class NationalLeagueController extends Controller
         return Inertia::render('Ranking/Index', [
             'season'  => $season,
             'ranking' => $ranking,
+        ]);
+    }
+
+    public function game(Game $game): Response
+    {
+        return Inertia::render('Games/Game', [
+            'game' => $game,
         ]);
     }
 

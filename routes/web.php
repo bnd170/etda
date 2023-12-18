@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NationalLeagueController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,13 @@ use Inertia\Inertia;
 |
 */
 Route::prefix('/')->group(static function () {
-    Route::get('', static function () {
-        return Inertia::render('Home/Index');
-    });
+    Route::get('', [HomeController::class, 'index'])->name('home.index');
 
     Route::prefix('/liga-nacional')->group(static function () {
         Route::get('', [NationalLeagueController::class, 'index'])->name('national-league.index');
         Route::get('/equipos', [NationalLeagueController::class, 'teams'])->name('national-league.teams');
         Route::get('/equipo/{team:sheet_name}', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
+        Route::get('/partido/{game:slug}', [NationalLeagueController::class, 'game'])->name('national-league.game');
     });
 
     Route::prefix('/noticias')->group(static function () {
