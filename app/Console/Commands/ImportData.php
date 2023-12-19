@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Game;
+use App\Models\Game\GameStats;
+use App\Models\Game\TeamStats;
 use App\Models\Ranking;
 use App\Models\Season;
 use App\Models\Team;
@@ -66,6 +68,8 @@ class ImportData extends Command implements PromptsForMissingInput
                 case 'Partidos':
                     $this->importGames($sheet);
                     break;
+                default:
+                    $this->importGameStats($sheet);
             }
 
             $this->info("Importing $title...");
@@ -87,28 +91,25 @@ class ImportData extends Command implements PromptsForMissingInput
         $rows     = $this->rowsToJson($response->getValues());
 
         foreach ($rows as $row) {
-            Game::updateOrCreate([
-                                     'season_id' => $season->id,
-                                     'sheet_id'  => $row['sheet_id'],
-                                 ], [
-                                     'date'            => Carbon::createFromFormat('j/m/Y H:i:s', $row['FECHA']),
-                                     'location'        => $row['LOCALIDAD'],
-                                     'home_team_id'    => $row['LOCAL'] === '-' ? null : Team::where(
-                                         'sheet_name',
-                                         $row['LOCAL']
-                                     )->first()->id,
-                                     'away_team_id'    => $row['VISITANTE'] === '-' ? null : Team::where(
-                                         'sheet_name',
-                                         $row['VISITANTE']
-                                     )->first()->id,
-                                     'home_team_score' => $row['GOLES LOCAL'] === '-' ? null : $row['GOLES LOCAL'],
-                                     'away_team_score' => $row['GOLES VISITANTE'] === '-' ? null : $row['GOLES VISITANTE'],
-                                     'season_id'       => $season->id,
-                                     'sheet_id'        => $row['sheet_id'],
-                                     'state'           => $row['PROVINCIA'],
-                                     'round'           => str_replace('J', '', $row['JORNADA']),
-                                     'status'          => GameStatusTranslator::translate($row['ESTADO']),
-                                 ]);
+            Game::updateOrCreate(
+                [
+                    'season_id' => $season->id,
+                    'sheet_id'  => $row['sheet_id'],
+                ],
+                [
+                    'date'            => Carbon::createFromFormat('j/m/Y H:i:s', $row['FECHA']),
+                    'location'        => $row['LOCALIDAD'],
+                    'home_team_id'    => $row['LOCAL'] === '-' ? null : Team::where('sheet_name', $row['LOCAL'])->first()->id,
+                    'away_team_id'    => $row['VISITANTE'] === '-' ? null : Team::where('sheet_name',$row['VISITANTE'])->first()->id,
+                    'home_team_score' => $row['GOLES LOCAL'] === '-' ? null : $row['GOLES LOCAL'],
+                    'away_team_score' => $row['GOLES VISITANTE'] === '-' ? null : $row['GOLES VISITANTE'],
+                    'season_id'       => $season->id,
+                    'sheet_id'        => $row['sheet_id'],
+                    'state'           => $row['PROVINCIA'],
+                    'round'           => str_replace('J', '', $row['JORNADA']),
+                    'status'          => GameStatusTranslator::translate($row['ESTADO']),
+                ]
+            );
         }
     }
 
@@ -147,7 +148,7 @@ class ImportData extends Command implements PromptsForMissingInput
         return $values[0][0];
     }
 
-    protected function rowsToJson(array $rows): array
+    protected function rowsToJson(array $rows, int $headerIndex = 0): array
     {
         $headers = array_shift($rows);
         $array   = [];
@@ -161,5 +162,62 @@ class ImportData extends Command implements PromptsForMissingInput
     private function findSeason(): Season
     {
         return Season::where('year', $this->seasonYear)->first();
+    }
+
+    private function importGameStats(Sheet $sheet)
+    {
+        $match_id  = 'match_'.$sheet->getProperties()->getTitle();
+        $range    = $sheet->getProperties()->getTitle().'!A9:F18';
+        $response = $this->service->spreadsheets_values->get($this->sheetId, $range);
+        $values   = $response->getValues();
+        $headers  = array_map(fn($value) => $this->toSnakeCase($value[2]), $values);
+        $rows = [];
+        foreach ($values as $key => $value) {
+            $rows[$headers[$key]]['home'] = $value[0];
+            $rows[$headers[$key]]['away'] = $value[4];
+        }
+
+        $game = Game::where('sheet_id', $match_id)->first();
+        $game->update(['stats' => $this->parseGameStats($rows)]);
+    }
+
+
+
+    private function toSnakeCase($string): string
+    {
+        $string = preg_replace('/[\'"]/', '', $string);
+        $string = preg_replace('/[^a-zA-Z0-9]+/', '_', $string);
+        $string = strtolower($string);
+
+        return $string;
+    }
+
+    protected function parseStats(array $rows, string $team): TeamStats
+    {
+        return new TeamStats(
+            possession:  $this->getData($rows['posesion'][$team]),
+            shoots:      $this->getData($rows['remates'][$team]),
+            effectivity: $this->getData($rows['efectividad'][$team]),
+            passes:      $this->getData($rows['pases_completados'][$team]),
+            steals:      $this->getData($rows['balones_recuperados'][$team]),
+            fouls:       $this->getData($rows['faltas_cometidas'][$team]),
+            corners:     $this->getData($rows['corneres_lanzados'][$team]),
+            yellowCards: $this->getData($rows['tarjetas_amarillas'][$team]),
+            redCards:    $this->getData($rows['tarjetas_rojas'][$team]),
+            penalties:   $this->getData($rows['penaltis'][$team]),
+        );
+    }
+
+    protected function parseGameStats(array $rows): GameStats
+    {
+        return GameStats::fromArray([
+                                        'home' => $this->parseStats($rows, 'home')->toArray(),
+                                        'away' => $this->parseStats($rows, 'away')->toArray(),
+                                    ]);
+    }
+
+    protected function getData($possession): int
+    {
+        return $possession === '-' ? 0 : $possession;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\GameStatsCast;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ class Game extends Model
 
     protected $casts = [
         'date' => 'datetime',
+        'stats' => GameStatsCast::class,
     ];
 
     public function sluggable(): array
