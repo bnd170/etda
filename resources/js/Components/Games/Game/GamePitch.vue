@@ -285,4 +285,24 @@ body {
     background: #f5f5f5;
     color: #8F6CAB;
 }
+.player.extremadura  {
+    background: #04A12D;
+    color: #000;
+}
+.player.hercules  {
+    background: #352ea2;
+    color: #fff;
+}
+.player.disport  {
+    background: #FEEA2B;
+    color: #000;
+}
+.player.amdda  {
+    background: #9015A1;
+    color: #fff;
+}
+.player.eibar  {
+    background: #0071B9;
+    color: #fff;
+}
 </style>
