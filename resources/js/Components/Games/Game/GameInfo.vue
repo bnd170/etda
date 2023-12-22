@@ -56,7 +56,7 @@ const status = computed(() => {
 
 <style scoped>
 .match-summary__info-container {
-    @apply flex flex-row justify-center items-center gap-5 text-white bg-neutral-700 mx-auto px-5 py-1 z-40;
+    @apply flex flex-row justify-center items-center gap-5 text-neutral bg-neutral-200 mx-auto px-5 py-1 z-40;
 }
 .match-summary__info-container .match-summary__info {
     @apply capitalize flex items-center gap-1;

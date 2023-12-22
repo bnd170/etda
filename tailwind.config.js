@@ -18,11 +18,11 @@ export default {
         themes: [
             {
                 mytheme: {
-                    "primary": "#8FBF9F",
+                    "primary": "#102D4D",
                     "secondary": "#833500",
                     "accent": "#24613b",
-                    "neutral": "#ebe2cd",
-                    "base-100": "#F5ECD7",
+                    "neutral": "#2B313F",
+                    "base-100": "#F1F4F8",
                     "info": "#0097b9",
                     "success": "#00af41",
                     "warning": "#F18F01",
