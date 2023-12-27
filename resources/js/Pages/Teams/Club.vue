@@ -1,7 +1,6 @@
 <script setup>
 import Default                   from "~/Layout/Default.vue";
 import Spacer                    from "~/Components/Layout/Spacer.vue";
-import Menu                      from "~/Components/Ranking/Menu.vue";
 import {ref}                     from "vue";
 import {Hero, HeroContent, Text} from "daisy-ui-kit";
 import Roster                    from "~/Components/Team/Roster.vue";
@@ -41,8 +40,6 @@ const tim = ref({
 </script>
 
 <template>
-    <Menu selected="teams"/>
-    <Spacer/>
     <div class="flex flex-col w-full mb-5">
         <h2 class="section-header">{{ team.name }}</h2>
     </div>

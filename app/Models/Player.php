@@ -11,13 +11,20 @@ class Player extends Model
 
     protected $table = 'players';
 
+    protected $hidden = [
+        'team_id'
+    ];
+
     protected $fillable
         = [
             'name',
+            'surname',
             'image',
             'position',
             'number',
             'classification',
             'description',
+            'age',
+            'team_id',
         ];
 }

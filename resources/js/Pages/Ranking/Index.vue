@@ -2,7 +2,6 @@
 import Default  from "~/Layout/Default.vue";
 import Spacer   from "~/Components/Layout/Spacer.vue";
 import Table    from "~/Components/Ranking/Table.vue";
-import Menu     from "~/Components/Ranking/Menu.vue";
 import NewsHome from "~/Components/News/Home.vue";
 
 defineProps({
@@ -20,10 +19,9 @@ defineOptions({layout: Default})
 </script>
 
 <template>
-    <Menu/>
     <Spacer/>
     <div class="flex flex-col w-full mb-5">
-        <h2 class="section-header">Clasificación {{ season.name }}</h2>
+        <h2 class="section-header">Clasificación</h2>
     </div>
     <Table :ranking="ranking" />
 

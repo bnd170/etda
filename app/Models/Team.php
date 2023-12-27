@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Team extends Model
 {
@@ -22,4 +23,16 @@ class Team extends Model
             'description',
             'season_id',
         ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->with = ['players'];
+    }
+
+    public function players(): HasMany
+    {
+        return $this->hasMany(Player::class)->orderBy('number');
+    }
 }

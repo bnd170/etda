@@ -25,8 +25,12 @@ const props = defineProps({
             <img :src="team.logo" :alt="team.name" :title="team.name">
         </a>
         <a href="#" class="match-summary__team-name">
+<!--        <a href="#" class="match-summary__team-name hidden md:inline">-->
             {{ team.name }}
         </a>
+<!--        <a href="#" class="match-summary__team-name inline md:hidden">-->
+<!--            {{ team.tag }}-->
+<!--        </a>-->
         <svg class="match-summary__team-svg-decoration u-hide-mob" viewBox="0 0 592 79" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <defs>
                 <linearGradient :id="`style-${team.sheet_name}`" x1="591.482" y1="432.389" x2="-155.174" y2="269.785" gradientUnits="userSpaceOnUse">
@@ -42,11 +46,12 @@ const props = defineProps({
 <style scoped>
 
 .match-summary__team {
-    @apply bg-amber-100/50 flex flex-row items-center py-5 relative w-5/12;
+    @apply bg-amber-100/50 flex flex-row items-center h-full relative w-full md:w-5/12;
 }
 
 .match-summary__team .match-summary__team-name {
-    @apply text-2xl font-bold z-10;
+    @apply text-2xl font-bold z-10 text-ellipsis overflow-hidden;
+    text-wrap: nowrap;
 }
 .match-summary__team .match-summary__team-svg-decoration {
     @apply absolute left-0 w-full h-full z-0;
@@ -63,9 +68,9 @@ const props = defineProps({
     right: -3rem;
 }
 .match-summary__team .match-summary__team-logo-container img {
-    width: 8rem;
-    height: 8rem;
+    @apply z-20 w-24 md:w-32;
 }
+
 .match-summary__team.away {
     @apply pr-24 justify-end;
 }

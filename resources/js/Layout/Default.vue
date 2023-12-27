@@ -1,13 +1,11 @@
 <template>
-    <div class="container mx-auto">
-        <header>
-            <Navbar>
-                <slot />
-            </Navbar>
-        </header>
-        <Spacer />
-        <Footer/>
-    </div>
+    <header>
+        <Navbar>
+            <slot />
+        </Navbar>
+    </header>
+    <Spacer />
+    <Footer/>
 </template>
 
 <script setup>

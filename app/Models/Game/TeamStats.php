@@ -15,6 +15,7 @@ class TeamStats
         public int $yellowCards,
         public int $redCards,
         public int $penalties,
+        public array $goals = [],
     ) {
     }
 
@@ -35,6 +36,7 @@ class TeamStats
             yellowCards: $data['yellowCards'],
             redCards: $data['redCards'],
             penalties: $data['penalties'],
+            goals: $data['goals'],
         );
     }
 
@@ -67,6 +69,7 @@ class TeamStats
             'yellowCards' => $this->yellowCards,
             'redCards' => $this->redCards,
             'penalties' => $this->penalties,
+            'goals' => $this->goals,
         ];
     }
 }

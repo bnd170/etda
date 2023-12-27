@@ -68,6 +68,8 @@ class ImportData extends Command implements PromptsForMissingInput
                 case 'Partidos':
                     $this->importGames($sheet);
                     break;
+                case 'PLANTILLA PARTIDO':
+                    break;
                 default:
                     $this->importGameStats($sheet);
             }
@@ -99,8 +101,12 @@ class ImportData extends Command implements PromptsForMissingInput
                 [
                     'date'            => Carbon::createFromFormat('j/m/Y H:i:s', $row['FECHA']),
                     'location'        => $row['LOCALIDAD'],
-                    'home_team_id'    => $row['LOCAL'] === '-' ? null : Team::where('sheet_name', $row['LOCAL'])->first()->id,
-                    'away_team_id'    => $row['VISITANTE'] === '-' ? null : Team::where('sheet_name',$row['VISITANTE'])->first()->id,
+                    'home_team_id'    => $row['LOCAL'] === '-' ? null : Team::where('sheet_name', $row['LOCAL'])->first(
+                    )->id,
+                    'away_team_id'    => $row['VISITANTE'] === '-' ? null : Team::where(
+                        'sheet_name',
+                        $row['VISITANTE']
+                    )->first()->id,
                     'home_team_score' => $row['GOLES LOCAL'] === '-' ? null : $row['GOLES LOCAL'],
                     'away_team_score' => $row['GOLES VISITANTE'] === '-' ? null : $row['GOLES VISITANTE'],
                     'season_id'       => $season->id,
@@ -167,20 +173,22 @@ class ImportData extends Command implements PromptsForMissingInput
     private function importGameStats(Sheet $sheet)
     {
         $match_id  = 'match_'.$sheet->getProperties()->getTitle();
-        $range    = $sheet->getProperties()->getTitle().'!A9:F18';
-        $response = $this->service->spreadsheets_values->get($this->sheetId, $range);
-        $values   = $response->getValues();
-        $headers  = array_map(fn($value) => $this->toSnakeCase($value[2]), $values);
-        $rows = [];
+        $goals     = $this->parseGameGoals($sheet);
+        $gameStats = $sheet->getProperties()->getTitle().'!A9:F18';
+        $response  = $this->service->spreadsheets_values->get($this->sheetId, $gameStats);
+        $values    = $response->getValues();
+        $headers   = array_map(fn($value) => $this->toSnakeCase($value[2]), $values);
+        $rows      = [];
         foreach ($values as $key => $value) {
             $rows[$headers[$key]]['home'] = $value[0];
             $rows[$headers[$key]]['away'] = $value[4];
         }
+        $rows['goals']['home'] = $goals['home'];
+        $rows['goals']['away'] = $goals['away'];
 
         $game = Game::where('sheet_id', $match_id)->first();
         $game->update(['stats' => $this->parseGameStats($rows)]);
     }
-
 
 
     private function toSnakeCase($string): string
@@ -205,6 +213,7 @@ class ImportData extends Command implements PromptsForMissingInput
             yellowCards: $this->getData($rows['tarjetas_amarillas'][$team]),
             redCards:    $this->getData($rows['tarjetas_rojas'][$team]),
             penalties:   $this->getData($rows['penaltis'][$team]),
+            goals:       $rows['goals'][$team],
         );
     }
 
@@ -219,5 +228,30 @@ class ImportData extends Command implements PromptsForMissingInput
     protected function getData($possession): int
     {
         return $possession === '-' ? 0 : $possession;
+    }
+
+    private function parseGameGoals(Sheet $sheet): array
+    {
+        return [
+            'home' => $this->parseTeamGoals($sheet, 'A23:C36'),
+            'away' => $this->parseTeamGoals($sheet, 'A37:C50'),
+        ];
+    }
+
+    private function parseTeamGoals(Sheet $sheet, string $coords): array
+    {
+        $goals    = $sheet->getProperties()->getTitle().'!'.$coords;
+        $response = $this->service->spreadsheets_values->get($this->sheetId, $goals);
+        $values   = $response->getValues();
+        $rows     = [];
+        foreach ($values as $key => $value) {
+            if ($value[2] === '-') {
+                continue;
+            }
+            $number        = $value[0];
+            $rows[$number] = explode(',', $value[2]);
+        }
+
+        return $rows;
     }
 }
