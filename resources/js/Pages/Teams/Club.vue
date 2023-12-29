@@ -124,46 +124,30 @@ const tim = ref({
             </div>
         </header>
     </div>
-    <div class="md:ml-10">
-        <Text size="5xl" bold class="hidden md:block">
-            {{ team.name }}
-        </Text>
-        <Text size="2xl">
-            {{ team.location }}
-        </Text>
-        <Text is="p" class="py-6">
-            {{ team.description }}
-        </Text>
-        <Text size="xl" class="block">
-            Responsable <div class="font-bold">{{ team.president }}</div>
-        </Text>
-        <Text size="xl" class="block mt-3">
-            Entrenador <div class="font-bold">{{ team.coach }}</div>
-        </Text>
-    </div>
 
-    <Spacer/>
-    <div class="flex flex-col w-full mb-5">
-        <h2 class="section-header">Palmarés</h2>
-    </div>
-    <div class="grid lg:grid-cols-6 grid-cols-2">
-        <div class="flex flex-col items-center" v-for="award in tim.awards">
-            <Text class="py-3 text-5xl">
-                {{ award.position_icon }}
-            </Text>
-            <Text class="text-2xl">
-                {{ award.year }}
-            </Text>
-            <Text>
-                {{ award.competition }}
-            </Text>
+    <div class="container mx-auto">
+        <Spacer/>
+        <div class="flex flex-col w-full mb-5">
+            <h2 class="section-header">Palmarés</h2>
         </div>
-    </div>
+        <div class="grid lg:grid-cols-6 grid-cols-2">
+            <div class="flex flex-col items-center" v-for="award in tim.awards">
+                <Text class="py-3 text-5xl">
+                    {{ award.position_icon }}
+                </Text>
+                <Text class="text-2xl">
+                    {{ award.year }}
+                </Text>
+                <Text>
+                    {{ award.competition }}
+                </Text>
+            </div>
+        </div>
 
-    <Spacer/>
-    <div class="flex flex-col w-full mb-5">
-        <h2 class="section-header">Plantilla</h2>
+        <Spacer/>
+        <div class="flex flex-col w-full mb-5">
+            <h2 class="section-header">Plantilla</h2>
+        </div>
+        <Roster/>
     </div>
-    <Roster/>
-
 </template>

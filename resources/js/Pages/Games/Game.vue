@@ -19,7 +19,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col w-full mt-16">
+    <div class="container mx-auto">
+        <div class="flex flex-col w-full mt-16">
         <div class="match-summary">
             <GameInfo :game="game" start/>
             <div class="match-summary__teams_container">
@@ -94,6 +95,7 @@ defineProps({
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
