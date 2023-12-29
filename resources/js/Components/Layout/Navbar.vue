@@ -22,7 +22,7 @@
                     </label>
                 </div>
                 <a href="/" class="flex-1 px-2 mx-2 text-xl font-bold">
-                    <img src="/img/logo.svg" alt="El talon de aquiles" class="w-6 mr-3">
+                    <img src="/public/img/logo.svg" alt="El talon de aquiles" class="w-6 mr-3">
                     El Talón de Aquiles
                 </a>
             </div>

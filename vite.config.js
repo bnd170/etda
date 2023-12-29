@@ -11,18 +11,14 @@ export default defineConfig({
         vue({
             script: {
                 defineModel: true
-            }
+            },
         })
     ],
-    build: {
-      rollupOptions: {
-          external: [/^\/img\/.*/],
-      }
-    },
+    publicDir: 'public',
     resolve: {
         alias: {
             'ziggy-js': '/vendor/tightenco/ziggy/dist/vue.m',
-            '~': '/resources/js'
+            '~': '/resources/js',
         },
     },
 });
