@@ -1,0 +1,30 @@
+:root {
+    --extremadura-start: #00e164;
+    --extremadura-end: #00AF43;
+    --extremadura-text: #0e0e0e;
+
+    --hercules-start: #352ea2;
+    --hercules-end: #656398;
+    --hercules-text: #fff;
+
+    --amdda-start: #9015A1;
+    --amdda-end: #4e0c59;
+    --amdda-text: #fff;
+
+    --eibar-start: #0071B9;
+    --eibar-end: #02598f;
+    --eibar-text: #fff;
+
+    --tenerife-start: #17369d;
+    --tenerife-end: #173ebe;
+    --tenerife-text: #fff;
+
+    --segunda_parte-start: #dedede;
+    --segunda_parte-end: #fff;
+    --segunda_parte-text: #8F6CAB;
+
+    --disport-start: #FEEA2B;
+    --disport-end: #d3c21c;
+    --disport-text: #000;
+
+}

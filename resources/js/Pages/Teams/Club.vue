@@ -39,36 +39,108 @@ const tim = ref({
 
 </script>
 
-<template>
-    <div class="flex flex-col w-full mb-5">
-        <h2 class="section-header">{{ team.name }}</h2>
-    </div>
+<style scoped>
+.club-container {
+    @apply w-full;
+}
 
-    <Hero class="mb-18">
-        <HeroContent class="flex-col sm:flex-row">
-            <img
-                :src="team.logo"
-                class="w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem] object-contain mb-6 sm:mb-0"
-            >
-            <div class="md:ml-10">
-                <Text size="5xl" bold class="hidden md:block">
-                    {{ team.name }}
-                </Text>
-                <Text size="2xl">
-                    {{ team.location }}
-                </Text>
-                <Text is="p" class="py-6">
-                    {{ team.description }}
-                </Text>
-                <Text size="xl" class="block">
-                    Responsable <div class="font-bold">{{ team.president }}</div>
-                </Text>
-                <Text size="xl" class="block mt-3">
-                    Entrenador <div class="font-bold">{{ team.coach }}</div>
-                </Text>
+.club-header{
+    @apply h-[30rem] w-full flex items-end relative;
+    letter-spacing: -.4px;
+}
+.club-header__logo-container {
+    @apply absolute left-0 bottom-0 flex justify-start items-center;
+    z-index: 10;
+}
+.club-header-card  {
+    @apply w-[27rem] h-[20rem] flex justify-center items-center relative rounded-tr-[2.5rem] overflow-hidden;
+}
+.club-header-card__slide-bg {
+    @apply relative h-full opacity-60;
+    flex: 1 1 50%;
+}
+.club-header-card__slide-bg--neutral {
+    @apply bg-white opacity-100;
+}
+.club-header__logo {
+    @apply w-full max-h-[15rem] absolute z-10 object-contain;
+}
+.club-image {
+    @apply w-full h-full absolute flex justify-end items-end;
+}
+.club-image::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,.35);
+}
+.club-image-bg {
+    @apply w-full h-full object-cover absolute block top-0 left-0;
+    font-family: "object-fit: cover; object-position: center";
+}
+.club-title {
+    position: relative;
+    z-index: 10;
+    margin-left: 32.4rem;
+    margin-bottom: 2rem;
+}
+.club-title__name {
+    font-size: 7rem;
+    line-height: 6.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+.club-title__info {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: #fff;
+}
+</style>
+
+<template>
+    <div class="club-container">
+        <header class="club-header">
+            <div class="club-header__logo-container">
+                <div class="club-header-card">
+                    <div class="club-header-card__slide-bg club-header-card__slide-bg--neutral"></div>
+                    <div class="club-header-card__slide-bg" :style="`background-color: var(--${team.sheet_name}-start)`"></div>
+                </div>
+                <img
+                    :src="team.logo"
+                    class="club-header__logo"
+                >
             </div>
-        </HeroContent>
-    </Hero>
+            <div class="club-image">
+                <img class="club-image-bg" src="https://statics-maker.llt-services.com/eib/images/2023/04/18/xlarge/d08f92d0-5bec-4123-b0e4-95adc57225c1.jpg" alt="">
+            </div>
+            <div class="club-title">
+                <div class="club-title__name">{{ team.name }}</div>
+                <div class="club-title__info">{{ team.city }}</div>
+            </div>
+        </header>
+    </div>
+    <div class="md:ml-10">
+        <Text size="5xl" bold class="hidden md:block">
+            {{ team.name }}
+        </Text>
+        <Text size="2xl">
+            {{ team.location }}
+        </Text>
+        <Text is="p" class="py-6">
+            {{ team.description }}
+        </Text>
+        <Text size="xl" class="block">
+            Responsable <div class="font-bold">{{ team.president }}</div>
+        </Text>
+        <Text size="xl" class="block mt-3">
+            Entrenador <div class="font-bold">{{ team.coach }}</div>
+        </Text>
+    </div>
 
     <Spacer/>
     <div class="flex flex-col w-full mb-5">

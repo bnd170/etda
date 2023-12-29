@@ -1,24 +1,16 @@
 <template>
     <div class="drawer block">
-        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+        <input ref="drawer" id="my-drawer-3" type="checkbox" class="drawer-toggle" @input="toggleMenu" />
         <div class="drawer-content flex flex-col">
             <!-- Navbar -->
             <div class="navbar">
                 <div class="flex-none">
                     <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
-                        <svg class="hb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" stroke="currentColor" stroke-width=".6" fill="rgba(0,0,0,0)" stroke-linecap="round" style="cursor: pointer">
-                            <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
-                                <animate dur="0.2s" attributeName="d" values="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7;M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7" fill="freeze" begin="start.begin" />
-                                <animate dur="0.2s" attributeName="d" values="M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7;M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7" fill="freeze" begin="reverse.begin" />
-                            </path>
-                            <rect width="10" height="10" stroke="none">
-                                <animate dur="2s" id="reverse" attributeName="width" begin="click" />
-                            </rect>
-                            <rect width="10" height="10" stroke="none">
-                                <animate dur="0.001s" id="start" attributeName="width" values="10;0" fill="freeze" begin="click" />
-                                <animate dur="0.001s" attributeName="width" values="0;10" fill="freeze" begin="reverse.begin" />
-                            </rect>
-                        </svg>
+                        <div class="hamburger" :class="iconStatus ? 'hamburger--is-open' : ''">
+                            <div class="hamburger__item hamburger__item--first"></div>
+                            <div class="hamburger__item hamburger__item--middle"></div>
+                            <div class="hamburger__item hamburger__item--last"></div>
+                        </div>
                     </label>
                 </div>
                 <a href="/" class="flex-1 px-2 mx-2 text-xl font-bold">
@@ -27,11 +19,9 @@
                 </a>
             </div>
 
-            <div  class="container mx-auto">
-                <main class="px-5 md:px-0">
-                    <slot/>
-                </main>
-            </div>
+            <main class="px-5 md:px-0">
+                <slot/>
+            </main>
 
         </div>
         <div class="drawer-side">
@@ -45,9 +35,16 @@
 
 </template>
 <script setup>
-import Menu from "~/Components/Layout/Navbar/Menu.vue";
+import Menu                       from "~/Components/Layout/Navbar/Menu.vue";
+import {ref} from "vue";
 
 const logo = '/img/logo.svg';
+
+const iconStatus = ref(false);
+
+const toggleMenu = (event) => {
+    iconStatus.value = event.target.checked;
+}
 </script>
 
 <style scoped>
@@ -57,4 +54,36 @@ const logo = '/img/logo.svg';
 .drawer-side {
     @apply z-10;
 }
+body {
+    background-color: whitesmoke;
+}
+.bg-blue-bright {
+    background-color: blue;
+}
+.hamburger {
+    height: 20px;
+    width: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.hamburger:hover {
+    cursor: pointer;
+}
+.hamburger__item {
+    height: 3px;
+    width: 100%;
+    background: #111111;
+    transition: transform 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 300ms linear;
+}
+.hamburger--is-open .hamburger__item--first {
+    transform: translate(0, 7px) rotate(45deg);
+}
+.hamburger--is-open .hamburger__item--middle {
+    opacity: 0;
+}
+.hamburger--is-open .hamburger__item--last {
+    transform: translate(0, -10px) rotate(-45deg);
+}
+
 </style>

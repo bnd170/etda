@@ -8,7 +8,6 @@ defineProps({
 </script>
 
 <template>
-
     <div class="football-pitch">
         <div class="outline marking"></div>
         <div class="box left marking"></div>
@@ -46,12 +45,22 @@ defineProps({
 </template>
 
 <style scoped>
-
 .football-pitch {
-    @apply mt-10 mx-auto relative overflow-hidden;
+    @apply mt-10 mx-auto relative overflow-hidden max-w-full;
     width: 640px;
     height: 380px;
     top: calc(50% - 380px / 2);
+    --border-width: 4px;
+    --sport-size: 4px;
+}
+@media screen and (max-width: 640px) {
+    .football-pitch {
+        width: 100%;
+        height: 250px;
+        top: 0;
+        --border-width: 2px;
+        --sport-size: 5px;
+    }
 }
 .marking {
     @apply bg-white absolute;
@@ -60,12 +69,12 @@ defineProps({
 
 .outline.marking {
     @apply w-full h-full bg-transparent;
-    border: 4px solid white;
+    border: var(--border-width) solid white;
 }
 
 .center-line {
     @apply h-full top-0;
-    width: 4px;
+    width: var(--border-width);
     left: calc(50% - 4px / 2);
 }
 
@@ -73,7 +82,7 @@ defineProps({
     width: 120px;
     height: 120px;
     border-radius: 120px;
-    border: 4px solid white;
+    border: var(--border-width) solid white;
     background: none;
     top: calc(50% - 120px / 2);
     left: calc(50% - 120px / 2);
@@ -83,8 +92,8 @@ defineProps({
     top: 25%;
     width: 16%;
     height: 50%;
-    background: transparent;
-    border: 4px solid white;
+    background-color: transparent;
+    border: var(--border-width) solid white;
 }
 
 .box.left {
@@ -105,8 +114,8 @@ defineProps({
     top: 35%;
     width: 15%;
     height: 30%;
-    background: transparent;
-    border: 4px solid white;
+    background-color: transparent;
+    border: var(--border-width) solid white;
 }
 
 .box-d.left {
@@ -126,7 +135,7 @@ defineProps({
 }
 
 .spot {
-    width: 4px;
+    width: var(--border-width);
     height: 4px;
     border-radius: 4px;
     top: calc(50% - 4px / 2);
@@ -143,7 +152,7 @@ defineProps({
 .spot.center {
     width: 8px;
     height: 8px;
-    left: calc(50% - 4px);
+    left: calc(50% - var(--sport-size));
 }
 
 .corner {
@@ -151,7 +160,7 @@ defineProps({
     height: 40px;
     border-radius: 40px;
     background: none;
-    border: 4px solid white;
+    border: var(--border-width) solid white;
 }
 
 .corner.top {
@@ -204,24 +213,33 @@ html, body {
 }
 
 body {
-    background: #333;
+    background-color: #333;
 }
 
 * {
     box-sizing: border-box;
 }
-
 .player {
     z-index: 3;
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 13px;
     color: white;
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 13px;
     position: absolute;
 }
+
+@screen sm {
+    .player {
+        width: 30px;
+        height: 30px;
+        border-radius: 20px;
+        font-size: 20px;
+    }
+}
+
 .player.home.gk {
     top: calc(50% - 20px / 2);
     left: calc(4% - 20px / 2);
@@ -279,30 +297,32 @@ body {
     left: calc(40% - 20px / 2);
 }
 .player.tenerife  {
-    background: blue;
+    background-color: var(--tenerife-start);
+    color: var(--tenerife-text);
 }
 .player.segunda_parte  {
-    background: #f5f5f5;
-    color: #8F6CAB;
+    background-color: var(--segunda_parte-start);
+    color: var(--segunda_parte-text);
 }
 .player.extremadura  {
-    background: #04A12D;
-    color: #000;
+    background-color: var(--extremadura-start);
+    color: var(--extremadura-text);
 }
 .player.hercules  {
-    background: #352ea2;
-    color: #fff;
+    background-color: var(--hercules-start);
+    color: var(--hercules-text);
 }
 .player.disport  {
-    background: #FEEA2B;
-    color: #000;
+    background-color: var(--disport-start);
+    color: var(--disport-text);
 }
 .player.amdda  {
-    background: #9015A1;
-    color: #fff;
+    background-color: var(--amdda-start);
+    color: var(--amdda-text);
 }
 .player.eibar  {
-    background: #0071B9;
-    color: #fff;
+    background-color: var(--eibar-start);
+    color: var(--eibar-text);
 }
+
 </style>

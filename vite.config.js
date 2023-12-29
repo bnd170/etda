@@ -19,6 +19,7 @@ export default defineConfig({
         alias: {
             'ziggy-js': '/vendor/tightenco/ziggy/dist/vue.m',
             '~': '/resources/js',
+            'css': '/resources/css',
         },
     },
 });

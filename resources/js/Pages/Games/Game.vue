@@ -16,38 +16,6 @@ defineProps({
         required: true
     },
 });
-
-
-const colors = {
-    extremadura: {
-        start: '#00e164',
-        end: '#00AF43'
-    },
-    hercules: {
-        start: '#352ea2',
-        end: '#656398'
-    },
-    amdda: {
-        start: '#9015A1',
-        end: '#4e0c59'
-    },
-    eibar: {
-        start: '#0071B9',
-        end: '#02598f'
-    },
-    tenerife: {
-        start: '#17369d',
-        end: '#173ebe'
-    },
-    segunda_parte: {
-        start: '#dedede',
-        end: '#fff'
-    },
-    disport: {
-        start: '#FEEA2B',
-        end: '#d3c21c'
-    }
-}
 </script>
 
 <template>
@@ -55,9 +23,9 @@ const colors = {
         <div class="match-summary">
             <GameInfo :game="game" start/>
             <div class="match-summary__teams_container">
-                <GameTeam team_position="home" :colors="colors" :score="game.home_team_score" :team="game.home_team"/>
+                <GameTeam team_position="home" :score="game.home_team_score" :team="game.home_team"/>
                 <GameScore :game="game"/>
-                <GameTeam team_position="away" :colors="colors" :score="game.away_team_score" :team="game.away_team"/>
+                <GameTeam team_position="away" :score="game.away_team_score" :team="game.away_team"/>
             </div>
             <GameInfo :game="game"/>
 
@@ -90,16 +58,16 @@ const colors = {
                                     {{ game.away_team.tag }}
                                 </div>
                             </div>
-                            <GameStat :game="game" :colors="colors" statName="possession"/>
-                            <GameStat :game="game" :colors="colors" statName="shoots"/>
-                            <GameStat :game="game" :colors="colors" statName="effectivity"/>
-                            <GameStat :game="game" :colors="colors" statName="passes"/>
-                            <GameStat :game="game" :colors="colors" statName="steals"/>
-                            <GameStat :game="game" :colors="colors" statName="fouls"/>
-                            <GameStat :game="game" :colors="colors" statName="corners"/>
-                            <GameStat :game="game" :colors="colors" statName="yellowCards"/>
-                            <GameStat :game="game" :colors="colors" statName="redCards"/>
-                            <GameStat :game="game" :colors="colors" statName="penalties"/>
+                            <GameStat :game="game" statName="possession"/>
+                            <GameStat :game="game" statName="shoots"/>
+                            <GameStat :game="game" statName="effectivity"/>
+                            <GameStat :game="game" statName="passes"/>
+                            <GameStat :game="game" statName="steals"/>
+                            <GameStat :game="game" statName="fouls"/>
+                            <GameStat :game="game" statName="corners"/>
+                            <GameStat :game="game" statName="yellowCards"/>
+                            <GameStat :game="game" statName="redCards"/>
+                            <GameStat :game="game" statName="penalties"/>
                         </div>
                     </div>
                 </div>
@@ -139,7 +107,7 @@ const colors = {
 }
 
 .match-summary .match-summary__stats_container {
-    @apply flex flex-col w-10/12 md:w-9/12 mx-auto relative;
+    @apply flex flex-col w-full md:w-9/12 md:mx-auto relative;
 }
 
 .match-summary .match-summary__stats--container-scorers {

@@ -6,10 +6,6 @@ const props = defineProps({
         type: Object,
         required: true
     },
-    colors: {
-        type: Object,
-        required: true
-    },
     statName: {
         type: String,
         required: true
@@ -54,13 +50,13 @@ const statMax = {
         <div class="w-4/12 text-lg text-center relative">
             {{ game.stats.home[statName] }}
             <div class="absolute w-full bg-neutral-100/80 h-1">
-                <div :style="`background: ${colors[game.home_team.sheet_name].start}; width: ${statPercent(game.stats.home[statName], statMax[statName])}%`" class="h-1 absolute right-0"></div>
+                <div :style="`background: var(--${game.home_team.sheet_name}-start); width: ${statPercent(game.stats.home[statName], statMax[statName])}%`" class="h-1 absolute right-0"></div>
             </div>
         </div>
         <div class="w-4/12 font-bold text-lg text-center relative">
             {{ game.stats.away[statName] }}
             <div class="absolute w-full bg-neutral-100/80 h-1">
-                <div :style="`background: ${colors[game.away_team.sheet_name].start}; width: ${statPercent(game.stats.away[statName], statMax[statName])}%`" class="h-1"></div>
+                <div :style="`background: var(--${game.away_team.sheet_name}-start); width: ${statPercent(game.stats.away[statName], statMax[statName])}%`" class="h-1"></div>
             </div>
         </div>
     </div>
