@@ -73,7 +73,7 @@ defineProps({
                     </div>
                 </div>
                 <div class="match-summary__stats--container-global">
-                    <div class="match-summary__stats--container-global__players">
+                    <div class="box match-summary__stats--container-global__players">
                         <h2 class="match-summary__title">PLANTILLA</h2>
                         <div class="w-full font-bold text-lg text-center pb-5">
                             <img :src="game.home_team.logo" :alt="game.home_team.name"
@@ -82,7 +82,7 @@ defineProps({
                         </div>
                         <TeamPlayer :player="player" v-for="player in game.home_team.players" :key="player.id"/>
                     </div>
-                    <div class="match-summary__stats--container-global__players">
+                    <div class="box match-summary__stats--container-global__players">
                         <h2 class="match-summary__title">PLANTILLA</h2>
                         <div class="w-full font-bold text-lg text-center pb-5">
                             <img :src="game.away_team.logo" :alt="game.away_team.name"
@@ -121,7 +121,7 @@ defineProps({
 }
 
 .match-summary__stats--container-global__players {
-    @apply flex bg-white rounded-2xl flex-col w-full lg:w-3/6 py-10 px-10;
+    @apply flex flex-col w-full lg:w-3/6;
 }
 
 .match-summary__stats--container-global__generic {

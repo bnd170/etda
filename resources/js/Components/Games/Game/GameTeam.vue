@@ -17,16 +17,12 @@ const props = defineProps({
 
 <template>
     <div class="match-summary__team" :class="[team.sheet_name, team_position]">
-        <a href="#" class="match-summary__team-logo-container">
+        <a :href="route('national-league.teams.club', {'sheet_name': team.sheet_name})" class="match-summary__team-logo-container">
             <img :src="team.logo" :alt="team.name" :title="team.name">
         </a>
-        <a href="#" class="match-summary__team-name">
-<!--        <a href="#" class="match-summary__team-name hidden md:inline">-->
+        <a :href="route('national-league.teams.club', {'sheet_name': team.sheet_name})" class="match-summary__team-name">
             {{ team.name }}
         </a>
-<!--        <a href="#" class="match-summary__team-name inline md:hidden">-->
-<!--            {{ team.tag }}-->
-<!--        </a>-->
         <svg class="match-summary__team-svg-decoration u-hide-mob" viewBox="0 0 592 79" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             <defs>
                 <linearGradient :id="`style-${team.sheet_name}`" x1="591.482" y1="432.389" x2="-155.174" y2="269.785" gradientUnits="userSpaceOnUse">
@@ -46,7 +42,7 @@ const props = defineProps({
 }
 
 .match-summary__team .match-summary__team-name {
-    @apply text-2xl font-bold z-10 text-ellipsis overflow-hidden;
+    @apply text-2xl font-bold z-10 text-ellipsis overflow-hidden font-['Cabin'];
     text-wrap: nowrap;
 }
 .match-summary__team .match-summary__team-svg-decoration {

@@ -19,7 +19,7 @@
                 </a>
             </div>
 
-            <main class="px-5 md:px-0">
+            <main>
                 <slot/>
             </main>
 

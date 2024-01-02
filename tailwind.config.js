@@ -9,7 +9,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                'sans': ['Work Sans', ...defaultTheme.fontFamily.sans],
+                'sans': ['Overpass', ...defaultTheme.fontFamily.sans],
+                'serif': ['Martel Sans', ...defaultTheme.fontFamily.serif],
+                'body': ['Overpass', ...defaultTheme.fontFamily.sans],
             }
         },
     },

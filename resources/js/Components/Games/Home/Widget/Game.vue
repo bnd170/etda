@@ -17,8 +17,8 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
 </script>
 
 <template>
-    <div class="group/item border-2 border-neutral lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
-        <div class="bg-neutral flex flex-row px-5 py-2 font-bold">
+    <div class="group/item border-2 border-white lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
+        <div class="bg-white flex flex-row px-5 py-2 font-bold">
             Jornada {{ game.round }}
         </div>
         <div class="relative">
@@ -34,16 +34,10 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
             </div>
             <div class="overlay group-hover/item:opacity-100" v-if="game.status !== 'pending'">
                 <a :href="route('national-league.game', {'slug': game.slug})"
-                   class="btn btn-wide btn-outline text-xl btn-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="32px" width="32px" id="Capa_1"
-                         viewBox="0 0 465.797 465.797" xml:space="preserve">
-<path
-    d="M423.532,0H42.264c-11.046,0-20,8.954-20,20v282.563c0,11.046,8.954,20,20,20h125.651l-50.474,115.203  c-4.433,10.117,0.175,21.912,10.293,26.346c2.612,1.143,5.335,1.686,8.016,1.686c7.701,0,15.041-4.474,18.329-11.979l57.507-131.256  h42.625l57.507,131.256c3.289,7.506,10.628,11.979,18.329,11.979c2.68,0,5.404-0.542,8.016-1.686  c10.118-4.434,14.726-16.228,10.293-26.346l-50.474-115.203h125.651c11.046,0,20-8.954,20-20V20C443.532,8.954,434.578,0,423.532,0z   M151.724,246.587c0,3.879-3.144,7.023-7.023,7.023h-30.433c-3.879,0-7.023-3.144-7.023-7.023V93.587  c0-3.879,3.145-7.023,7.023-7.023h30.433c3.879,0,7.023,3.144,7.023,7.023V246.587z M220.667,246.587  c0,3.879-3.144,7.023-7.023,7.023H183.21c-3.879,0-7.023-3.144-7.023-7.023V133.011c0-3.879,3.144-7.023,7.023-7.023h30.433  c3.879,0,7.023,3.144,7.023,7.023V246.587z M289.609,246.587c0,3.879-3.144,7.023-7.023,7.023h-30.433  c-3.879,0-7.023-3.144-7.023-7.023v-78.283c0-3.879,3.144-7.023,7.023-7.023h30.433c3.879,0,7.023,3.145,7.023,7.023V246.587z   M358.552,246.587c0,3.879-3.144,7.023-7.023,7.023h-30.433c-3.879,0-7.023-3.144-7.023-7.023v-42.729  c0-3.879,3.144-7.023,7.023-7.023h30.433c3.879,0,7.023,3.145,7.023,7.023V246.587z"/>
-</svg>
-                    Ver estadísticas</a>
+                   class="btn btn-wide btn-outline text-xl">Ver estadísticas</a>
             </div>
         </div>
-        <div class="flex flex-row px-5 py-2 font-bold items-center bg-neutral">
+        <div class="flex flex-row px-5 py-2 font-bold items-center bg-white">
             <div class="w-1/2">
                 <p>{{ day }} {{ date }}</p>
                 <p class="font-bold">{{ hour }}</p>

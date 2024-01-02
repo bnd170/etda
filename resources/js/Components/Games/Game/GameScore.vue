@@ -18,6 +18,6 @@ defineProps({
     @apply flex flex-col items-center justify-center w-full md:w-2/12 bg-neutral-950 text-white h-full;
 }
 .match-summary__score_container .score {
-    @apply text-4xl lg:text-6xl font-bold font-['Urbanist'];
+    @apply text-4xl lg:text-6xl font-bold font-['Cabin'];
 }
 </style>
