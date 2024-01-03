@@ -26,7 +26,8 @@ defineProps({
                 <div v-if="index === 0" class="flex flex-row w-full px-3 py-5 first" :class="`${team.sheet_name}`">
                     <div class="flex flex-col flex-grow">
                         <p class="font-extrabold">1</p>
-                        <p class="font-bold text-xl">{{ team.name }}</p>
+                        <p class="lg:block hidden font-bold text-xl">{{team.name}}</p>
+                        <p class="block lg:hidden font-bold text-xl">{{team.tag}}</p>
                         <p class="text-3xl font-extrabold">{{ team.stat }}<template v-if="is_percentage">%</template></p>
                     </div>
                     <div class="">
@@ -34,10 +35,11 @@ defineProps({
                     </div>
                 </div>
                 <div v-else class="flex flex-row w-full items-center gap-3 py-1.5 px-3">
-                    <p class="text-neutral-900/50">{{ index + 1}}</p>
-                    <div class="font-[Overpass] flex-grow flex flex-row items-center gap-4">
+                    <p class="text-neutral-900/50 mr-1">{{ index + 1}}</p>
+                    <div class="font-[Overpass] flex-grow flex flex-row items-center gap-2">
                         <img class="w-8" :src="team.logo"/>
-                        <p>{{team.name}}</p>
+                        <p class="lg:block hidden">{{team.name}}</p>
+                        <p class="block lg:hidden">{{team.tag}}</p>
                     </div>
                     <div class="text-lg font-extrabold">
                         {{ team.stat }}<template v-if="is_percentage">%</template>
