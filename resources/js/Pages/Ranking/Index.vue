@@ -21,17 +21,17 @@ defineOptions({layout: Default})
 <template>
     <div class="container mx-auto">
         <Spacer/>
-        <div class="flex flex-col w-full mb-5">
-            <h2 class="section-header">Clasificación</h2>
+        <div class="box">
+            <div class="box-title">CLASIFICACIÓN</div>
+            <Table :ranking="ranking"/>
         </div>
-        <Table :ranking="ranking"/>
 
         <Spacer/>
-        <div class="flex flex-col w-full mb-10">
-            <h2 class="section-header">Actualidad</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-10">
-            <NewsHome/>
+        <div class="box">
+            <div class="box-title">ACTUALIDAD</div>
+            <div class="grid md:grid-cols-2 gap-10">
+                <NewsHome/>
+            </div>
         </div>
     </div>
 </template>

@@ -1,11 +1,9 @@
 <template>
-    <div class="flex flex-col">
-        <div class="flex flex-col w-full mb-5">
-            <h2 class="section-header">{{ title }}</h2>
-        </div>
+    <div class="box flex flex-col">
+        <h2 class="box-title">{{ title }}</h2>
         <Carousel autoplay loop :autoplayTimeout="4000"
                   :pagination-enabled="false"
-                  :per-page-custom="[[320,1], [1024,2], [1280,3], [1536,4]]">
+                  :per-page-custom="[[320,1], [1024,2], [1280,3]]">
             <slide v-for="game in gamesToShow" :key="game.id">
                 <Game :game="game"/>
             </slide>

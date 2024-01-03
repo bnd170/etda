@@ -17,8 +17,8 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
 </script>
 
 <template>
-    <div class="group/item border-2 border-white lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
-        <div class="bg-white flex flex-row px-5 py-2 font-bold">
+    <div class="group/item bg-gray-100/30 lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
+        <div class="flex flex-row px-5 py-2 font-bold bg-gradient-to-br from-neutral-100 to-neutral-100/10">
             Jornada {{ game.round }}
         </div>
         <div class="relative">
@@ -37,7 +37,7 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
                    class="btn btn-wide btn-outline text-xl">Ver estadísticas</a>
             </div>
         </div>
-        <div class="flex flex-row px-5 py-2 font-bold items-center bg-white">
+        <div class="flex flex-row px-5 pb-2 py-3 font-bold items-center bg-gradient-to-br from-neutral-100 to-neutral-100/10">
             <div class="w-1/2">
                 <p>{{ day }} {{ date }}</p>
                 <p class="font-bold">{{ hour }}</p>
@@ -53,7 +53,7 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
 <style scoped>
 .overlay {
     @apply absolute w-full h-full top-0 left-0 opacity-0;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(3px);
     transition: opacity 0.3s ease-in-out;
 }
 

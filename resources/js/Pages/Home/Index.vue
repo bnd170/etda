@@ -2,6 +2,7 @@
 import Default           from "~/Layout/Default.vue";
 import GamesWidget       from "~/Components/Games/Home/GamesWidget.vue";
 import {Carousel, Slide} from '@jambonn/vue-concise-carousel';
+import Table             from "~/Components/Ranking/Table.vue";
 
 defineOptions({layout: Default})
 
@@ -13,7 +14,11 @@ defineProps({
     playedGames: {
         type: Array,
         required: true
-    }
+    },
+    ranking: {
+        type: Array,
+        required: true
+    },
 });
 </script>
 
@@ -45,7 +50,17 @@ defineProps({
                 </slide>
             </Carousel>
         </div>
-        <GamesWidget class="mt-20" :games="nextGames" title="Próximos partidos" v-if="nextGames.length"/>
-        <GamesWidget class="mt-20" :games="playedGames" title="Resultados" v-if="playedGames.length"/>
+        <div class="flex flex-row space-x-10 items-start mt-10">
+            <div>
+                <GamesWidget class="w-full" :games="nextGames" title="Próximos partidos" v-if="nextGames.length"/>
+                <GamesWidget class="w-full mt-10" :games="playedGames" title="Resultados" v-if="playedGames.length"/>
+            </div>
+            <div class="box w-2/6">
+                <div class="box-title">CLASIFICACIÓN</div>
+                <Table :ranking="ranking" short />
+            </div>
+        </div>
+
+
     </div>
 </template>

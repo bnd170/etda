@@ -14,13 +14,14 @@ const post = ref({
 </script>
 
 <template>
-    <Spacer />
     <article>
-        <img class="object-cover w-full h-[40rem] my-10" src="https://www.fedpc.org/wp-content/uploads/CARTEL-LNF7-2023-NAVALMORAL-1-724x1024.png" :alt="post.title">
-        <h1 class="text-5xl">{{ post.title}}</h1>
-        <p class="mt-3">{{ post.date }} - Por: <b>{{ post.author }}</b></p>
-        <spacer />
-        <div class="body" v-html="post.body"></div>
+        <img class="object-cover w-full h-[10rem] md:h-[22rem] lg:h-[40rem] mb-7 md:mb-20" src="https://www.fedpc.org/wp-content/uploads/CARTEL-LNF7-2023-NAVALMORAL-1-724x1024.png" :alt="post.title">
+        <div class="box container mx-auto">
+            <h1 class="text-3xl md:text-5xl">{{ post.title}}</h1>
+            <p class="mt-3">{{ post.date }} - Por: <b>{{ post.author }}</b></p>
+            <spacer />
+            <div class="body" v-html="post.body"></div>
+        </div>
     </article>
 </template>
 
@@ -29,6 +30,6 @@ article {
     @apply lg:mx-64;
 }
 .body > p {
-    @apply my-10 text-xl;
+    @apply my-10 md:text-xl leading-7 text-justify;
 }
 </style>
