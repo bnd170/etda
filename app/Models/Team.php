@@ -28,11 +28,16 @@ class Team extends Model
     {
         parent::__construct($attributes);
 
-        $this->with = ['players'];
+        $this->with = ['players', 'awards'];
     }
 
     public function players(): HasMany
     {
         return $this->hasMany(Player::class)->orderBy('number');
+    }
+
+    public function awards(): HasMany
+    {
+        return $this->hasMany(TeamAward::class);
     }
 }

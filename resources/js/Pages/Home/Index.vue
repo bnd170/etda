@@ -58,6 +58,7 @@ defineProps({
             <div class="box w-2/6">
                 <div class="box-title">CLASIFICACIÓN</div>
                 <Table :ranking="ranking" short />
+                <a class="btn btn-block btn-ghost mt-10" :href="route('national-league.index')">Más detalles</a>
             </div>
         </div>
 

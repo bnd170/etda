@@ -28,12 +28,12 @@ defineProps({
         </tr>
         </thead>
         <tbody class="text-lg">
-        <tr v-for="ranking in ranking" :key="ranking.id">
-            <td>
+        <tr v-for="(ranking, index) in ranking" :key="ranking.id">
+            <td :class="{'playoff': index < 4}">
                 <a :href="route('national-league.teams.club', {'sheet_name': ranking.team.sheet_name})">
                     <div class="flex items-center gap-3">
                         <div class="avatar">
-                            <div class="mask mask-squircle" :class="{'w-16 h-16': !short, 'w-10 h-10': short}">
+                            <div :class="{'w-16 h-16': !short, 'w-10 h-10': short}">
                                 <img
                                     class="w-full h-full"
                                     :src="ranking.team.logo"
@@ -57,12 +57,20 @@ defineProps({
             <td v-if="!short" class="hidden xl:table-cell">{{ ranking.goal_differential }}</td>
         </tr>
         </tbody>
-
     </table>
+
+    <div class="flex flex-row justify-end items-center gap-3 mt-5 border-t border-gray-900 pt-5">
+        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        <div>Playoff</div>
+    </div>
 </template>
 
 <style>
 .avatar img {
     @apply object-contain !important;
+}
+
+.playoff {
+    @apply border-l-4 border-green-500/50 !important;
 }
 </style>
