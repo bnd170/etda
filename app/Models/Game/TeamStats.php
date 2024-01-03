@@ -72,4 +72,21 @@ class TeamStats
             'goals' => $this->goals,
         ];
     }
+
+    public function sum(TeamStats $teamStats): self
+    {
+        return new self(
+            possession: $this->possession + $teamStats->possession,
+            shoots: $this->shoots + $teamStats->shoots,
+            effectivity: $this->effectivity + $teamStats->effectivity,
+            passes: $this->passes + $teamStats->passes,
+            steals: $this->steals + $teamStats->steals,
+            fouls: $this->fouls + $teamStats->fouls,
+            corners: $this->corners + $teamStats->corners,
+            yellowCards: $this->yellowCards + $teamStats->yellowCards,
+            redCards: $this->redCards + $teamStats->redCards,
+            penalties: $this->penalties + $teamStats->penalties,
+            goals: $this->goals + $teamStats->goals,
+        );
+    }
 }

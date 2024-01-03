@@ -24,6 +24,8 @@ class NationalLeagueController extends Controller
         return Inertia::render('Ranking/Index', [
             'season'  => $season,
             'ranking' => $ranking,
+            'stats'   => $stats->stats(),
+            'top_stats' => $stats->generateGlobalStats()->toArray(),
         ]);
     }
 
