@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
@@ -40,6 +41,11 @@ class NewsScreen extends Screen
         $task->content = $request->input('news.content');
         $task->cover   = $request->input('news.cover');
         $task->save();
+    }
+
+    public function delete(News $news)
+    {
+        $news->delete();
     }
 
     /**
@@ -81,7 +87,15 @@ class NewsScreen extends Screen
     {
         return [
             Layout::table('news', [
+                TD::make('adminCreatedAt', 'Created at'),
                 TD::make('title', 'Title'),
+                TD::make('Actions')
+                    ->alignRight()
+                    ->render(function (News $news) {
+                        return Button::make('Delete')
+                            ->confirm('After deleting, the news will be gone forever.')
+                            ->method('delete', ['news' => $news->id]);
+                    }),
             ]),
             Layout::modal(
                 'newsModal',
