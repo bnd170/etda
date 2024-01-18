@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\News;
 use App\Models\Ranking;
 use App\Models\Season;
 use App\Models\Team;
@@ -20,12 +21,14 @@ class NationalLeagueController extends Controller
             'team'
         )->get();
         $stats = $teamStatsArranger();
+        $news = News::orderBy('created_at', 'desc')->limit(3)->get();
 
         return Inertia::render('Ranking/Index', [
             'season'  => $season,
             'ranking' => $ranking,
             'stats'   => $stats->stats(),
             'top_stats' => $stats->generateGlobalStats()->toArray(),
+            'news' => $news,
         ]);
     }
 

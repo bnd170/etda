@@ -21,6 +21,10 @@ defineProps({
     top_stats: {
         type: Array,
         required: true
+    },
+    news: {
+        type: Array,
+        required: true
     }
 })
 
@@ -57,7 +61,7 @@ defineOptions({layout: Default})
         <div class="box">
             <div class="box-title">ACTUALIDAD</div>
             <div class="grid md:grid-cols-2 gap-10">
-                <NewsHome/>
+                <NewsHome :news="news"/>
             </div>
         </div>
     </div>

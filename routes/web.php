@@ -27,6 +27,6 @@ Route::prefix('/')->group(static function () {
     });
 
     Route::prefix('/noticias')->group(static function () {
-        Route::get('', [NewsController::class, 'post'])->name('news.post');
+        Route::get('{news:slug}', [NewsController::class, 'post'])->name('news.post');
     });
 });

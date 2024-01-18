@@ -37,7 +37,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('News')
                 ->icon('bs.book')
                 ->title('Navigation')
-                ->route('platform.news'),
+                ->route('platform.news.list'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
