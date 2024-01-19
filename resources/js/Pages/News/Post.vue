@@ -1,7 +1,9 @@
 <script setup>
-import Default         from "~/Layout/Default.vue";
-import {computed, ref} from "vue";
-import Spacer          from "~/Components/Layout/Spacer.vue";
+import Default    from "~/Layout/Default.vue";
+import {computed} from "vue";
+import Spacer     from "~/Components/Layout/Spacer.vue";
+import { Head } from '@inertiajs/vue3'
+
 
 defineOptions({layout: Default})
 const props = defineProps({
@@ -21,13 +23,17 @@ const createdAt = computed(() => {
 </script>
 
 <template>
-    <article>
-        <img class="object-cover w-full h-[10rem] md:h-[22rem] lg:h-[40rem] mb-7 md:mb-20"
-             :src="news.cover_image" :alt="news.title">
+    <Head>
+        <title>{{ news.title }} - El Talón de Aquiles</title>
+    </Head>
+    <article class="container mx-auto">
         <div class="box container mx-auto">
-            <h1 class="text-3xl md:text-5xl">{{ news.title }}</h1>
+            <img
+                class="object-scale-down xl:object-cover w-full h-[10rem] md:h-[22rem] lg:h-[30rem] mb-7 md:mb-10 rounded-xl"
+                :src="news.cover_image" :alt="news.title">
+            <h1 class="text-3xl md:text-5xl font-[Cabin] font-extrabold">{{ news.title }}</h1>
             <p class="mt-3">{{ createdAt }}</p>
-            <spacer />
+            <spacer/>
             <div class="body" v-html="news.content"></div>
         </div>
     </article>
@@ -37,7 +43,12 @@ const createdAt = computed(() => {
 article {
     @apply lg:mx-64;
 }
+
 .body > p {
-    @apply my-10 md:text-xl leading-7 text-justify;
+    @apply md:text-xl leading-7 text-justify;
+}
+
+.container {
+    @apply max-w-[80rem];
 }
 </style>
