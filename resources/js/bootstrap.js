@@ -9,6 +9,7 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import 'css/variables.css';
 
 createInertiaApp({
+    title: title => `${title} ${title ? '-' : ''} El Talón de Aquiles`,
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         return pages[`./Pages/${name}.vue`]

@@ -24,7 +24,7 @@ const createdAt = computed(() => {
 
 <template>
     <Head>
-        <title>{{ news.title }} - El Talón de Aquiles</title>
+        <title>{{ news.title }}</title>
     </Head>
     <article class="container mx-auto">
         <div class="box container mx-auto">
