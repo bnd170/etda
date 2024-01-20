@@ -9,16 +9,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Attachment\Models\Attachment;
+use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Like;
 use Orchid\Screen\AsSource;
 
 class News extends Model
 {
-    use HasFactory, AsSource, Sluggable;
+    use HasFactory, AsSource, Sluggable, Filterable;
 
     protected $fillable = [
         'title',
         'content',
         'cover_id',
+    ];
+
+    protected $allowedSorts = [
+        'title',
+        'created_at',
+        'updated_at'
+    ];
+
+
+    protected $allowedFilters = [
+        'title' => Like::class,
     ];
 
     protected $appends = [
@@ -39,9 +52,15 @@ class News extends Model
         return Attribute::make(get: fn () => Carbon::create($this->created_at)->format('Y-m-d H:i:s'));
     }
 
+
+    protected function adminUpdatedAt(): Attribute
+    {
+        return Attribute::make(get: fn () => Carbon::create($this->updated_at)->format('Y-m-d H:i:s'));
+    }
+
     protected function coverImage(): Attribute
     {
-        return Attribute::make(get: fn () => env('CLOUDFLARE_R2_DOMAIN', '').$this->cover?->physicalPath());
+        return Attribute::make(get: fn () => $this->cover?->url);
     }
 
     protected function cover(): HasOne

@@ -22,7 +22,7 @@ class NewsListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'news' => News::paginate(),
+            'news' => News::filters()->defaultSort('created_at')->paginate(),
         ];
     }
 
@@ -54,8 +54,9 @@ class NewsListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Create new')
+            Link::make('Create')
                 ->icon('pencil')
+                ->class('btn')
                 ->route('platform.news.edit')
         ];
     }
@@ -69,16 +70,21 @@ class NewsListScreen extends Screen
     {
         return [
             Layout::table('news', [
-                TD::make('adminCreatedAt', 'Created at'),
                 TD::make('title', 'Title')
+                    ->sort()
+                    ->filter(Input::make())
                     ->render(function (News $news) {
                         return Link::make($news->title)
                             ->route('platform.news.edit', $news);
                     }),
+                TD::make('adminCreatedAt', 'Created at')->sort(),
+                TD::make('adminUpdatedAt', 'Last updated')->sort(),
                 TD::make('Actions')
                     ->alignRight()
                     ->render(function (News $news) {
                         return Button::make('Delete')
+                            ->icon('trash')
+                            ->class('btn btn-danger')
                             ->confirm('After deleting, the news will be gone forever.')
                             ->method('delete', ['news' => $news->id]);
                     }),

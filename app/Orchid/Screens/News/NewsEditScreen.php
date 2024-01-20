@@ -52,15 +52,19 @@ class NewsEditScreen extends Screen
                 ->method('createOrUpdate')
                 ->canSee(!$this->news->exists),
 
+            Button::make()
+                ->icon('trash')
+                ->class('btn btn-danger float-right py-2')
+                ->confirm('After deleting, the news will be gone forever.')
+                ->method('remove')
+                ->canSee($this->news->exists),
+
             Button::make('Update')
-                ->icon('note')
+                ->icon('disk')
+                ->class('btn btn-success float-right')
                 ->method('createOrUpdate')
                 ->canSee($this->news->exists),
 
-            Button::make('Remove')
-                ->icon('trash')
-                ->method('remove')
-                ->canSee($this->news->exists),
         ];
     }
 
@@ -81,6 +85,7 @@ class NewsEditScreen extends Screen
                         ->title('Large web banner image, generally in the front and center')
                         ->width(1600)
                         ->height(600)
+                        ->maxFileSize(0.5)
                         ->targetId(),
                 ]
             ),

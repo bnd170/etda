@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "league/csv": "^9.0",
         "league/flysystem-aws-s3-v3": "^3.0",
+        "orchid/crud": "^4.1",
         "orchid/platform": "^14.17",
         "phpoffice/phpspreadsheet": "^1.29",
         "sentry/sentry-laravel": "^4.1",
