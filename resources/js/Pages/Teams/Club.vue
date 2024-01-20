@@ -97,7 +97,7 @@ const have_awards = ref(props.team.awards.length);
             </div>
             <div class="club-image">
                 <img class="club-image-bg"
-                     src="https://statics-maker.llt-services.com/eib/images/2023/04/18/xlarge/d08f92d0-5bec-4123-b0e4-95adc57225c1.jpg"
+                     :src="team.cover"
                      alt="">
             </div>
             <div class="club-title">

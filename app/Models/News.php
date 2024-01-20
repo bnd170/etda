@@ -47,23 +47,12 @@ class News extends Model
         ];
     }
 
-    protected function adminCreatedAt(): Attribute
-    {
-        return Attribute::make(get: fn () => Carbon::create($this->created_at)->format('Y-m-d H:i:s'));
-    }
-
-
-    protected function adminUpdatedAt(): Attribute
-    {
-        return Attribute::make(get: fn () => Carbon::create($this->updated_at)->format('Y-m-d H:i:s'));
-    }
-
-    protected function coverImage(): Attribute
+    public function coverImage(): Attribute
     {
         return Attribute::make(get: fn () => $this->cover?->url);
     }
 
-    protected function cover(): HasOne
+    public function cover(): HasOne
     {
         return $this->hasOne(Attachment::class, 'id', 'cover_id');
     }

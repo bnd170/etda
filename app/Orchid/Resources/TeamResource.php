@@ -2,11 +2,17 @@
 
 namespace App\Orchid\Resources;
 
+use App\Models\Season;
 use App\Models\Team;
+use Illuminate\Database\Eloquent\Model;
+use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
 class TeamResource extends Resource
@@ -36,6 +42,9 @@ class TeamResource extends Resource
                         ->title('Name'),
                     Input::make('tag')
                         ->title('Tag'),
+                    Relation::make('season_id')
+                        ->title('Season')
+                        ->fromModel(Season::class, 'year'),
                 ]
             ),
             Group::make(
@@ -49,8 +58,24 @@ class TeamResource extends Resource
             Input::make('city')
                 ->title('City')
                 ->placeholder('City'),
-            TextArea::make('description')
-                ->title('Description'),
+            Group::make(
+                [
+                    Quill::make('description')
+                        ->title('Description')
+                        ->toolbar(["text", "color", "header", "quote", "list", "format"]),
+                    Cropper::make('logo_id')
+                        ->title('Logo')
+                        ->width(366)
+                        ->height(366)
+                        ->maxCanvas(366)
+                        ->targetId(),
+                ]
+            ),
+            Cropper::make('cover_id')
+                ->title('Cover')
+                ->width(1900)
+                ->height(1200)
+                ->targetId(),
         ];
     }
 
@@ -68,7 +93,26 @@ class TeamResource extends Resource
                 ->render(function ($model) {
                     return $model->players->count();
                 }),
+            TD::make('season_id', 'Season')
+                ->render(function ($model) {
+                    return $model->season->year;
+                }),
 
+        ];
+    }
+
+    public function rules(Model $model): array
+    {
+        return [
+            'name'        => 'required',
+            'tag'         => 'required|max:3',
+            'city'        => 'required',
+            'coach'       => 'max:255',
+            'president'   => 'max:255',
+            'description' => 'max:3000',
+            'season_id'   => 'required|exists:seasons,id',
+            'logo_id'     => 'required|exists:attachments,id',
+            'cover_id'    => 'nullable|exists:attachments,id',
         ];
     }
 
@@ -89,6 +133,8 @@ class TeamResource extends Resource
      */
     public function filters(): array
     {
-        return [];
+        return [
+            new DefaultSorted('name', 'asc'),
+        ];
     }
 }

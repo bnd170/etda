@@ -3,10 +3,9 @@
 namespace App\Orchid\Screens\News;
 
 use App\Models\News;
-use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
@@ -57,7 +56,7 @@ class NewsListScreen extends Screen
             Link::make('Create')
                 ->icon('pencil')
                 ->class('btn')
-                ->route('platform.news.edit')
+                ->route('platform.news.edit'),
         ];
     }
 
@@ -77,8 +76,22 @@ class NewsListScreen extends Screen
                         return Link::make($news->title)
                             ->route('platform.news.edit', $news);
                     }),
-                TD::make('adminCreatedAt', 'Created at')->sort(),
-                TD::make('adminUpdatedAt', 'Last updated')->sort(),
+                TD::make('created_at', 'Created')
+                    ->usingComponent(
+                                     DateTimeSplit::class,
+                        upperFormat: 'Y-m-d',
+                        lowerFormat: 'H:i:s',
+                        timeZone:    'Europe/Madrid'
+                    )
+                    ->sort(),
+                TD::make('updated_at', 'Last updated')
+                    ->usingComponent(
+                                     DateTimeSplit::class,
+                        upperFormat: 'Y-m-d',
+                        lowerFormat: 'H:i:s',
+                        timeZone:    'Europe/Madrid'
+                    )
+                    ->sort(),
                 TD::make('Actions')
                     ->alignRight()
                     ->render(function (News $news) {
