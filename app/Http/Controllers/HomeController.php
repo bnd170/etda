@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\News;
 use App\Models\Ranking;
 use App\Models\Season;
 use Inertia\Inertia;
@@ -19,12 +20,14 @@ class HomeController extends Controller
         $ranking = Ranking::where('season_id', $season->id)->orderBy('points', 'desc')->orderBy('losses', 'asc')->with(
             'team'
         )->get();
+        $news = News::orderBy('created_at', 'desc')->limit(3)->get();
 
         return Inertia::render('Home/Index', [
             'season' => $season,
             'nextGames'  => $nextGames,
             'playedGames'  => $playedGames,
             'ranking' => $ranking,
+            'news' => $news,
         ]);
     }
 }

@@ -35,7 +35,7 @@ class News extends Model
     ];
 
     protected $appends = [
-        'cover_image',
+        'cover',
     ];
 
     public function sluggable(): array
@@ -47,12 +47,12 @@ class News extends Model
         ];
     }
 
-    public function coverImage(): Attribute
+    public function cover(): Attribute
     {
-        return Attribute::make(get: fn () => $this->cover?->url);
+        return Attribute::make(get: fn () => $this->attachment?->url);
     }
 
-    public function cover(): HasOne
+    public function attachment(): HasOne
     {
         return $this->hasOne(Attachment::class, 'id', 'cover_id');
     }

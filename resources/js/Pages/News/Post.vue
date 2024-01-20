@@ -30,7 +30,7 @@ const createdAt = computed(() => {
         <div class="box container mx-auto">
             <img
                 class="object-scale-down xl:object-cover w-full h-[10rem] md:h-[22rem] lg:h-[30rem] mb-7 md:mb-10 rounded-xl"
-                :src="news.cover_image" :alt="news.title">
+                :src="news.cover" :alt="news.title">
             <h1 class="text-3xl md:text-5xl font-[Cabin] font-extrabold">{{ news.title }}</h1>
             <p class="mt-3">{{ createdAt }}</p>
             <spacer/>

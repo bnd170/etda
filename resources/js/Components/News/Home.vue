@@ -11,7 +11,7 @@ defineProps({
     <article v-for="article in news" class="card bg-base-300/10 overflow-hidden">
         <a :href="route('news.post', {'slug': article.slug})">
             <figure class="max-h-60 xl:max-h-[30rem]">
-                <img :src="article.cover_image" :alt="article.title" :title="article.title"/>
+                <img :src="article.cover" :alt="article.title" :title="article.title"/>
             </figure>
         </a>
         <div class="card-body">

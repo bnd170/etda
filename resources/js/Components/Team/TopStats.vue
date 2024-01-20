@@ -22,6 +22,7 @@ defineProps({
     <section>
         <div class="font-[Cabin] text-xl font-extrabold mb-3 text-center">{{ stat_name }}</div>
         <div class="rounded-xl border border-neutral-200 font-[Cabin] overflow-hidden">
+            <template v-if="top_stat.length > 0">
             <div class="flex flex-row items-center border-t border-neutral-200" :class="{'border-t-0': index === 0}" v-for="(team, index) in top_stat">
                 <div v-if="index === 0" class="flex flex-row w-full px-3 py-5 first" :class="`${team.sheet_name}`">
                     <div class="flex flex-col flex-grow">
@@ -45,6 +46,10 @@ defineProps({
                         {{ team.stat }}<template v-if="is_percentage">%</template>
                     </div>
                 </div>
+            </div>
+            </template>
+            <div v-else class="text-center text-gray-600">
+                No hay datos disponibles
             </div>
         </div>
     </section>

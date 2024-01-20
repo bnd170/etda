@@ -19,6 +19,10 @@ defineProps({
         type: Array,
         required: true
     },
+    news: {
+        type: Array,
+        required: true
+    }
 });
 </script>
 
@@ -28,25 +32,18 @@ defineProps({
             <Carousel autoplay loop :autoplayTimeout="4000"
                       :pagination-enabled="false"
                       :per-page-custom="[[320,1]]">
-                <slide>
-                    <div class="relative  transition duration-300 ease-out">
-                        <img
-                            src="https://www.fedpc.org/wp-content/uploads/WhatsApp-Image-2023-04-23-at-13.26.44-1-1024x768.jpeg"
-                            class="object-cover w-full h-[600px]" alt="Campeon de Liga"/>
-                        <div
-                            class="absolute pt-5 pb-3 bottom-0 px-10 backdrop-brightness-50 bg-back/30 w-full flex flex-col">
-                            <div class="flex flex-row items-center space-x-2 mb-5">
-                                <div class="relative flex h-4 w-4 ">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-                                </div>
-                                <p class="text-gray-300 uppercase w-full font-bold">Última hora</p>
+                <slide v-for="article in news">
+                    <a :href="route('news.post', {'slug': article.slug})">
+                        <div class="relative  transition duration-300 ease-out">
+                            <img
+                                :src="article.cover"
+                                class="object-cover w-full h-[600px]" alt="Campeon de Liga"/>
+                            <div
+                                class="absolute pt-5 pb-5 bottom-0 px-10 backdrop-brightness-50 bg-back/30 w-full flex flex-col">
+                                <h2 class="text-white text-4xl w-full font-bold">{{ article.title }}</h2>
                             </div>
-                            <h2 class="text-white text-4xl w-full font-bold">LA SD ÉIBAR CONQUISTA LA LIGA NACIONAL DE
-                                FÚTBOL 7</h2>
                         </div>
-                    </div>
+                    </a>
                 </slide>
             </Carousel>
         </div>
@@ -57,7 +54,7 @@ defineProps({
             </div>
             <div class="box w-full lg:w-4/12">
                 <div class="box-title">CLASIFICACIÓN</div>
-                <Table :ranking="ranking" short />
+                <Table :ranking="ranking" short/>
                 <a class="btn btn-block btn-ghost mt-10" :href="route('national-league.index')">Más detalles</a>
             </div>
         </div>
