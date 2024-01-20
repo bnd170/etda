@@ -50,12 +50,12 @@ defineProps({
                 </slide>
             </Carousel>
         </div>
-        <div class="flex flex-row space-x-10 items-start mt-10">
-            <div>
+        <div class="flex flex-col lg:flex-row lg:space-x-5 xl:space-x-10 items-start mt-10">
+            <div class="w-full lg:w-8/12">
                 <GamesWidget class="w-full" :games="nextGames" title="Próximos partidos" v-if="nextGames.length"/>
                 <GamesWidget class="w-full mt-10" :games="playedGames" title="Resultados" v-if="playedGames.length"/>
             </div>
-            <div class="box w-2/6">
+            <div class="box w-full lg:w-4/12">
                 <div class="box-title">CLASIFICACIÓN</div>
                 <Table :ranking="ranking" short />
                 <a class="btn btn-block btn-ghost mt-10" :href="route('national-league.index')">Más detalles</a>

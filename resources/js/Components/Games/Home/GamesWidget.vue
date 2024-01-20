@@ -3,7 +3,7 @@
         <h2 class="box-title">{{ title }}</h2>
         <Carousel autoplay loop :autoplayTimeout="4000"
                   :pagination-enabled="false"
-                  :per-page-custom="[[320,1], [1024,2], [1280,3]]">
+                  :per-page-custom="[[320,1], [1024,2], [1280,2]]">
             <slide v-for="game in gamesToShow" :key="game.id">
                 <Game :game="game"/>
             </slide>
