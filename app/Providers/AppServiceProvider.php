@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(UrlGenerator $url): void
     {
         $this->forceHttpsInProd($url);
+        $this->app->bind(
+            \Orchid\Attachment\Models\Attachment::class,
+            \App\Models\Attachment::class
+        );
     }
 
     protected function forceHttpsInProd($url): void
