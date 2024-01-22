@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NationalLeagueController;
 use App\Http\Controllers\NewsController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('/')->group(static function () {
     Route::get('', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/el-proyecto', AboutUsController::class)->name('about-us.index');
 
     Route::prefix('/liga-nacional')->group(static function () {
         Route::get('', [NationalLeagueController::class, 'index'])->name('national-league.index');
