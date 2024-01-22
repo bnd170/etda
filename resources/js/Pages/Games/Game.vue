@@ -7,6 +7,7 @@ import GameStat   from "~/Components/Games/Game/GameStat.vue";
 import GamePitch  from "~/Components/Games/Game/GamePitch.vue";
 import TeamPlayer from "~/Components/Games/Game/TeamPlayer.vue";
 import GameGoal   from "~/Components/Games/Game/GameGoal.vue";
+import {Head}     from "@inertiajs/vue3";
 
 defineOptions({layout: Default})
 
@@ -19,6 +20,9 @@ defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>{{ game.home_team.name }} vs {{ game.away_team.name }} - J{{ game.round }} - LNF7PC</title>
+    </Head>
     <div class="container mx-auto">
         <div class="flex flex-col w-full mt-16">
         <div class="match-summary">

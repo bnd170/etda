@@ -3,6 +3,7 @@ import Default    from "~/Layout/Default.vue";
 import Spacer     from "~/Components/Layout/Spacer.vue";
 import {ref} from "vue";
 import Roster     from "~/Components/Team/Roster.vue";
+import {Head}     from "@inertiajs/vue3";
 
 defineOptions({layout: Default})
 
@@ -82,6 +83,9 @@ const have_awards = ref(props.team.awards.length);
 </style>
 
 <template>
+    <Head>
+        <title>{{ team.name }}</title>
+    </Head>
     <div class="club-container">
         <header class="club-header">
             <div class="club-header__logo-container">

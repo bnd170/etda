@@ -4,6 +4,7 @@ import Spacer   from "~/Components/Layout/Spacer.vue";
 import Table    from "~/Components/Ranking/Table.vue";
 import NewsHome from "~/Components/News/Home.vue";
 import TopStats from "~/Components/Team/TopStats.vue";
+import {Head}   from "@inertiajs/vue3";
 
 defineProps({
     season: {
@@ -32,6 +33,9 @@ defineOptions({layout: Default})
 </script>
 
 <template>
+    <Head>
+        <title>Liga nacional de fútbol 7 PC/DCA</title>
+    </Head>
     <div class="container mx-auto">
         <Spacer/>
         <div class="box">
