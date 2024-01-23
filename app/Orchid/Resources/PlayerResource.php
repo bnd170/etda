@@ -4,6 +4,8 @@ namespace App\Orchid\Resources;
 
 use App\Models\Player;
 use App\Models\Team;
+use App\Orchid\Filters\PlayerNameFilter;
+use App\Orchid\Filters\TeamNameFilter;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Cropper;
@@ -120,6 +122,8 @@ class PlayerResource extends Resource
     {
         return [
             new DefaultSorted('team_id', 'asc'),
+            PlayerNameFilter::class,
+            TeamNameFilter::class
         ];
     }
 }
