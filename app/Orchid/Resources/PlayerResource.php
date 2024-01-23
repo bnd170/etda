@@ -41,6 +41,9 @@ class PlayerResource extends Resource
             ),
             Group::make(
                 [
+                    Input::make('classification')
+                        ->title('Classification')
+                        ->placeholder('FT1'),
                     Input::make('number')
                         ->title('Number')
                         ->placeholder('Number'),
