@@ -38,7 +38,7 @@ class PlayerNameFilter extends Filter
      */
     public function run(Builder $builder): Builder
     {
-        return $builder->where('name', $this->request->get('player_name'));
+        return $builder->where('name', 'LIKE', "%{$this->request->get('player_name')}%");
     }
 
     /**
