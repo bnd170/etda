@@ -3,12 +3,14 @@
 namespace App\Orchid\Resources;
 
 use App\Models\Player;
+use App\Models\Team;
 use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\TD;
 
@@ -29,6 +31,13 @@ class PlayerResource extends Resource
     public function fields(): array
     {
         return [
+            Group::make(
+                [
+                    Relation::make('team_id')
+                        ->title('Equipo')
+                        ->fromModel(Team::class, 'name'),
+                ]
+            ),
             Group::make(
                 [
                     Input::make('name')
