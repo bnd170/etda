@@ -17,7 +17,7 @@ class NationalLeagueController extends Controller
     public function index(TeamStatsArranger $teamStatsArranger): Response
     {
         $season  = Season::where('in_progress', true)->first();
-        $ranking = Ranking::where('season_id', $season->id)->orderBy('points', 'desc')->orderBy('losses', 'asc')->with(
+        $ranking = Ranking::where('season_id', $season->id)->orderBy('points', 'desc')->orderBy('goal_differential', 'desc')->with(
             'team'
         )->get();
         $stats = $teamStatsArranger();

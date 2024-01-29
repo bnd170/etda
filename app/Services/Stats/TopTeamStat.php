@@ -7,7 +7,7 @@ class TopTeamStat
     public function __construct(
         public string $name,
         public string $tag,
-        public string $logo,
+        public ?string $logo,
         public string $sheetName,
         public int    $stat,
     ) {

@@ -10,7 +10,7 @@ readonly class TeamStatsResponse
         public int $teamId,
         public string $name,
         public string $tag,
-        public string $logo,
+        public ?string $logo,
         public string $sheetName,
         public int $possession,
         public int $shoots,
@@ -31,7 +31,7 @@ readonly class TeamStatsResponse
         int       $teamId,
         string    $name,
         string    $tag,
-        string    $logo,
+        ?string   $logo,
         string    $sheetName
     ): self {
         return new self(
