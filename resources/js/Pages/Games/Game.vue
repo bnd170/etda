@@ -46,8 +46,8 @@ defineProps({
                     </div>
                 </div>
 <!--                <GamePitch class="mt-10" :game="game" />-->
-                <div class="match-summary__stats--container-global">
-                    <div class="match-summary__stats--container-global__generic">
+<!--                <div class="match-summary__stats&#45;&#45;container-global">
+                    <div class="match-summary__stats&#45;&#45;container-global__generic">
                         <h2 class="match-summary__title">ESTADISTICAS</h2>
                         <div class="flex flex-col gap-5 w-full px-5">
                             <div class="match-stats__row flex">
@@ -75,7 +75,7 @@ defineProps({
                             <GameStat :game="game" statName="penalties"/>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="match-summary__stats--container-global">
                     <div class="box match-summary__stats--container-global__players">
                         <h2 class="match-summary__title">PLANTILLA</h2>

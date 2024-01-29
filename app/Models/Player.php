@@ -16,6 +16,14 @@ class Player extends Model
     protected $table = 'players';
     public $timestamps = false;
 
+
+    protected $allowedSorts = [
+        'team_id',
+        'name',
+        'surname',
+        'classification'
+    ];
+
     protected $hidden
         = [
             'team_id',
