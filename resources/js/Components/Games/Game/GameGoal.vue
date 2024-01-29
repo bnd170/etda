@@ -24,8 +24,8 @@ const shouldBeReversed = computed(() => !props.isHome);
 <template>
     <div class="scorer">
         <div class="flex justify-end gap-2 font-normal md:font-bold items-center" :class="{'flex-row-reverse': shouldBeReversed}">
-            <template v-for="(goal, index) in goals">{{ goal }}
-                <template v-if="index === goals.length">,</template>
+            <template v-for="(goal, index) in goals">{{ goal }}'
+                <template v-if="index !== goals.length">,</template>
             </template>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                  width="12" height="12" viewBox="0 0 12 12">
