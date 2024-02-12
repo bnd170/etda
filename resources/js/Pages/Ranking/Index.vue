@@ -47,7 +47,7 @@ defineOptions({layout: Default})
         <div class="box">
             <div class="box-title">TOP ESTADISTICAS</div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <TopStats stat_name="Posesión" :top_stat="top_stats.possession" is_percentage/>
+<!--                <TopStats stat_name="Posesión" :top_stat="top_stats.possession" is_percentage/>-->
                 <TopStats stat_name="Goles" :top_stat="top_stats.goals"/>
                 <TopStats stat_name="Disparos" :top_stat="top_stats.shoots"/>
                 <TopStats stat_name="Efectividad" :top_stat="top_stats.effectivity"/>
