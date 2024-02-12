@@ -38,7 +38,7 @@ class TeamStatsArranger
         return $teamStats;
     }
 
-    private function updateTeamStats(array $teamStats, $team, $stats): array
+    private function updateTeamStats(array $teamStats, Team $team, $stats): array
     {
         $teamId = $team->id;
 

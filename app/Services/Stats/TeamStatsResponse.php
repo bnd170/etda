@@ -50,7 +50,7 @@ readonly class TeamStatsResponse
             $teamStats->yellowCards,
             $teamStats->redCards,
             $teamStats->penalties,
-            0
+            $teamStats->totalGoals(),
         );
     }
 }

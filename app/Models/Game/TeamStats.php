@@ -2,6 +2,8 @@
 
 namespace App\Models\Game;
 
+use App\Services\Stats\TeamStatsGoalsTranslator;
+
 class TeamStats
 {
     public function __construct(
@@ -88,5 +90,10 @@ class TeamStats
             penalties: $this->penalties + $teamStats->penalties,
             goals: $this->goals + $teamStats->goals,
         );
+    }
+
+    public function totalGoals(): int
+    {
+        return TeamStatsGoalsTranslator::make($this->goals);
     }
 }

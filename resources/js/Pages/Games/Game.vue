@@ -51,10 +51,10 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
                         </div>
                     </div>
                     <!-- <GamePitch class="mt-10" :game="game" />-->
-                    <div class="match-summary__stats--container-global" v-if="statsLoaded">
+                    <div class="match-summary__stats--container-global" >
                         <div class="match-summary__stats--container-global__generic">
                             <h2 class="match-summary__title">ESTADISTICAS</h2>
-                            <div class="flex flex-col gap-5 w-full px-5">
+                            <div class="flex flex-col gap-5 w-full px-5" v-if="statsLoaded">
                                 <div class="match-stats__row flex">
                                     <div class="w-4/12"></div>
                                     <div class="w-4/12 font-bold text-lg text-center">
@@ -78,6 +78,9 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
                                 <GameStat :game="game" statName="yellowCards"/>
                                 <GameStat :game="game" statName="redCards"/>
                                 <GameStat :game="game" statName="penalties"/>
+                            </div>
+                            <div class="flex flex-col gap-5 w-full px-5" v-else>
+                                <h2 class="text-center text-xl text-gray-400">Estamos procesando los datos...</h2>
                             </div>
                         </div>
                     </div>
