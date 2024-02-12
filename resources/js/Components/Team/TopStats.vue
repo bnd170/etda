@@ -31,14 +31,16 @@ defineProps({
                         <p class="block lg:hidden font-bold text-xl">{{team.tag}}</p>
                         <p class="text-3xl font-extrabold">{{ team.stat }}<template v-if="is_percentage">%</template></p>
                     </div>
-                    <div class="">
-                        <img class="w-24" :src="team.logo"/>
-                    </div>
+                    <a :href="route('national-league.teams.club', {'sheet_name': team.sheet_name})" class="">
+                        <img class="w-24" :src="team.logo" :alt="team.tag"/>
+                    </a>
                 </div>
                 <div v-else class="flex flex-row w-full items-center gap-3 py-1.5 px-3">
                     <p class="text-neutral-900/50 mr-1">{{ index + 1}}</p>
                     <div class="font-[Overpass] flex-grow flex flex-row items-center gap-2">
-                        <img class="w-8" :src="team.logo"/>
+                        <a class="w-8" :href="route('national-league.teams.club', {'sheet_name': team.sheet_name})">
+                            <img class="w-full" :src="team.logo" :alt="team.tag"/>
+                        </a>
                         <p class="lg:block hidden">{{team.name}}</p>
                         <p class="block lg:hidden">{{team.tag}}</p>
                     </div>
