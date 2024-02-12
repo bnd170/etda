@@ -9,6 +9,10 @@ const props = defineProps({
     statName: {
         type: String,
         required: true
+    },
+    isPercent: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -48,13 +52,13 @@ const statMax = {
     <div class="match-stats__row flex">
         <div class="w-4/12 text-right mr-10 text-xl">{{ statTitle[statName] }}</div>
         <div class="w-4/12 text-lg text-center relative">
-            {{ game.stats.home[statName] }}
+            {{ game.stats.home[statName] }} <template v-if="isPercent">%</template>
             <div class="absolute w-full bg-neutral-100/80 h-1">
                 <div :style="`background: var(--${game.home_team.sheet_name}-start); width: ${statPercent(game.stats.home[statName], statMax[statName])}%`" class="h-1 absolute right-0"></div>
             </div>
         </div>
         <div class="w-4/12 font-bold text-lg text-center relative">
-            {{ game.stats.away[statName] }}
+            {{ game.stats.away[statName] }} <template v-if="isPercent">%</template>
             <div class="absolute w-full bg-neutral-100/80 h-1">
                 <div :style="`background: var(--${game.away_team.sheet_name}-start); width: ${statPercent(game.stats.away[statName], statMax[statName])}%`" class="h-1"></div>
             </div>

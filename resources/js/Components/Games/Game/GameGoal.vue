@@ -16,9 +16,9 @@ const props = defineProps({
     },
 });
 
-const name = computed(() => props.player.name);
-const surname = computed(() => props.player.surname);
-const shouldBeReversed = computed(() => !props.isHome);
+const name = computed(() => props.player?.name);
+const surname = computed(() => props.player?.surname);
+const shouldBeReversed = computed(() => !props?.isHome);
 </script>
 
 <template>
@@ -39,6 +39,7 @@ const shouldBeReversed = computed(() => !props.isHome);
                 </defs>
             </svg>
         </div>
+
         <div class="flex text-lg -mt-1 items-center" :class="{'justify-end': !shouldBeReversed, 'justify-start': shouldBeReversed}">
             <span class="hidden md:inline">{{ name }}</span>
             <span class="surname">{{ surname }}</span>

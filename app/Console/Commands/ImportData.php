@@ -15,7 +15,6 @@ use Google_Client;
 use Google_Service_Sheets;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
-use Portal\Application\SeasonImport;
 
 class ImportData extends Command implements PromptsForMissingInput
 {
@@ -38,11 +37,6 @@ class ImportData extends Command implements PromptsForMissingInput
     private string $sheetId;
 
     private string $seasonYear;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function handle(): void
     {
@@ -225,9 +219,10 @@ class ImportData extends Command implements PromptsForMissingInput
                                     ]);
     }
 
-    protected function getData($possession): int
+    protected function getData(string $statData): int
     {
-        return $possession === '-' ? 0 : $possession;
+        $statData = str_replace('%', '', $statData);
+        return $statData === '-' ? 0 : (int)$statData;
     }
 
     private function parseGameGoals(Sheet $sheet): array
