@@ -1,4 +1,6 @@
 <script setup>
+import Avatar from 'primevue/avatar';
+
 defineProps({
     ranking: {
         type: Array,
@@ -13,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-    <table class="table" ranking="">
+    <table class="table w-full">
         <thead class="text-lg font-bold">
         <tr>
             <th></th>
@@ -32,14 +34,7 @@ defineProps({
             <td :class="{'playoff': index < 4}">
                 <a :href="route('national-league.teams.club', {'sheet_name': ranking.team.sheet_name})">
                     <div class="flex items-center gap-3">
-                        <div class="avatar">
-                            <div :class="{'w-16 h-16': !short, 'w-10 h-10': short}">
-                                <img
-                                    class="w-full h-full"
-                                    :src="ranking.team.logo"
-                                    :alt="`${ranking.team.name} logo`"/>
-                            </div>
-                        </div>
+                        <Avatar :image="ranking.team.logo" :size="short ? 'normal' : 'xlarge'" class="ml-2 my-2" />
                         <div :class="{'hidden': short}">
                             <div class="font-bold">{{ ranking.team.name }}</div>
                             <div class="opacity-50">{{ ranking.team.city }}</div>
@@ -66,6 +61,12 @@ defineProps({
 </template>
 
 <style>
+table th {
+    @apply text-gray-500 text-left min-w-[3rem];
+}
+table tr:not(:last-child), table th {
+    @apply border-b dark:border-gray-950 border-gray-200 py-3;
+}
 .avatar img {
     @apply object-contain !important;
 }

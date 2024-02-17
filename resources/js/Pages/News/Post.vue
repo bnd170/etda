@@ -2,7 +2,8 @@
 import Default    from "~/Layout/Default.vue";
 import {computed} from "vue";
 import Spacer     from "~/Components/Layout/Spacer.vue";
-import { Head } from '@inertiajs/vue3'
+import {Head}     from '@inertiajs/vue3'
+import Card       from "primevue/card";
 
 
 defineOptions({layout: Default})
@@ -26,8 +27,11 @@ const createdAt = computed(() => {
     <Head>
         <title>{{ news.title }}</title>
     </Head>
-    <article class="container mx-auto">
-        <div class="box container mx-auto">
+    <Card class="container mx-auto">
+        <template #title>
+            <h3 class="box-title">ACTUALIDAD</h3>
+        </template>
+        <template #content>
             <img
                 class="object-scale-down xl:object-cover w-full h-[10rem] md:h-[22rem] lg:h-[30rem] mb-7 md:mb-10 rounded-xl"
                 :src="news.cover" :alt="news.title">
@@ -35,8 +39,8 @@ const createdAt = computed(() => {
             <p class="mt-3">{{ createdAt }}</p>
             <spacer/>
             <div class="body" v-html="news.content"></div>
-        </div>
-    </article>
+        </template>
+    </Card>
 </template>
 
 <style>
