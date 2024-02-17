@@ -16,7 +16,6 @@
                 <Logo class="w-6 mr-3 inline" />
                 El Talón de Aquiles
             </a>
-            <ThemeSwitcher />
         </div>
 
         <main>
