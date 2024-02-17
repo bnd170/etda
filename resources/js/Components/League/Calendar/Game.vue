@@ -20,7 +20,7 @@ defineProps({
                 </div>
                 <div class="w-4/12 lg:w-2/12">
                     <div
-                        class="w-[3.4rem] mx-auto font-bold dark:bg-surface-950 rounded-lg py-1 bg-surface-600 flex flex-row justify-center">
+                        class="w-[3.4rem] mx-auto font-bold dark:bg-surface-950 rounded-lg py-1 bg-surface-200/70 flex flex-row justify-center">
                         {{ game.home_team_score }} - {{ game.away_team_score }}
                     </div>
                 </div>
