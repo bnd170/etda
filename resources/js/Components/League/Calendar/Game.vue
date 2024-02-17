@@ -14,21 +14,21 @@ defineProps({
     <a :href="route('national-league.game', {'slug': game.slug})">
         <div
             class="flex flex-col lg:flex-row gap-3 lg:gap-10 border-b border-surface-800 dark:border-surface-950/50 py-2">
-            <div class="w-full xl:w-8/12 flex flex-row">
-                <div class="w-4/12 lg:w-5/12 flex items-center justify-end space-x-2">
+            <div class="w-full lg:w-8/12 flex flex-row gap-2 align-middle">
+                <div class="w-1/2 flex items-center justify-end space-x-2">
                     <GameTeam is-home :team="game.home_team"/>
                 </div>
-                <div class="w-4/12 lg:w-2/12">
+                <div class="flex rounded-lg dark:bg-surface-950 bg-surface-200/70">
                     <div
-                        class="w-[3.4rem] mx-auto font-bold dark:bg-surface-950 rounded-lg py-1 bg-surface-200/70 flex flex-row justify-center">
+                        class="w-[3.4rem] font-bold flex justify-center items-center">
                         {{ game.home_team_score }} - {{ game.away_team_score }}
                     </div>
                 </div>
-                <div class="w-4/12 lg:w-5/12 flex items-center justify-start">
+                <div class="w-1/2 flex items-center justify-start">
                     <GameTeam :team="game.away_team"/>
                 </div>
             </div>
-            <div class="w-full xl:w-3/12 flex-row items-center justify-end hidden lg:flex">
+            <div class="w-full lg:w-3/12 flex-row items-center justify-end hidden lg:flex">
                 <div class="capitalize items-center gap-1 hidden md:flex">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 1024 1024">
                         <path fill="currentColor"
@@ -41,7 +41,7 @@ defineProps({
                     {{ game.location }}, {{ game.state }}
                 </div>
             </div>
-            <div class="w-full xl:w-1/12 flex flex-row items-center justify-center lg:justify-end mt-3 lg:mt-0">
+            <div class="w-full lg:w-1/12 flex flex-row items-center justify-center lg:justify-end mt-3 lg:mt-0">
                 <Button label="Ver ficha" size="small" severity="secondary"/>
             </div>
         </div>
