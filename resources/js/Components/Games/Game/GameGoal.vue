@@ -26,17 +26,23 @@ const shouldBeReversed = computed(() => !props?.isHome);
         <div class="flex justify-end gap-2 font-normal md:font-bold items-center" :class="{'flex-row-reverse': shouldBeReversed}">
             <template v-for="(goal, index) in goals">{{ goal }}'<template v-if="index !== (goals.length - 1)">, </template>
             </template>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 width="12" height="12" viewBox="0 0 12 12">
-                <path fill="url(#pattern0)" d="M0 0h12v12H0z"/>
-                <defs>
-                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1"
-                             height="1">
-                        <use xlink:href="#image0_1067_14909" transform="scale(.04167)"/>
-                    </pattern>
-                    <image id="image0_1067_14909" width="24" height="24"
-                           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAABA5JREFUSEuNVV1oHFUU/s6d0HHFh+oiav1DsxV37p2kuGJNBZEW/O2DQqO2+GJ88L8URESxRiNW0Ye25KVi0BetlqgFf2mxECnaoqxkZ+7OJv4RSwuK1iqJJE1358iJs2V2M5t63mbOuec79zvfOZewhHmedw4RrSWiW4noemY+H0AOwO8AjjDzgTiO9xpjfh4dHW1kpaKsn4VCwc3lclsAbGbmFUsVAUAS71NKbQ2C4Lv22EUAWmuPiN4D4ANgAJlFZIDWiejFfD6/bWxsrN70txzWWt9ARB8BOA/Ap0S0g5k3A7gDgMpIOgdgN4AAwCCAcwG87bruQLlcPiXxpwGKxeJKx3EOSxARDebz+Zelkv7+fmdycrKXmQeZeX0CdIqIdtfr9ZdqtdqPctPe3t6rGo3GJwBWAhi21kph/wF4nrdMKXUIwDUADllr12Tx7nnedUqpDY7jjFQqle/bY4wx9wAQesXutdbuWQDQWm8hou2J46i19tIzNDbT7fv+Y8w8nDiPuK7bQ319fbnp6ekqgCsSxwlrrfRgkWmtNxCRqOtZa+1Yxg2eT3qx4CKix6mnp2ddHMdfpIJPWmvPSh8ulUpnz83NbSeiBwA4AE4y845qtfoMgLgZa4x5E8D9zW9mPkjGmFcBPJlKGMdxfHEURb8m/RHe3wFQyLhUEMfxpiiKhAEYY6TJorimxQLwJYAbUz93FovFJ2QytdaPEtFryfR2ass0Mw9Uq9X3jTE3AdgLYHkzWABEDSItueqQtXYoGTCpSKS280wNJ6LbwzD8PLnxKqXUZwAuWuiD7/vHknXwsLV2VzpZom0ZIncJkOOu63aXy+W/mzG+71/JzPsBdAuAZebCzMzM8qmpKZnMFjPGfAvg2k4ARPRuGIab2v1a6yEi2ioUfQjgLiJaE4ahDFuL+b7/FDO/0gFAdtVGGaiMwj4GsF4AFniW9RCGofDfYsVi8XLHcaY6AMx2dXWtGB8f/yvtT2brNwB10loXiCgCcDSO46ujKJrPqOYNIrqEmds362FrrQxXO60yLyMA3pIDyhgjCrgZwAv1en14YmLiRKIkoeD/GpVKpa7Z2VlNRHuIqJuI1i1U5Pt+HzN/ldqux4lIXqyw0Wg8V6vVfumAIhQPALhTVhoAeZyaittvrb3l9JWNMdsAPN2eqJNKJE5rfRkR/QBgWdu5PxzHWVWpVI6lORWqPkiqaYmP43h1FEXfZHAtUyvVp+0fpdRtQRAclJ8tTZOlNj8/P8LMG9sOjVlr1zYnXHye561WSn3d9tL9qZS6OwiCA83zme9tIl15AtNrexczy5zME9EFAB4EUEwSiRgk6UPW2p/SxXV80D3Pu5CIHiGi+1JvRTtLIul9AF631sr+WaS6fwHVbYlwPMxC6gAAAABJRU5ErkJggg=="/>
-                </defs>
+            <svg fill="currentColor" height="16px" width="16px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 538.043 538.043" xml:space="preserve">
+                <g>
+                    <path d="M269.022,0C120.689,0,0,120.677,0,269.022s120.689,269.022,269.022,269.022s269.022-120.677,269.022-269.022
+                        S417.354,0,269.022,0z M467.811,124.503h-11.502c-4.962,0-9.35,3.204-10.88,7.915l-24.654,75.876l-64.482,28.337l-75.828-55.084
+                        v-76.043l63.991-46.463c4.017-2.917,5.691-8.083,4.161-12.794l-3.647-11.227C394.804,51.234,437.56,82.99,467.811,124.503z
+                         M193.086,35.009l-3.647,11.227c-1.53,4.723,0.143,9.876,4.161,12.794l63.979,46.463v76.043l-75.828,55.084l-64.494-28.349
+                        l-24.666-75.876c-1.53-4.735-5.93-7.915-10.88-7.915H70.232C100.482,82.99,143.251,51.234,193.086,35.009z M22.909,268.83
+                        l9.637,7.007c2.009,1.447,4.364,2.2,6.731,2.2c2.355,0,4.723-0.741,6.731-2.2l63.369-46.045l64.482,28.349l29.257,89.997
+                        l-38.99,46.427H84.568c-4.962,0-9.35,3.204-10.88,7.915l-3.551,10.916c-29.568-40.592-47.24-90.403-47.24-144.375
+                        C22.897,268.95,22.909,268.89,22.909,268.83z M192.894,502.963l9.529-6.959c4.017-2.894,5.703-8.083,4.173-12.781l-24.284-74.692
+                        l38.99-46.403h95.437l38.954,46.403l-24.272,74.704c-1.53,4.723,0.167,9.876,4.185,12.794l9.529,6.935
+                        c-23.985,7.808-49.536,12.196-76.103,12.196C242.442,515.158,216.891,510.794,192.894,502.963z M467.894,413.432l-3.551-10.952
+                        c-1.542-4.723-5.942-7.903-10.892-7.903l-79.547,0.012l-38.954-46.415l29.234-90.008l64.505-28.337l63.358,46.009
+                        c2.009,1.47,4.364,2.212,6.732,2.212c2.367,0,4.735-0.741,6.732-2.212l9.637-6.994c0,0.06,0.012,0.12,0.012,0.191
+                        C515.146,322.993,497.451,372.804,467.894,413.432z"/>
+                </g>
             </svg>
         </div>
 
