@@ -22,7 +22,7 @@ const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute
 </script>
 
 <template>
-    <div class="group/item bg-surface-100 lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
+    <div class="group/item bg-surface-100 dark:bg-surface-800 lg:mx-0.5 2xl:mx-1.5 h-full flex flex-col ">
         <div class="flex flex-row px-5 py-2 font-bold bg-gradient-to-br from-surface-100 to-surface-300 dark:from-surface-900 dark:to-surface-950">
             Jornada {{ game.round }}
         </div>

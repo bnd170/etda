@@ -39,10 +39,10 @@ defineProps({
                         <div class="relative  transition duration-300 ease-out">
                             <img
                                 :src="article.cover"
-                                class="object-cover w-full h-[600px]" alt="Campeon de Liga"/>
+                                class="object-cover w-full h-[300px] lg:h-[600px]" alt="Campeon de Liga"/>
                             <div
-                                class="absolute pt-5 pb-5 bottom-0 px-10 backdrop-brightness-50 bg-back/30 w-full flex flex-col">
-                                <h2 class="text-white text-4xl w-full font-bold">{{ article.title }}</h2>
+                                class="absolute pt-5 pb-5 bottom-0 px-5 lg:px-10 backdrop-brightness-50 bg-back/30 w-full flex flex-col">
+                                <h2 class="text-white text-xl lg:text-4xl w-full font-bold">{{ article.title }}</h2>
                             </div>
                         </div>
                     </a>
