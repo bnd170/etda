@@ -21,8 +21,11 @@ Route::prefix('/')->group(static function () {
     Route::get('/el-proyecto', AboutUsController::class)->name('about-us.index');
 
     Route::prefix('/liga-nacional')->group(static function () {
-        Route::get('', [NationalLeagueController::class, 'index'])->name('national-league.index');
+        Route::get('/clasificacion', [NationalLeagueController::class, 'classification'])->name('national-league.classification');
+        Route::get('/estadisticas', [NationalLeagueController::class, 'stats'])->name('national-league.stats');
+        Route::get('/actualidad', [NationalLeagueController::class, 'news'])->name('national-league.news');
         Route::get('/equipos', [NationalLeagueController::class, 'teams'])->name('national-league.teams');
+        Route::get('/calendario', [NationalLeagueController::class, 'calendar'])->name('national-league.calendar');
         Route::get('/equipo/{team:sheet_name}', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
         Route::get('/partido/{game:slug}', [NationalLeagueController::class, 'game'])->name('national-league.game');
     });

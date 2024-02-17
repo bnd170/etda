@@ -1,5 +1,5 @@
 <template>
-    <div class="card  flex flex-row h-[17rem] hover:bg-neutral/10 transition-colors">
+    <div class="card flex flex-row h-[17rem] dark:bg-surface-800/70 bg-surface-50 transition-colors">
         <img class="w-2/5 object-cover rounded-l-2xl"
              :src="player.image || '/img/player.webp'" :alt="player.name">
         <section class="w-3/5">

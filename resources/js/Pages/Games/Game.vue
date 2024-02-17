@@ -85,7 +85,7 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
                         </div>
                     </div>
                     <div class="match-summary__stats--container-global">
-                        <div class="box match-summary__stats--container-global__players">
+                        <div class="match-summary__stats--container-global__players">
                             <h2 class="match-summary__title">PLANTILLA</h2>
                             <div class="w-full font-bold text-lg text-center pb-5">
                                 <img :src="game.home_team.logo" :alt="game.home_team.name"
@@ -94,7 +94,7 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
                             </div>
                             <TeamPlayer :player="player" v-for="player in game.home_team.players" :key="player.id"/>
                         </div>
-                        <div class="box match-summary__stats--container-global__players">
+                        <div class="match-summary__stats--container-global__players">
                             <h2 class="match-summary__title">PLANTILLA</h2>
                             <div class="w-full font-bold text-lg text-center pb-5">
                                 <img :src="game.away_team.logo" :alt="game.away_team.name"
@@ -125,7 +125,7 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
 }
 
 .match-summary .match-summary__stats--container-scorers {
-    @apply w-full flex flex-row items-start bg-white pb-5 pt-20 -mt-14 z-0 text-neutral-950 rounded-b-3xl;
+    @apply w-full flex flex-row items-start bg-white dark:bg-surface-900 pb-5 pt-20 -mt-14 z-0 rounded-b-3xl;
 }
 
 .match-summary__stats--container-global {
@@ -133,11 +133,11 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
 }
 
 .match-summary__stats--container-global__players {
-    @apply flex flex-col w-full lg:w-3/6;
+    @apply flex flex-col w-full lg:w-3/6 bg-white dark:bg-surface-900 py-10 px-5 rounded-2xl;
 }
 
 .match-summary__stats--container-global__generic {
-    @apply flex bg-white rounded-2xl flex-col w-full py-10 px-5;
+    @apply flex bg-white dark:bg-surface-900 rounded-2xl flex-col w-full py-10 px-5;
 }
 
 .match-summary__title {

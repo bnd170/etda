@@ -4,6 +4,7 @@ import Spacer     from "~/Components/Layout/Spacer.vue";
 import {ref} from "vue";
 import Roster     from "~/Components/Team/Roster.vue";
 import {Head}     from "@inertiajs/vue3";
+import Card       from 'primevue/card';
 
 defineOptions({layout: Default})
 
@@ -113,22 +114,30 @@ const have_awards = ref(props.team.awards.length);
     <div class="container mx-auto px-5 md:px-0">
         <template v-if="have_awards">
             <Spacer/>
-            <div class="box">
-                <h2 class="box-title">PALMARÉS</h2>
-                <div class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-                    <div class="flex flex-col items-center my-3 md:my-0" v-for="award in team.awards">
-                        <p class="py-3 text-6xl font-[Cabin] font-bold">{{ award.image }}</p>
-                        <p class="text-2xl">{{ award.season.year }}</p>
-                        <p>{{ award.name }}</p>
+            <Card>
+                <template #title>
+                    <h2 class="box-title">PALMARÉS</h2>
+                </template>
+                <template #content>
+                    <div class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+                        <div class="flex flex-col items-center my-3 md:my-0" v-for="award in team.awards">
+                            <p class="py-3 text-6xl font-[Cabin] font-bold">{{ award.image }}</p>
+                            <p class="text-2xl">{{ award.season.year }}</p>
+                            <p>{{ award.name }}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </template>
+            </Card>
         </template>
         <Spacer/>
 
-        <div class="box">
-            <h2 class="box-title">PLANTILLA</h2>
-            <Roster :players="team.players"/>
-        </div>
+        <Card>
+            <template #title>
+                <h2 class="box-title">PLANTILLA</h2>
+            </template>
+            <template #content>
+                <Roster :players="team.players"/>
+            </template>
+        </Card>
     </div>
 </template>

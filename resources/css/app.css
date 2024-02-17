@@ -1,3 +1,5 @@
+@import 'primeicons/primeicons.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,18 +13,23 @@ h6 {
     font-family: 'Cabin', sans-serif;
 }
 
+body {
+    @apply text-gray-800;
+    background-color: #F1F4F8;
+}
+
 .section-header {
     @apply text-2xl;
 }
 
 .menu-item.active > a, .menu-item.active > span {
-    @apply bg-base-200 !important;
+    @apply bg-slate-200 !important;
 }
 
 .box {
     @apply bg-white rounded-2xl p-10;
 }
 
-.box > .box-title {
-    @apply text-2xl font-bold text-center mb-8;
+.box-title {
+    @apply text-2xl font-bold;
 }

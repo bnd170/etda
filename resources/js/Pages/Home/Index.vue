@@ -2,7 +2,9 @@
 import Default           from "~/Layout/Default.vue";
 import GamesWidget       from "~/Components/Games/Home/GamesWidget.vue";
 import {Carousel, Slide} from '@jambonn/vue-concise-carousel';
-import Table             from "~/Components/Ranking/Table.vue";
+import Table             from "~/Components/League/Table.vue";
+import Button            from "primevue/button";
+import Card              from "primevue/card";
 
 defineOptions({layout: Default})
 
@@ -49,14 +51,20 @@ defineProps({
         </div>
         <div class="flex flex-col lg:flex-row lg:space-x-5 xl:space-x-10 items-start mt-10">
             <div class="w-full lg:w-8/12">
-                <GamesWidget class="w-full" :games="nextGames" title="Próximos partidos" v-if="nextGames.length"/>
-                <GamesWidget class="w-full mt-10" :games="playedGames" title="Resultados" v-if="playedGames.length"/>
+                <GamesWidget class="w-full" :games="nextGames" title="PROXIMOS PARTIDOS" v-if="nextGames.length"/>
+                <GamesWidget class="w-full mt-10" :games="playedGames" title="ULTIMOS RESULTADOS" v-if="playedGames.length"/>
             </div>
-            <div class="box w-full lg:w-4/12">
-                <div class="box-title">CLASIFICACIÓN</div>
-                <Table :ranking="ranking" short/>
-                <a class="btn btn-block btn-ghost mt-10" :href="route('national-league.index')">Más detalles</a>
-            </div>
+            <Card class="w-full lg:w-4/12">
+                <template #title>
+                    <h3 class="box-title">CLASIFICACIÓN</h3>
+                </template>
+                <template #content>
+                    <Table :ranking="ranking" short/>
+                    <a :href="route('national-league.classification')">
+                        <Button label="Más detalles" severity="primary" outlined class="w-full mt-5"/>
+                    </a>
+                </template>
+            </Card>
         </div>
 
 

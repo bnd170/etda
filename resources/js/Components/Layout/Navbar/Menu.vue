@@ -1,9 +1,50 @@
 <template>
-    <li><a :href="route('national-league.index')">Liga Nacional</a></li>
-
-    <div class="divider">Y PROXIMAMENTE...</div>
-    <li><a href="#">Liga Promesas</a></li>
-    <li><a href="#">Selección nacional masculina</a></li>
-    <li><a href="#">Selección nacional femenina</a></li>
-    <li><a href="#">Selección nacional sub 19</a></li>
+    <div class="overflow-y-auto pt-16 px-2 bg-white dark:bg-surface-950 h-full">
+        <ul class="list-none m-0">
+            <li>
+                <a v-ripple :href="route('national-league.news')" class="menu-item hover:bg-surface-200 dark:hover:bg-surface-900 p-ripple">
+                    <Image src="/img/liga-logo.webp" alt="Liga nacional" width="32" class="mr-3" />
+                    <span class="font-medium"><a >Liga Nacional</a></span>
+                </a>
+            </li>
+            <li>
+                <a v-ripple class="flex align-items-center cursor-pointer p-3 hover:bg-surface-200 dark:hover:bg-surface-900 transition-duration-150 transition-colors p-ripple">
+                    <span class="font-medium text-gray-500"><a >Y proximamente...</a></span>
+                </a>
+            </li>
+            <li>
+                <a v-ripple class="flex align-items-center cursor-pointer p-3 border-round hover:bg-surface-200 dark:hover:bg-surface-900 transition-duration-150 transition-colors p-ripple">
+                    <i class="pi mr-5"></i>
+                    <span class="font-medium text-gray-500">Liga promesas</span>
+                </a>
+            </li>
+            <li>
+                <a v-ripple class="flex align-items-center cursor-pointer p-3 border-round hover:bg-surface-200 dark:hover:bg-surface-900 transition-duration-150 transition-colors p-ripple">
+                    <i class="pi mr-5"></i>
+                    <span class="font-medium text-gray-500">Selección nacional masculina</span>
+                </a>
+            </li>
+            <li>
+                <a v-ripple class="flex align-items-center cursor-pointer p-3 border-round hover:bg-surface-200 dark:hover:bg-surface-900 transition-duration-150 transition-colors p-ripple">
+                    <i class="pi mr-5"></i>
+                    <span class="font-medium text-gray-500">Selección nacional femenina</span>
+                </a>
+            </li>
+            <li>
+                <a v-ripple class="flex align-items-center cursor-pointer p-3 border-round hover:bg-surface-200 dark:hover:bg-surface-900 transition-duration-150 transition-colors p-ripple">
+                    <i class="pi mr-5"></i>
+                    <span class="font-medium text-gray-500">Selección nacional SUB-19</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </template>
+
+<style scoped>
+.menu-item {
+    @apply flex items-center cursor-pointer p-3 rounded transition duration-150 ;
+}
+</style>
+<script setup>
+import Image from 'primevue/image';
+</script>

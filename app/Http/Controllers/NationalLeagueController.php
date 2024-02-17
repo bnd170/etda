@@ -14,21 +14,49 @@ use Inertia\Response;
 class NationalLeagueController extends Controller
 {
 
-    public function index(TeamStatsArranger $teamStatsArranger): Response
+    public function classification(): Response
     {
         $season  = Season::where('in_progress', true)->first();
-        $ranking = Ranking::where('season_id', $season->id)->orderBy('points', 'desc')->orderBy('goal_differential', 'desc')->with(
+        $ranking = Ranking::where('season_id', $season->id)->orderBy('points', 'desc')->orderBy(
+            'goal_differential',
+            'desc'
+        )->with(
             'team'
         )->get();
-        $stats = $teamStatsArranger();
-        $news = News::orderBy('created_at', 'desc')->limit(3)->get();
 
-        return Inertia::render('Ranking/Index', [
+
+        return Inertia::render('League/Classification', [
             'season'  => $season,
             'ranking' => $ranking,
-            'stats'   => $stats->stats(),
-            'top_stats' => $stats->generateGlobalStats()->toArray(),
+        ]);
+    }
+    public function calendar(): Response
+    {
+        $season  = Season::where('in_progress', true)->first();
+        $games  = Game::where('season_id', $season->id)->orderBy('date', 'asc')->get();
+        $gamesByDate = $games->groupBy(fn($game) => $game->date->format('Y-m-d'));
+
+        return Inertia::render('League/Calendar', [
+            'games'  => $gamesByDate,
+        ]);
+    }
+
+    public function news(): Response
+    {
+        $news = News::orderBy('created_at', 'desc')->limit(12)->get();
+
+        return Inertia::render('League/News', [
             'news' => $news,
+        ]);
+    }
+
+    public function stats(TeamStatsArranger $teamStatsArranger): Response
+    {
+        $stats = $teamStatsArranger();
+
+        return Inertia::render('League/Stats', [
+            'stats'     => $stats->stats(),
+            'top_stats' => $stats->generateGlobalStats()->toArray(),
         ]);
     }
 
