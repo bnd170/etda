@@ -10,3 +10,8 @@ import Menu  from "~/Components/League/Menu.vue";
     </div>
 </template>
 
+<style>
+li[data-pc-section="inkbar"] {
+    display: none;
+}
+</style>
