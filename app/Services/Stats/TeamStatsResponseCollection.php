@@ -36,6 +36,7 @@ class TeamStatsResponseCollection
             topPossession: $this->getTop('possession'),
             topShoots: $this->getTop('shoots'),
             topEffectivity: $this->getTop('effectivity'),
+            topProratedEffectivity: $this->getTop('proratedEffectivity'),
             topPasses: $this->getTop('passes'),
             topSteals: $this->getTop('steals'),
             topFouls: $this->getTop('fouls'),

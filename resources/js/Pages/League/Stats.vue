@@ -35,7 +35,7 @@ defineOptions({layout: Default})
                     <!--                <TopStats stat_name="Posesión" :top_stat="top_stats.possession" is_percentage/>-->
                     <TopStats stat_name="Goles" :top_stat="top_stats.goals"/>
                     <TopStats stat_name="Disparos" :top_stat="top_stats.shoots"/>
-                    <TopStats stat_name="Efectividad" :top_stat="top_stats.effectivity" is_percentage/>
+                    <TopStats stat_name="Efectividad" :top_stat="top_stats.proratedEffectivity" is_percentage/>
                     <TopStats stat_name="Pases" :top_stat="top_stats.passes"/>
                     <TopStats stat_name="Robos" :top_stat="top_stats.steals"/>
                     <TopStats stat_name="Faltas cometidas" :top_stat="top_stats.fouls"/>

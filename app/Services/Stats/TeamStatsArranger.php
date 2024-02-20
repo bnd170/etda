@@ -2,6 +2,7 @@
 
 namespace App\Services\Stats;
 
+use App\Models\Game\TeamStats;
 use App\Models\Season;
 use App\Models\Team;
 
@@ -38,7 +39,14 @@ class TeamStatsArranger
         return $teamStats;
     }
 
-    private function updateTeamStats(array $teamStats, Team $team, $stats): array
+
+    /**
+     * @param TeamStats[] $teamStats
+     * @param Team $team
+     * @param TeamStats $stats
+     * @return array
+     */
+    private function updateTeamStats(array $teamStats, Team $team, TeamStats $stats): array
     {
         $teamId = $team->id;
 

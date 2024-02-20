@@ -18,6 +18,7 @@ class TeamStats
         public int $redCards,
         public int $penalties,
         public array $goals = [],
+        public int $games
     ) {
     }
 
@@ -39,6 +40,7 @@ class TeamStats
             redCards: $data['redCards'],
             penalties: $data['penalties'],
             goals: $data['goals'],
+            games: 1
         );
     }
 
@@ -55,6 +57,7 @@ class TeamStats
             yellowCards: 0,
             redCards: 0,
             penalties: 0,
+            games: 0
         );
     }
 
@@ -64,6 +67,7 @@ class TeamStats
             'possession' => $this->possession,
             'shoots' => $this->shoots,
             'effectivity' => $this->effectivity,
+            'proratedEffectivity' => $this->prorateEffectivity(),
             'passes' => $this->passes,
             'steals' => $this->steals,
             'fouls' => $this->fouls,
@@ -88,12 +92,22 @@ class TeamStats
             yellowCards: $this->yellowCards + $teamStats->yellowCards,
             redCards: $this->redCards + $teamStats->redCards,
             penalties: $this->penalties + $teamStats->penalties,
-            goals: $this->goals + $teamStats->goals,
+            goals: array_merge_recursive($this->goals, $teamStats->goals),
+            games: $this->games + 1
         );
     }
 
     public function totalGoals(): int
     {
         return TeamStatsGoalsTranslator::make($this->goals);
+    }
+
+    public function prorateEffectivity(): float
+    {
+        try {
+            return round($this->effectivity / $this->games);
+        } catch (\Exception) {
+            return 0;
+        }
     }
 }
