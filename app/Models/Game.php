@@ -20,6 +20,20 @@ class Game extends Model
         'stats' => GameStatsCast::class,
     ];
 
+    public static function getDaysWithStatus()
+    {
+        return self::select('day')
+            ->selectRaw("
+        CASE
+            WHEN COUNT(*) = SUM(CASE WHEN status = 'finished' THEN 1 ELSE 0 END) THEN 'finished'
+            ELSE 'pending'
+        END as status
+    ")
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get();
+    }
+
     public function sluggable(): array
     {
         return [

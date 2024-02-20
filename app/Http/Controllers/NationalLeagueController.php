@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NationalLeagueStatsRequest;
 use App\Models\Game;
 use App\Models\News;
 use App\Models\Ranking;
 use App\Models\Season;
 use App\Models\Team;
 use App\Services\Stats\TeamStatsArranger;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -50,13 +52,16 @@ class NationalLeagueController extends Controller
         ]);
     }
 
-    public function stats(TeamStatsArranger $teamStatsArranger): Response
+    public function stats(NationalLeagueStatsRequest $request, TeamStatsArranger $teamStatsArranger): Response
     {
-        $stats = $teamStatsArranger();
+        $stats = $teamStatsArranger(day: $request->day);
+        $days = Game::getDaysWithStatus();
 
         return Inertia::render('League/Stats', [
             'stats'     => $stats->stats(),
             'top_stats' => $stats->generateGlobalStats()->toArray(),
+            'day'       => $request->day ?? 'all',
+            'days'      => $days,
         ]);
     }
 
@@ -79,3 +84,5 @@ class NationalLeagueController extends Controller
         ]);
     }
 }
+
+

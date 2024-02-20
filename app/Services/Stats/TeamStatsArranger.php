@@ -8,9 +8,9 @@ use App\Models\Team;
 
 class TeamStatsArranger
 {
-    public function __invoke(?Team $team = null): TeamStatsResponseCollection
+    public function __invoke(?Team $team = null, int $day = null): TeamStatsResponseCollection
     {
-        $games     = $this->getSeasonGames();
+        $games     = $this->getSeasonGames($day);
         $teamStats = $this->calculateTeamStats($games);
 
         if ($team !== null) {
@@ -20,11 +20,15 @@ class TeamStatsArranger
         return $this->createTeamStatsResponseCollection($teamStats);
     }
 
-    private function getSeasonGames()
+    private function getSeasonGames(int $day = null)
     {
         $season = Season::where('in_progress', true)->with('games')->first();
 
-        return $season->games()->where('status', 'finished')->get();
+        return $season->games()
+            ->when($day, function ($query, $day) {
+                return $query->where('day', $day);
+            })
+            ->where('status', 'finished')->get();
     }
 
     private function calculateTeamStats($games): array
