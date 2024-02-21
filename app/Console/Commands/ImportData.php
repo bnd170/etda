@@ -208,6 +208,7 @@ class ImportData extends Command implements PromptsForMissingInput
             redCards:    $this->getData($rows['tarjetas_rojas'][$team]),
             penalties:   $this->getData($rows['penaltis'][$team]),
             goals:       $rows['goals'][$team],
+            games:       1
         );
     }
 
