@@ -27,11 +27,9 @@ const episodesUrl = computed(() => props.episodes.data.map(e => `https://open.sp
             </template>
             <template #content>
                 <div class="mb-10 ">
-                    <p class="text-xl mb-3">&iexcl;Bienvenido a nuestor podcast!</p>
-                    <p>Aquí encontrarás un nuevo modo de conocer este deporte y a sus principales protagonistas tales
-                        como futbolistas, entrenadores e incluso algún que otro ferviente aficionado.</p>
-                    <p>Además podrás seguir la actulidad referente a la selección española, federación e incluso alguna
-                        que otra polémica.</p>
+                    <p class="text-xl mb-3">&iexcl;Bienvenido a nuestro podcast!</p>
+                    <p>Descubre una nueva forma de conocer este deporte y a sus principales protagonistas, como futbolistas, entrenadores e incluso algunos fervientes aficionados.</p>
+                    <p>Además, podrás mantenerte al tanto de la actualidad de la selección española, la federación e incluso algunas polémicas.</p>
                 </div>
                 <template v-for="episodeUrl in episodesUrl">
                     <iframe style="border-radius:12px"
