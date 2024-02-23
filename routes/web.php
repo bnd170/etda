@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NationalLeagueController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PodcastController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,9 @@ Route::prefix('/')->group(static function () {
 
     Route::prefix('/noticias')->group(static function () {
         Route::get('{news:slug}', [NewsController::class, 'post'])->name('news.post');
+    });
+
+    Route::prefix('/podcast')->group(static function () {
+        Route::get('episodios', [PodcastController::class, 'index'])->name('podcast.episodes');
     });
 });
