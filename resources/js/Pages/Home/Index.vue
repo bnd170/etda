@@ -52,19 +52,39 @@ defineProps({
         <div class="flex flex-col lg:flex-row lg:space-x-5 xl:space-x-10 items-start mt-10">
             <div class="w-full lg:w-8/12">
                 <GamesWidget class="w-full" :games="nextGames" title="PROXIMOS PARTIDOS" v-if="nextGames.length"/>
-                <GamesWidget class="w-full mt-10" :games="playedGames" title="ULTIMOS RESULTADOS" v-if="playedGames.length"/>
+                <GamesWidget class="w-full mt-10" :games="playedGames" title="ULTIMOS RESULTADOS"
+                             v-if="playedGames.length"/>
             </div>
-            <Card class="w-full lg:w-4/12">
-                <template #title>
-                    <h3 class="box-title">CLASIFICACIÓN</h3>
-                </template>
-                <template #content>
-                    <Table :ranking="ranking" short/>
-                    <a :href="route('national-league.classification')">
-                        <Button label="Más detalles" severity="primary" outlined class="w-full mt-5"/>
-                    </a>
-                </template>
-            </Card>
+            <div class="w-full lg:w-4/12">
+                <Card class="w-full">
+                    <template #title>
+                        <h3 class="box-title">LO ÚLTIMO - PODCAST</h3>
+                    </template>
+                    <template #content>
+                        <iframe style="border-radius:12px"
+                                src="https://open.spotify.com/embed/episode/5hoyKrEgAHeKjVTi4Z1e8m?utm_source=generator&theme=0"
+                                width="100%"
+                                height="152"
+                                frameBorder="0"
+                                allowfullscreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy">
+                        </iframe>
+                    </template>
+                </Card>
+                <Card class="w-full mt-10">
+                    <template #title>
+                        <h3 class="box-title">CLASIFICACIÓN</h3>
+                        <h3 class="text-lg text-surface-400">LNF7PC</h3>
+                    </template>
+                    <template #content>
+                        <Table :ranking="ranking" short/>
+                        <a :href="route('national-league.classification')">
+                            <Button label="Más detalles" severity="primary" outlined class="w-full mt-5"/>
+                        </a>
+                    </template>
+                </Card>
+            </div>
         </div>
 
 

@@ -2,6 +2,7 @@
     <Card>
         <template #title>
             <h3 class="box-title">{{ title }}</h3>
+            <h3 class="text-lg text-surface-400">LNF7PC</h3>
         </template>
         <template #content>
             <Carousel autoplay loop :autoplayTimeout="4000"

@@ -36,6 +36,13 @@
                     <span class="font-medium text-gray-500">Selección nacional SUB-19</span>
                 </a>
             </li>
+
+            <li>
+                <a v-ripple :href="route('podcast.episodes')" class="menu-item hover:bg-surface-200 dark:hover:bg-surface-900 p-ripple">
+                    <Image src="/img/spotify.webp" alt="Liga nacional" width="32" class="mr-3" />
+                    <span class="font-medium"><a >El podcast</a></span>
+                </a>
+            </li>
         </ul>
     </div>
 </template>
