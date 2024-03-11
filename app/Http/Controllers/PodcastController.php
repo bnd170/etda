@@ -10,6 +10,7 @@ use Inertia\Response;
 class PodcastController extends Controller
 {
     private const PODCAST_EPISODE_LIST = [
+        '7lXbWHRMbZeYYugsr8xk7k',
         '5hoyKrEgAHeKjVTi4Z1e8m',
     ];
 

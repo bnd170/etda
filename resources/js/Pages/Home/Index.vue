@@ -62,7 +62,7 @@ defineProps({
                     </template>
                     <template #content>
                         <iframe style="border-radius:12px"
-                                src="https://open.spotify.com/embed/episode/5hoyKrEgAHeKjVTi4Z1e8m?utm_source=generator&theme=0"
+                                src="https://open.spotify.com/embed/episode/7lXbWHRMbZeYYugsr8xk7k?utm_source=generator&theme=0"
                                 width="100%"
                                 height="152"
                                 frameBorder="0"
