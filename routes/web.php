@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NationalLeagueController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\PredictorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,9 @@ Route::prefix('/')->group(static function () {
 
     Route::prefix('/podcast')->group(static function () {
         Route::get('episodios', [PodcastController::class, 'index'])->name('podcast.episodes');
+    });
+
+    Route::prefix('/porra')->group(static function () {
+        Route::get('', [PredictorController::class, 'index'])->name('predictions.index');
     });
 });
