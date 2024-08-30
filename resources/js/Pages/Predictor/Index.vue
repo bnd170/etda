@@ -8,27 +8,29 @@
                 @update:match="updateMatch(index, $event)"
             />
         </div>
-
-        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-semibold mb-4 text-primary">Resumen de tu porra</h2>
-            <ul class="space-y-3">
-                <Summary
-                    v-for="(match, index) in matches"
-                    :key="index"
-                    :match="match"
-                />
-            </ul>
-        </div>
-
-        <div class="mt-8 text-center">
-            <button
-                @click="submitBet"
-                class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-lg"
-                :disabled="!bettingComplete"
-            >
-                Enviar Porra
-            </button>
-        </div>
+        <section>
+            <Card class="w-full mt-10">
+                <template #title>
+                    <header>
+                        <h3 class="box-title">Resumen de tu porra</h3>
+                    </header>
+                </template>
+                <template #content>
+                    <DataView :value="matches">
+                        <template #list="slotProps">
+                            <Summary
+                                v-for="(match, index) in slotProps.items"
+                                :key="index"
+                                :match="match"
+                            />
+                        </template>
+                    </DataView>
+                    <div class="mt-8 text-center">
+                        <Button label="Guardar predicciones" outlined @click="submitBet" :disabled="!bettingComplete"/>
+                    </div>
+                </template>
+            </Card>
+        </section>
     </div>
 </template>
 
@@ -36,6 +38,9 @@
 import {computed, ref} from 'vue';
 import Match           from '~/Components/Predictor/Match.vue';
 import Summary         from '~/Components/Predictor/Summary.vue';
+import Card            from "primevue/card";
+import DataView        from 'primevue/dataview';
+import Button          from 'primevue/button';
 import Default         from "~/Layout/Default.vue";
 
 defineOptions({layout: Default})
@@ -128,8 +133,8 @@ const updateMatch = (index, updatedMatch) => {
 const bettingComplete = computed(() => {
     return matches.value.every(match =>
         match.selection &&
-        ((match.selection === 'X' && match.drawScore !== null) ||
-            (match.selection !== 'X' && match.homeScore !== null && match.awayScore !== null)) &&
+        ((match.selection==='X' && match.drawScore!==null) ||
+            (match.selection!=='X' && match.homeScore!==null && match.awayScore!==null)) &&
         !match.error
     );
 });

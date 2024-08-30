@@ -96,6 +96,7 @@
 
 <script setup>
 import {ref, watch} from 'vue';
+import { getFlagUrl } from '~/Utils/flags.js';
 
 const props = defineProps({
     match: {
@@ -116,9 +117,6 @@ watch([homeScore, awayScore, drawScore], () => {
     emitUpdatedMatch();
 });
 
-const getFlagUrl = (isoCode) => {
-    return `https://flagsapi.com/${isoCode.toUpperCase()}/flat/64.png`;
-};
 
 const selectResult = (option) => {
     props.match.selection = option;
