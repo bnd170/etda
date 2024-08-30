@@ -4,26 +4,29 @@
             <span class="text-sm font-medium text-primary-foreground">{{ match.stage }}</span>
             <p class="text-xs text-primary-foreground/80 mt-1">{{ formatDate(match.date) }}</p>
         </div>
-        <div class="p-4">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center flex-1 justify-center">
-                    <img :src="getFlagUrl(match.homeIso)" :alt="match.home + ' flag'" class="w-8 h-6 mr-2 object-cover">
-                    <span class="font-semibold text-gray-800 border-b-2 border-primary">{{ match.home }}</span>
-                </div>
-                <div class="font-bold text-xl text-gray-900 mx-2">VS</div>
-                <div class="flex items-center flex-1 justify-center">
-                    <span class="font-semibold text-gray-800 border-b-2 border-primary">{{ match.away }}</span>
-                    <img :src="getFlagUrl(match.awayIso)" :alt="match.away + ' flag'" class="w-8 h-6 ml-2 object-cover">
-                </div>
+        <div class="flex items-center justify-around mb-4 bg-neutral-200">
+            <div class="flex flex-col items-center flex-1 justify-center">
+                <img :src="getFlagUrl(match.homeIso)" :alt="match.home + ' flag'" class="w-75 h-25 object-cover">
+                <span class="font-semibold text-gray-800 border-b-2 border-primary">{{ match.home }}</span>
             </div>
-            <div class="flex justify-between items-center mb-4">
+            <div class="font-bold text-xl text-gray-900 mx-2">VS</div>
+            <div class="flex flex-col items-center flex-1 justify-center">
+                <img :src="getFlagUrl(match.awayIso)" :alt="match.away + ' flag'" class="w-75 h-25 object-cover">
+                <span class="font-semibold text-gray-800 border-b-2 border-primary">{{ match.away }}</span>
+            </div>
+        </div>
+        <div class="flex flex-col justify-around items-center py-2 bg-neutral-50">
+            <p class="mb-2 text-black">
+                ☝🏼. Predice el <b>resultado</b> del encuentro
+            </p>
+            <section class="flex justify-around w-2/5">
                 <button
                     @click="selectResult('1')"
                     :class="[
-            'w-20 h-10 rounded-full font-medium transition-colors text-sm',
+            'w-8 h-8 rounded-full font-medium transition-colors text-sm',
             match.selection === '1'
-              ? 'bg-secondary text-secondary-foreground shadow-md'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              ? 'bg-gray-400'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-700'
           ]"
                 >
                     1
@@ -31,9 +34,9 @@
                 <button
                     @click="selectResult('X')"
                     :class="[
-            'w-20 h-10 rounded-full font-medium transition-colors text-sm',
+            'w-8 h-8 rounded-full font-medium transition-colors text-sm',
             match.selection === 'X'
-              ? 'bg-secondary text-secondary-foreground shadow-md'
+              ? 'bg-gray-400'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           ]"
                 >
@@ -42,51 +45,49 @@
                 <button
                     @click="selectResult('2')"
                     :class="[
-            'w-20 h-10 rounded-full font-medium transition-colors text-sm',
+            'w-8 h-8 rounded-full font-medium transition-colors text-sm',
             match.selection === '2'
-              ? 'bg-secondary text-secondary-foreground shadow-md'
+              ? 'bg-gray-400'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           ]"
                 >
                     2
                 </button>
-            </div>
+            </section>
+        </div>
+        <div class="flex flex-col justify-around items-center py-2 bg-neutral-50">
+            <p class="mb-2 text-black">
+                ✌🏼. Predice el <b>marcador</b> del encuentro
+            </p>
             <div v-if="match.selection === 'X'" class="flex justify-center mb-4">
                 <div class="bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold">
                     <input
                         type="number"
                         v-model="drawScore"
-                        placeholder="0"
-                        class="w-12 bg-transparent text-center"
+                        placeholder="-"
+                        class="w-16 bg-transparent text-center"
                         min="0"
                         max="99"
-                        @input="validateScore"
                     >
                 </div>
             </div>
             <div v-else class="flex justify-center space-x-4 mb-4">
-                <div class="bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold">
-                    <input
-                        type="number"
-                        v-model="homeScore"
-                        placeholder="0"
-                        class="w-12 bg-transparent text-center"
-                        min="0"
-                        max="99"
-                        @input="validateScore"
-                    >
-                </div>
-                <div class="bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold">
-                    <input
-                        type="number"
-                        v-model="awayScore"
-                        placeholder="0"
-                        class="w-12 bg-transparent text-center"
-                        min="0"
-                        max="99"
-                        @input="validateScore"
-                    >
-                </div>
+                <input
+                    type="number"
+                    v-model="homeScore"
+                    placeholder="-"
+                    class="w-16 bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold text-center"
+                    min="0"
+                    max="99"
+                >
+                <input
+                    type="number"
+                    v-model="awayScore"
+                    placeholder="-"
+                    class="w-16 text-center bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold"
+                    min="0"
+                    max="99"
+                >
             </div>
             <p v-if="error" class="text-red-500 text-sm text-center">{{ error }}</p>
         </div>
@@ -94,7 +95,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import {ref, watch} from 'vue';
 
 const props = defineProps({
     match: {
@@ -111,50 +112,49 @@ const drawScore = ref(props.match.drawScore);
 const error = ref(props.match.error);
 
 watch([homeScore, awayScore, drawScore], () => {
-    validateScore();
+    updateSelection();
+    emitUpdatedMatch();
 });
 
 const getFlagUrl = (isoCode) => {
-    return `https://www.worldometers.info/img/flags/${isoCode.toLowerCase()}-flag.gif`;
+    return `https://flagsapi.com/${isoCode.toUpperCase()}/flat/64.png`;
 };
 
 const selectResult = (option) => {
-    const updatedMatch = { ...props.match, selection: option };
-    if (option !== 'X') {
-        updatedMatch.drawScore = null;
-    } else {
-        updatedMatch.homeScore = null;
-        updatedMatch.awayScore = null;
+    props.match.selection = option;
+    if (option === '1') {
+        drawScore.value = null;
+        awayScore.value = null;
+    } else if (option === '2') {
+        drawScore.value = null;
+        homeScore.value = null;
+    } else if (option === 'X') {
+        homeScore.value = null;
+        awayScore.value = null;
     }
-    emit('update:match', updatedMatch);
-    validateScore();
+    emitUpdatedMatch();
 };
 
-const validateScore = () => {
-    error.value = null;
-    let updatedMatch = { ...props.match };
-
-    if (props.match.selection === 'X') {
-        if (drawScore.value === null || drawScore.value === '') {
-            error.value = 'Por favor, introduce un resultado para el empate';
+const updateSelection = () => {
+    if (homeScore.value !== null && awayScore.value !== null) {
+        if (homeScore.value > awayScore.value) {
+            props.match.selection = '1';
+        } else if (awayScore.value > homeScore.value) {
+            props.match.selection = '2';
         } else {
-            updatedMatch.drawScore = drawScore.value;
-        }
-    } else {
-        if (homeScore.value === null || homeScore.value === '' || awayScore.value === null || awayScore.value === '') {
-            error.value = 'Por favor, introduce un resultado para ambos equipos';
-        } else if (props.match.selection === '1' && parseInt(homeScore.value) <= parseInt(awayScore.value)) {
-            error.value = 'El equipo local debe ganar si seleccionaste "1"';
-        } else if (props.match.selection === '2' && parseInt(awayScore.value) <= parseInt(homeScore.value)) {
-            error.value = 'El equipo visitante debe ganar si seleccionaste "2"';
-        } else {
-            updatedMatch.homeScore = homeScore.value;
-            updatedMatch.awayScore = awayScore.value;
+            props.match.selection = 'X';
         }
     }
+};
 
-    updatedMatch.error = error.value;
-    emit('update:match', updatedMatch);
+const emitUpdatedMatch = () => {
+    emit('update:match', {
+        ...props.match,
+        homeScore: homeScore.value,
+        awayScore: awayScore.value,
+        drawScore: drawScore.value,
+        error: error.value
+    });
 };
 
 const formatDate = (date) => {

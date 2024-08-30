@@ -122,7 +122,7 @@ const matches = ref([
 ]);
 
 const updateMatch = (index, updatedMatch) => {
-    matches.value[index] = updatedMatch;
+    matches.value[index] = {...matches.value[index], ...updatedMatch};
 };
 
 const bettingComplete = computed(() => {
