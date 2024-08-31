@@ -40,7 +40,7 @@ Route::prefix('/')->group(static function () {
         Route::get('episodios', [PodcastController::class, 'index'])->name('podcast.episodes');
     });
 
-    Route::prefix('/porra')->group(static function () {
-        Route::get('', [PredictorController::class, 'index'])->name('predictions.index');
+    Route::prefix('/porra/{tournament:slug}')->group(static function () {
+        Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictions.index');
     });
 });

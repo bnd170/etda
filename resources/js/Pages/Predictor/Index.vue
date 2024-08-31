@@ -1,5 +1,9 @@
 <template>
-    <div class="max-w-6xl mx-auto p-4 ">
+    <section class="max-w-6xl mx-auto p-4">
+        <header class="mb-10 mt-5">
+            <h1 class="text-3xl font-bold text-center">Porra de {{ tournament.name }}</h1>
+            <p class="text-center text-lg text-gray-500">Haz tus predicciones para los partidos de {{ tournament.name }}</p>
+        </header>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Match
                 v-for="(match, index) in matches"
@@ -31,7 +35,7 @@
                 </template>
             </Card>
         </section>
-    </div>
+    </section>
 </template>
 
 <script setup>
@@ -45,86 +49,33 @@ import Default         from "~/Layout/Default.vue";
 
 defineOptions({layout: Default})
 
-const matches = ref([
-    {
-        home: 'España',
-        away: 'Alemania',
-        homeIso: 'ES',
-        awayIso: 'DE',
-        date: new Date('2023-06-15T20:00:00'),
-        stage: 'Fase de Grupos',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
+const props = defineProps({
+    tournament: {
+        type: Object,
+        required: true
     },
-    {
-        home: 'Brasil',
-        away: 'Argentina',
-        homeIso: 'BR',
-        awayIso: 'AR',
-        date: new Date('2023-06-16T20:00:00'),
-        stage: 'Cuartos de Final',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
-    },
-    {
-        home: 'Francia',
-        away: 'Inglaterra',
-        homeIso: 'FR',
-        awayIso: 'GB',
-        date: new Date('2023-06-17T20:00:00'),
-        stage: 'Semifinal',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
-    },
-    {
-        home: 'Italia',
-        away: 'Portugal',
-        homeIso: 'IT',
-        awayIso: 'PT',
-        date: new Date('2023-06-18T20:00:00'),
-        stage: 'Fase de Grupos',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
-    },
-    {
-        home: 'Holanda',
-        away: 'Bélgica',
-        homeIso: 'NL',
-        awayIso: 'BE',
-        date: new Date('2023-06-19T20:00:00'),
-        stage: 'Octavos de Final',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
-    },
-    {
-        home: 'Uruguay',
-        away: 'Colombia',
-        homeIso: 'UY',
-        awayIso: 'CO',
-        date: new Date('2023-06-20T20:00:00'),
-        stage: 'Fase de Grupos',
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
-        error: null
-    },
-]);
+    games: {
+        type: Array,
+        required: true
+    }
+});
+
+
+const matches = ref(props.games.map(game => {
+    return {
+            home: game.team_home.name,
+            away: game.team_away.name,
+            homeIso: game.team_home.iso,
+            awayIso: game.team_away.iso,
+            date: new Date(game.date),
+            stage: game.round,
+            selection: null,
+            homeScore: null,
+            awayScore: null,
+            drawScore: null,
+            error: null
+        }
+}));
 
 const updateMatch = (index, updatedMatch) => {
     matches.value[index] = {...matches.value[index], ...updatedMatch};
