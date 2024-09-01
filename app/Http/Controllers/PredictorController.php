@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prediction\Tournament;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,5 +15,10 @@ class PredictorController extends Controller
             'tournament' => $tournament,
             'games' => $tournament->games()->orderBy('date', 'asc')->get(),
         ]);
+    }
+
+    public function savePredictions(Tournament $tournament, Request $request)
+    {
+
     }
 }
