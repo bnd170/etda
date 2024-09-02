@@ -51,38 +51,21 @@
 
             </nav>
             <section class="flex flex-col mb-5 px-2">
-                <h2 class=" mb-4 text-lg">👋 Hola, {{ $page.props.auth.user.name }}</h2>
-                <fieldset
-                    class="block px-4 pt-1 inline-size-min rounded-md border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 text-surface-700 dark:text-surface-0/80"
-                    data-pc-name="fieldset" data-pc-section="root">
-                    <legend
-                        class="font-bold leading-none p-2 rounded-md text-surface-700 dark:text-surface-0/80 border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 transition-none"
-                        data-pc-section="legend">
-                        <span class="flex items-center justify-center leading-none" data-pc-section="legendtitle">📣 ATENCIÓN 📣</span>
-                    </legend>
-                    <div role="region"
-                         data-pc-section="toggleablecontent">
-                        <div class="pb-4" data-pc-section="content"><p class="text-sm"><br> Si eres un <b
-                            class="text-blue-300">deportista</b> de la Liga Nacional o Liga Promesas, ponte en contacto
-                            con nosotros a través de el siguiente enlace</p></div>
-                    </div>
-                </fieldset>
+                <LoggedIn v-if="$page.props.auth.user"/>
+                <LoggedOut v-else/>
             </section>
         </header>
     </section>
 </template>
 
-<style>
-section > header > nav > .menu-item {
+<style scoped>
+.menu-item {
     @apply flex items-center cursor-pointer p-3 rounded transition duration-150 ;
-}
-
-section > header > nav > .p-fieldset-legend {
-    @apply p-1;
 }
 </style>
 <script setup>
 import Image    from 'primevue/image';
-import Fieldset from 'primevue/fieldset';
 import Header   from "@/Components/League/Header.vue";
+import LoggedIn from "@/Components/Layout/Navbar/LoggedIn.vue";
+import LoggedOut from "@/Components/Layout/Navbar/LoggedOut.vue";
 </script>
