@@ -44,8 +44,8 @@ const items = ref([
                     label: `Jornada ${day.day}`,
                     href: day.status === 'pending' ? '#' : route('national-league.stats', {day: day.day}),
                     class: {
-                        'text-slate-300 dark:text-slate-500': day.status === 'pending',
-                        'text-primary-400 dark:text-primary-400': day.day == props.day,
+                        'text-slate-300': day.status === 'pending',
+                        'text-primary-400': day.day == props.day,
                     },
                 }
             })

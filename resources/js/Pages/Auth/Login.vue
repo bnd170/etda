@@ -1,72 +1,91 @@
 <script setup>
-import {ref} from 'vue';
+import Checkbox              from '@/Components/Checkbox.vue';
+import InputError            from '@/Components/InputError.vue';
+import InputLabel            from '@/Components/InputLabel.vue';
+import PrimaryButton         from '@/Components/PrimaryButton.vue';
+import TextInput             from '@/Components/TextInput.vue';
+import {Head, Link, useForm} from '@inertiajs/vue3';
 
-import InputText from 'primevue/inputtext';
-import Password  from 'primevue/password';
-import Card      from 'primevue/card';
-import Checkbox  from 'primevue/checkbox';
-import Button    from 'primevue/button';
-import Logo      from "~/Components/Layout/Logo.vue";
+defineProps({
+    canResetPassword: {
+        type: Boolean,
+    },
+    status: {
+        type: String,
+    },
+});
 
-const email = ref('');
-const password = ref('');
-const checked = ref(true);
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+});
+
+const submit = () => {
+    form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+    });
+};
 </script>
 
 <template>
-    <section class="flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
-        <Card>
-            <template #title>
-                <header class="flex flex-col relative">
-                    <a href="/" class="flex flex-col pl-5 text-2xl font-[Cabin] w-full text-center absolute -top-[70px]">
-                        <span class="mx-auto bg-white p-4 rounded-full mb-2">
-                            <Logo class="w-16 inline text-surface-800" />
-                        </span>
-                        El Talón de Aquiles
-                    </a>
-                    <h3 class="mt-[120px] box-title">Accede a tu cuenta</h3>
-                </header>
-            </template>
-            <template #content>
-                <label
-                    class="flex flex-col text-surface-900 dark:text-surface-0 text-lg font-medium mb-2">
-                    Correo electrónico
-                    <InputText type="text" placeholder="mvp@eltalondeaquiles.es" class="w-full md:w-[30rem] mb-8"
-                               v-model="email"/>
-                </label>
+    <Head title="Log in"/>
 
+    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        {{ status }}
+    </div>
 
-                <label class="flex flex-col text-surface-900 dark:text-surface-0 font-medium text-lg mb-2">
-                    Contraseña
-                    <Password v-model="password" placeholder="Shhh... no la compartas" :toggleMask="true"
-                              class="mb-4 w-full"
-                              :feedback="false"/>
-                </label>
+    <form @submit.prevent="submit">
+        <div>
+            <InputLabel for="email" value="Email"/>
 
+            <TextInput
+                id="email"
+                type="email"
+                class="mt-1 block w-full"
+                v-model="form.email"
+                required
+                autofocus
+                autocomplete="username"
+            />
 
-                <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-                    <div class="flex items-center">
-                        <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
-                        <label for="rememberme1">No cerrar sesión</label>
-                    </div>
-                </div>
-                <Button label="Inicia sesión" class="w-full" as="router-link" to="/"></Button>
-                <p class="border-top-2  mt-8 w-full font-medium no-underline ml-2 text-center cursor-pointer text-gray-300">
-                    🤔 He olvidado mi contraseña</p>
-            </template>
-        </Card>
-    </section>
+            <InputError class="mt-2" :message="form.errors.email"/>
+        </div>
+
+        <div class="mt-4">
+            <InputLabel for="password" value="Password"/>
+
+            <TextInput
+                id="password"
+                type="password"
+                class="mt-1 block w-full"
+                v-model="form.password"
+                required
+                autocomplete="current-password"
+            />
+
+            <InputError class="mt-2" :message="form.errors.password"/>
+        </div>
+
+        <div class="block mt-4">
+            <label class="flex items-center">
+                <Checkbox name="remember" v-model:checked="form.remember"/>
+                <span class="ms-2 text-sm text-gray-600">Remember me</span>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <Link
+                v-if="canResetPassword"
+                :href="route('password.request')"
+                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                Forgot your password?
+            </Link>
+
+            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Log in
+            </PrimaryButton>
+        </div>
+    </form>
 </template>
-
-
-<style scoped>
-.pi-eye {
-    transform: scale(1.6);
-    margin-right: 1rem;
-}
-
-.pi-eye-slash {
-    transform: scale(1.6);
-    margin-right: 1rem;
-}
-</style>

@@ -17,7 +17,7 @@ export default defineConfig({
     publicDir: 'public',
     resolve: {
         alias: {
-            'ziggy-js': '/vendor/tightenco/ziggy/dist/vue.m',
+            'ziggy-js': ['/vendor/tightenco/ziggy'],
             '~': '/resources/js',
             'css': '/resources/css',
         },
