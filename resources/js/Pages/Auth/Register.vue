@@ -18,7 +18,6 @@ const form = useForm({
 
 
 const submit = () => {
-    console.log(route('register'));
     form.processing = true;
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation', 'processing'),

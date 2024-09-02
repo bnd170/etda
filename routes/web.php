@@ -6,6 +6,7 @@ use App\Http\Controllers\NationalLeagueController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\PredictorController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
