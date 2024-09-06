@@ -2,9 +2,9 @@ export default {
     root: ({ props }) => ({
         class: [
             // Spacing and Shape
-            'my-4 mx-0',
+            'mx-0',
             'rounded-md',
-            'border-solid border-0 border-l-[6px]',
+            'border-solid border-0 border-[2px]',
 
             // Colors
             {
@@ -33,7 +33,7 @@ export default {
             'flex items-center',
 
             // Spacing
-            'py-5 px-7'
+            'py-2 px-3'
         ]
     },
     icon: {
@@ -78,7 +78,7 @@ export default {
         ]
     },
     transition: {
-        enterFromClass: 'opacity-0',
+        enterFromClass: '',
         enterActiveClass: 'transition-opacity duration-300',
         leaveFromClass: 'max-h-40',
         leaveActiveClass: 'overflow-hidden transition-all duration-300 ease-in',

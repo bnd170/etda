@@ -56,16 +56,16 @@ export default {
         ]
     }),
     showicon: {
-        class: ['absolute top-1/2 right-3 -mt-2', 'text-surface-600 dark:text-white/70']
+        class: ['absolute top-1/2 right-3 -mt-2 z-10', 'text-surface-600 dark:text-white/70']
     },
     hideicon: {
-        class: ['absolute top-1/2 right-3 -mt-2', 'text-surface-600 dark:text-white/70']
+        class: ['absolute top-1/2 right-3 -mt-2 z-10', 'text-surface-600 dark:text-white/70']
     },
     input: {
         root: ({ props, context, parent }) => ({
             class: [
                 // Font
-                'font-sans leading-none',
+                'font-sans leading-none w-full z-0',
 
                 // Flex
                 { 'flex-1 w-[1%]': parent.instance.$name == 'InputGroup' },

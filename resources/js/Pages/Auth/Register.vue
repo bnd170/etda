@@ -1,12 +1,13 @@
 <script setup>
-import {Head, useForm} from '@inertiajs/vue3';
+import {Head, Link, useForm} from '@inertiajs/vue3';
 
-import InputText  from 'primevue/inputtext';
-import Password   from 'primevue/password';
-import Card       from 'primevue/card';
-import Button     from 'primevue/button';
-import Logo       from "@/Components/Layout/Logo.vue";
-import InputError from "@/Components/InputError.vue";
+import InputText     from 'primevue/inputtext';
+import Password      from 'primevue/password';
+import Card          from 'primevue/card';
+import Message       from 'primevue/message';
+import Logo          from "@/Components/Layout/Logo.vue";
+import InputError    from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const form = useForm({
     name: '',
@@ -26,8 +27,8 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Register"/>
-    <section class="flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
+    <Head title="Crea tu cuenta"/>
+    <section class="flex items-center flex-col justify-center min-h-screen min-w-[100vw] overflow-hidden">
         <Card>
             <template #title>
                 <header class="flex flex-col relative">
@@ -38,7 +39,7 @@ const submit = () => {
                         </span>
                         El Talón de Aquiles
                     </a>
-                    <h3 class="mt-[120px] box-title">Accede a tu cuenta</h3>
+                    <h3 class="mt-[120px] box-title">Crea tu cuenta</h3>
                 </header>
             </template>
             <template #content>
@@ -49,7 +50,7 @@ const submit = () => {
                         <InputText
                             id="name"
                             type="text"
-                            class="w-full md:w-[30rem] mb-8"
+                            class="w-full md:w-[25rem] mb-8"
                             v-model="form.name"
                             required
                             autofocus
@@ -61,7 +62,7 @@ const submit = () => {
                     <label
                         class="flex flex-col text-surface-900 dark:text-surface-0 text-lg font-medium mb-2">
                         Correo electrónico
-                        <InputText type="email" placeholder="mvp@eltalondeaquiles.es" class="w-full md:w-[30rem] mb-2"
+                        <InputText type="email" placeholder="mvp@eltalondeaquiles.es" class="w-full md:w-[25rem] mb-2"
                                    required
                                    autofocus
                                    autocomplete="username"
@@ -73,12 +74,12 @@ const submit = () => {
                     <label class="flex flex-col text-surface-900 dark:text-surface-0 font-medium text-lg mb-5">
                         Contraseña
                         <Password v-model="form.password"
-                                  id="password"
-                                  type="password"
-                                  class="mt-1 block w-full"
+                                  class="mt-1 block w-full w-full md:w-[25rem]"
                                   required
                                   autocomplete="new-password"
-                                  placeholder="Shhh... no la compartas" :toggleMask="true" :feedback="false"/>
+                                  placeholder="Shhh... no la compartas"
+                                  :toggleMask="true"
+                                  :feedback="false"/>
                         <InputError class="mt-2" :message="form.errors.password"/>
                     </label>
 
@@ -86,34 +87,29 @@ const submit = () => {
                     <label class="flex flex-col text-surface-900 dark:text-surface-0 font-medium text-lg mb-2">
                         Confirma la contraseña
                         <Password v-model="form.password_confirmation"
-                                  id="password"
-                                  type="password"
                                   class="mt-1 block w-full"
                                   required
                                   autocomplete="new-password"
-                                  placeholder="Shhh... no la compartas" :toggleMask="true" :feedback="false"/>
+                                  placeholder="Shhh... no la compartas"
+                                  :toggleMask="true"
+                                  :feedback="false"/>
                         <InputError class="mt-2" :message="form.errors.password_confirmation"/>
                     </label>
 
-                    <Button type="submit" label="Inicia sesión" class="w-full mt-5"
-                            :class="{ 'opacity-25': form.processing }" :disabled="form.processing"></Button>
+                    <PrimaryButton class="w-full mt-12 font-bold text-xl" :class="{ 'opacity-25': form.processing }"
+                                   :disabled="form.processing">
+                        Crear cuenta
+                    </PrimaryButton>
                 </form>
-                <p class="border-top-2  mt-8 w-full font-medium no-underline ml-2 text-center cursor-pointer text-gray-300">
-                    🤔 He olvidado mi contraseña</p>
             </template>
         </Card>
+
+        <Message severity="info" class="mt-5" :closable="false">
+            <Link :href="route('login')">Si ya tienes una cuenta, inicia sesión aquí</Link>
+        </Message>
     </section>
 </template>
 
 
 <style scoped>
-.pi-eye {
-    transform: scale(1.6);
-    margin-right: 1rem;
-}
-
-.pi-eye-slash {
-    transform: scale(1.6);
-    margin-right: 1rem;
-}
 </style>
