@@ -1,12 +1,12 @@
 <script setup>
-import DangerButton from '@/Components/DangerButton.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import Modal from '@/Components/Modal.vue';
+import DangerButton    from '@/Components/DangerButton.vue';
+import InputError      from '@/Components/InputError.vue';
+import Dialog          from 'primevue/dialog';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
-import { nextTick, ref } from 'vue';
+import PasswordInput   from '@/Components/PasswordInput.vue';
+import Card            from 'primevue/card';
+import {useForm}       from '@inertiajs/vue3';
+import {nextTick, ref} from 'vue';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -38,58 +38,56 @@ const closeModal = () => {
 </script>
 
 <template>
-    <section class="space-y-6">
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">Delete Account</h2>
+    <Card>
+        <template #title>
+            <header>
+                <h2>Eliminar mi cuenta</h2>
+            </header>
+        </template>
+        <template #subtitle>
+            Esta acción es irreversible y eliminará todos tus datos y recursos permanentemente.
+        </template>
 
-            <p class="mt-1 text-sm text-gray-600">
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                your account, please download any data or information that you wish to retain.
+        <template #footer>
+            <DangerButton @click="confirmUserDeletion">
+                Deseo eliminar mi cuenta
+            </DangerButton>
+        </template>
+    </Card>
+    <Dialog v-model:visible="confirmingUserDeletion" :style="{ width: '35rem' }" modal
+            header="¿Estás seguro que deseas eliminar tu cuenta?">
+        <div class="flex flex-col gap-5">
+            <p>
+                Al eliminar tu cuenta, todos tus datos y recursos serán eliminados permanentemente. Por favor, introduce
+                tu
+                contraseña para confirmar que deseas eliminar tu cuenta.
             </p>
-        </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+            <div>
+                <PasswordInput
+                    label="Escribe tu contraseña para confirmar"
+                    ref="passwordInput"
+                    v-model="form.password"
+                    placeholder="Password"
+                    @keyup.enter="deleteUser"
+                />
 
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">
-                    Are you sure you want to delete your account?
-                </h2>
-
-                <p class="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data will be permanently deleted. Please
-                    enter your password to confirm you would like to permanently delete your account.
-                </p>
-
-                <div class="mt-6">
-                    <InputLabel for="password" value="Password" class="sr-only" />
-
-                    <TextInput
-                        id="password"
-                        ref="passwordInput"
-                        v-model="form.password"
-                        type="password"
-                        class="mt-1 block w-3/4"
-                        placeholder="Password"
-                        @keyup.enter="deleteUser"
-                    />
-
-                    <InputError :message="form.errors.password" class="mt-2" />
-                </div>
-
-                <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
-
-                    <DangerButton
-                        class="ms-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
-                </div>
+                <InputError :message="form.errors.password" class="mt-2"/>
             </div>
-        </Modal>
-    </section>
+
+
+            <div class="flex justify-end gap-2">
+                <SecondaryButton @click="closeModal">Me he arrepentido</SecondaryButton>
+
+                <DangerButton
+                    class="ms-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                    @click="deleteUser"
+                >
+                    Eliminar cuenta permanentemente
+                </DangerButton>
+            </div>
+        </div>
+    </Dialog>
 </template>

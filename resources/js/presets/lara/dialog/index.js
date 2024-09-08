@@ -51,7 +51,7 @@ export default {
         ]
     },
     title: {
-        class: ['font-bold text-lg']
+        class: ['font-bold text-xl']
     },
     icons: {
         class: ['flex items-center']

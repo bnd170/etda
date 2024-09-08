@@ -1,9 +1,11 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
+import Default                      from "~/Layout/Default.vue";
+import {Head}                       from "@inertiajs/vue3";
+import UpdatePasswordForm           from "@/Pages/Profile/Partials/UpdatePasswordForm.vue";
+import DeleteUserForm               from "@/Pages/Profile/Partials/DeleteUserForm.vue";
+
+defineOptions({layout: Default});
 
 defineProps({
     mustVerifyEmail: {
@@ -16,31 +18,15 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head title="Mi cuenta"/>
+    <section class="max-w-2xl mx-auto flex flex-col gap-10">
+        <h1 class="text-2xl">Mi perfil</h1>
+        <UpdateProfileInformationForm
+            :must-verify-email="mustVerifyEmail"
+            :status="status"
+        />
+        <UpdatePasswordForm/>
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
-                </div>
-
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
-
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <DeleteUserForm class="max-w-xl" />
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+        <DeleteUserForm/>
+    </section>
 </template>

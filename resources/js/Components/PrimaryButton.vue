@@ -1,6 +1,5 @@
 <script setup>
 import Button from 'primevue/button';
-import {defineProps} from 'vue';
 
 defineProps({
     disabled: {

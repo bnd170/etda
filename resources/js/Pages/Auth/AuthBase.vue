@@ -1,7 +1,5 @@
 <script setup>
 
-import Logo from "@/Components/Layout/Logo.vue";
-
 import Message from "primevue/message";
 import Card    from "primevue/card";
 </script>
