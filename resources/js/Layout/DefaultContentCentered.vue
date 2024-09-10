@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col min-h-screen">
-        <Navbar :centerContent="false">
+        <Navbar :centerContent="true">
             <slot/>
         </Navbar>
         <Spacer/>

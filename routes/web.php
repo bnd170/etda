@@ -43,14 +43,14 @@ Route::prefix('/')->group(static function () {
         Route::get('episodios', [PodcastController::class, 'index'])->name('podcast.episodes');
     });
 
-    Route::prefix('/porra/{tournament:slug}')->group(static function () {
-        Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictions.index');
-    });
-
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::prefix('/porra/{tournament:slug}')->group(static function () {
+            Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictions.index');
+        });
     });
 });
 

@@ -1,7 +1,7 @@
 export default {
     root: ({ props, context, parent }) => ({
         class: [
-            'relative',
+            'relative font-black',
 
             // Alignments
             'items-center inline-flex text-center align-bottom justify-center',

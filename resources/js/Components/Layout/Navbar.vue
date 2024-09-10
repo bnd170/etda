@@ -1,42 +1,46 @@
 <template>
     <input ref="drawer" v-model="iconStatus" id="menu" type="checkbox" class="drawer-toggle" @input="toggleMenu"/>
-    <div class="drawer-content flex flex-col">
-        <!-- Navbar -->
-        <div class="navbar">
-            <div class="flex-none">
-                <label for="menu" aria-label="open sidebar">
-                    <div class="hamburger" :class="iconStatus ? 'hamburger--is-open' : ''">
-                        <div class="hamburger__item hamburger__item--first"></div>
-                        <div class="hamburger__item hamburger__item--middle"></div>
-                        <div class="hamburger__item hamburger__item--last"></div>
-                    </div>
-                </label>
-            </div>
-            <a href="/" class=" pl-5 mx-2 text-xl font-[Cabin]">
-                <Logo class="w-6 mr-3 inline" />
-                El Talón de Aquiles
-            </a>
-        </div>
-
-        <main>
+    <div class="drawer-content flex flex-col flex-grow">
+        <header class="flex-grow-0">
+            <nav class="navbar">
+                <section class="flex-none">
+                    <label for="menu" aria-label="open sidebar">
+                    <span class="hamburger" :class="iconStatus ? 'hamburger--is-open' : ''">
+                        <span class="hamburger__item hamburger__item--first"></span>
+                        <span class="hamburger__item hamburger__item--middle"></span>
+                        <span class="hamburger__item hamburger__item--last"></span>
+                    </span>
+                    </label>
+                </section>
+                <a href="/" class="flex pl-5 mx-2 text-xl font-[Cabin]">
+                    <Logo class="w-6 mr-3 inline"/>
+                    <h3>El Talón de Aquiles</h3>
+                </a>
+                <Sidebar v-model:visible="iconStatus" @hide="menuClosed" :base-z-index="10">
+                    <template #container="{ closeCallback }">
+                        <Menu/>
+                    </template>
+                </Sidebar>
+            </nav>
+        </header>
+        <main class="flex-grow" :class="centerContent ? 'flex justify-center items-center' : ''">
             <slot/>
         </main>
-
     </div>
 
-    <Sidebar v-model:visible="iconStatus" @hide="menuClosed" :base-z-index="10">
-        <template #container="{ closeCallback }">
-            <Menu/>
-        </template>
-    </Sidebar>
 </template>
 <script setup>
 import Sidebar from 'primevue/sidebar';
 import Menu    from "~/Components/Layout/Navbar/Menu.vue";
 import {ref}   from "vue";
 import Logo    from "./Logo.vue";
-import ThemeSwitcher from "./ThemeSwitcher.vue";
 
+defineProps({
+    centerContent: {
+        type: Boolean,
+        required: true
+    }
+})
 
 const iconStatus = ref(false);
 

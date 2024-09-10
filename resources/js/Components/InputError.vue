@@ -1,4 +1,5 @@
 <script setup>
+import Message from "primevue/message";
 defineProps({
     message: {
         type: String,
@@ -8,8 +9,8 @@ defineProps({
 
 <template>
     <div v-if="message">
-        <p class="dark:text-red-400 text-red-600">
+        <Message severity="error" :closable="false">
             {{ message }}
-        </p>
+        </Message>
     </div>
 </template>
