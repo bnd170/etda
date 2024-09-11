@@ -26,17 +26,16 @@ class GroupStageSeeder extends Seeder
             'AU' => ['name' => 'Australia', 'iso' => 'AU'],
             'CA' => ['name' => 'Canadá', 'iso' => 'CA'],
             'VE' => ['name' => 'Venezuela', 'iso' => 'VE'],
-            'RU' => ['name' => 'Alemania', 'iso' => 'DE'],
+            'DE' => ['name' => 'Alemania', 'iso' => 'DE'],
             'FI' => ['name' => 'Tailandia', 'iso' => 'TH'],
             'JP' => ['name' => 'Japón', 'iso' => 'JP'],
-            'CO' => ['name' => 'Colombia', 'iso' => 'CO'],
         ];
 
         $groups = [
-            'A' => [$teams['UA'], $teams['IE'], $teams['NL'], $teams['JP']],
-            'B' => [$teams['IR'], $teams['US'], $teams['ES'], $teams['CO']],
-            'C' => [$teams['BR'], $teams['AR'], $teams['AU'], $teams['CA']],
-            'D' => [$teams['RU'], $teams['GB'], $teams['VE'], $teams['FI']],
+            'A' => [$teams['UA'], $teams['AR'], $teams['ES']],
+            'B' => [$teams['BR'], $teams['GB'], $teams['CA'], $teams['JP']],
+            'C' => [$teams['US'], $teams['NL'], $teams['AU'], $teams['FI']],
+            'D' => [$teams['IR'], $teams['IE'], $teams['VE'], $teams['DE']],
         ];
 
         foreach ($groups as $group => $groupTeams) {
