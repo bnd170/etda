@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SavePredictionRequest;
 use App\Models\Prediction\Tournament;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,7 +15,11 @@ class PredictorController extends Controller
     {
         return Inertia::render('Predictor/Index', [
             'tournament' => $tournament,
-            'games'      => $tournament->games()->orderBy('date')->get(),
+            'games'      => $tournament->games()->with([
+                                                           'predictions' => function ($query) {
+                                                               $query->where('user_id', Auth::user()->id);
+                                                           },
+                                                       ])->orderBy('date')->get(),
         ]);
     }
 

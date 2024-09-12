@@ -1,5 +1,5 @@
 <template>
-    <Toast />
+    <Toast/>
     <section class="max-w-6xl mx-auto p-4">
         <header class="mb-10 mt-5" @click="show">
             <h1 class="text-3xl font-bold text-center">Porra de {{ tournament.name }}</h1>
@@ -39,15 +39,15 @@
 </template>
 
 <script setup>
-import {ref}    from 'vue';
-import Match    from '~/Components/Predictor/Match.vue';
-import Summary  from '~/Components/Predictor/Summary.vue';
-import Card     from "primevue/card";
-import DataView from 'primevue/dataview';
-import Default   from "~/Layout/Default.vue";
-import {useForm} from "@inertiajs/vue3";
-import Toast from 'primevue/toast';
-import { useToast } from "primevue/usetoast";
+import {ref}      from 'vue';
+import Match      from '~/Components/Predictor/Match.vue';
+import Summary    from '~/Components/Predictor/Summary.vue';
+import Card       from "primevue/card";
+import DataView   from 'primevue/dataview';
+import Default    from "~/Layout/Default.vue";
+import {useForm}  from "@inertiajs/vue3";
+import Toast      from 'primevue/toast';
+import {useToast} from "primevue/usetoast";
 
 defineOptions({layout: Default})
 
@@ -64,6 +64,11 @@ const props = defineProps({
 });
 
 const matches = ref(props.games.map(game => {
+    console.log(game);
+    const prediction = game.predictions.length ? game.predictions[0]:null;
+    const awayScore = prediction ? prediction.selection==='X' ? null:prediction.score_away:null;
+    const homeScore = prediction ? prediction.selection==='X' ? null:prediction.score_home:null;
+    const drawScore = prediction ? prediction.selection==='X' ? prediction.score_away:null:null;
     return {
         predictor_game_id: game.id,
         home: game.team_home.name,
@@ -72,10 +77,10 @@ const matches = ref(props.games.map(game => {
         awayIso: game.team_away.iso,
         date: new Date(game.date),
         stage: game.round,
-        selection: null,
-        homeScore: null,
-        awayScore: null,
-        drawScore: null,
+        selection: game.predictions.length ? game.predictions[0].selection:null,
+        homeScore,
+        awayScore,
+        drawScore,
         error: null
     }
 }));
@@ -87,22 +92,38 @@ const form = useForm({
 const updateMatch = (index, updatedMatch) => {
     form.matches[index] = {...form.matches[index], ...updatedMatch};
     const currentMatch = form.matches[index];
-    if (currentMatch.selection!==null && (currentMatch.drawScore!==null || (currentMatch.homeScore!==null && currentMatch.awayScore!==null))) {
-        form.transform(() => {
-            const awayScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.awayScore;
-            const homeScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.homeScore;
-            return {
-                predictor_game_id: currentMatch.predictor_game_id,
-                score_home: homeScore,
-                score_away: awayScore,
-                selection: currentMatch.selection
-            }
-        }).post(route('predictions.save', {slug: props.tournament.slug}), {
-            preserveScroll: true,
-            onSuccess: () => {
-                toast.add({ severity: 'success', summary: 'Predicción realizada', detail: 'Hemos guardado tu predicción. ¡Mucha suerte!', life: 3000 });
-            }
-        });
+
+    if (!isPredictionFullFilled(currentMatch)) {
+        return;
     }
+
+    form.transform(() => transformMatch(currentMatch))
+        .post(route('predictions.save', {slug: props.tournament.slug}), {
+            preserveScroll: true,
+            onSuccess: () => showSuccessMessage(),
+        });
+
 };
+const isPredictionFullFilled = (currentMatch) => {
+    return currentMatch.selection!==null || (currentMatch.drawScore!==null && (currentMatch.homeScore!==null || currentMatch.awayScore!==null));
+};
+const showSuccessMessage = () => {
+    toast.add({
+        severity: 'success',
+        summary: 'Predicción realizada',
+        detail: 'Hemos guardado tu predicción. ¡Mucha suerte!',
+        life: 3000
+    });
+};
+
+const transformMatch = (currentMatch) => {
+    const awayScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.awayScore;
+    const homeScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.homeScore;
+    return {
+        predictor_game_id: currentMatch.predictor_game_id,
+        score_home: homeScore,
+        score_away: awayScore,
+        selection: currentMatch.selection
+    };
+}
 </script>

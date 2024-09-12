@@ -27,6 +27,6 @@ class Game extends Model
 
     public function predictions(): HasMany
     {
-        return $this->hasMany(Prediction::class);
+        return $this->hasMany(Prediction::class, 'predictor_game_id');
     }
 }

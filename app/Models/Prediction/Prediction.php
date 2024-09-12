@@ -13,6 +13,7 @@ class Prediction extends Model
     use HasFactory;
 
     protected $fillable = ['predictor_game_id', 'user_id', 'score_home', 'score_away', 'selection'];
+    protected $hidden = ['predictor_game_id', 'user_id'];
 
     public function game(): BelongsTo
     {
