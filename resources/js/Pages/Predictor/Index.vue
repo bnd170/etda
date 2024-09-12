@@ -1,6 +1,7 @@
 <template>
+    <Toast />
     <section class="max-w-6xl mx-auto p-4">
-        <header class="mb-10 mt-5">
+        <header class="mb-10 mt-5" @click="show">
             <h1 class="text-3xl font-bold text-center">Porra de {{ tournament.name }}</h1>
             <p class="text-center text-lg text-gray-500">Haz tus predicciones para los partidos de {{
                     tournament.name
@@ -45,6 +46,7 @@ import Card     from "primevue/card";
 import DataView from 'primevue/dataview';
 import Default   from "~/Layout/Default.vue";
 import {useForm} from "@inertiajs/vue3";
+import Toast from 'primevue/toast';
 import { useToast } from "primevue/usetoast";
 
 defineOptions({layout: Default})
@@ -98,8 +100,7 @@ const updateMatch = (index, updatedMatch) => {
         }).post(route('predictions.save', {slug: props.tournament.slug}), {
             preserveScroll: true,
             onSuccess: () => {
-                toast.add({ severity: 'info', summary: 'Predicción realizada', detail: 'Hemos guardado tu predicción. ¡Mucha suerte!', life: 3000 });
-                toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
+                toast.add({ severity: 'success', summary: 'Predicción realizada', detail: 'Hemos guardado tu predicción. ¡Mucha suerte!', life: 3000 });
             }
         });
     }
