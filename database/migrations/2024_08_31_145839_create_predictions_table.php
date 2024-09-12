@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('predictor_game_id')->constrained();
-            $table->integer('predicted_score_home');
-            $table->integer('predicted_score_away');
+            $table->integer('score_home');
+            $table->integer('score_away');
             $table->string('selection');
             $table->integer('points')->default(0);
             $table->timestamps();
+            $table->unique(['user_id', 'predictor_game_id']);
         });
     }
 

@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('/')->group(static function () {
-    Route::get('acceso', [LoginController::class, 'showLoginForm'])->name('login');
-
     Route::get('', [HomeController::class, 'index'])->name('home.index');
     Route::get('/el-proyecto', AboutUsController::class)->name('about-us.index');
 
@@ -50,6 +48,7 @@ Route::prefix('/')->group(static function () {
 
         Route::prefix('/porra/{tournament:slug}')->group(static function () {
             Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictions.index');
+            Route::post('/guardar', [PredictorController::class, 'savePrediction'])->name('predictions.save');
         });
     });
 });

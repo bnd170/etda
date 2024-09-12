@@ -11,7 +11,7 @@ class SavePredictionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class SavePredictionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_id' => 'exists:predictor_games,id',
+            'predictor_game_id' => 'exists:predictor_games,id',
+            'score_home' => 'integer',
+            'score_away' => 'integer',
+            'selection' => 'in:1,X,2',
         ];
     }
 }

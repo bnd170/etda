@@ -5,6 +5,7 @@ import {createInertiaApp} from '@inertiajs/vue3'
 import 'css/variables.css';
 import PrimeVue           from 'primevue/config';
 import Lara               from './presets/lara';
+import ToastService from 'primevue/toastservice';
 
 window.axios = axios;
 
@@ -21,6 +22,7 @@ createInertiaApp({
         createApp({render: () => h(App, props)})
             .use(plugin)
             .use(PrimeVue, {ripple: true, unstyled: true, pt: Lara})
+            .use(ToastService)
             .use(ZiggyVue)
             .mount(el)
     },

@@ -2,7 +2,9 @@
     <section class="max-w-6xl mx-auto p-4">
         <header class="mb-10 mt-5">
             <h1 class="text-3xl font-bold text-center">Porra de {{ tournament.name }}</h1>
-            <p class="text-center text-lg text-gray-500">Haz tus predicciones para los partidos de {{ tournament.name }}</p>
+            <p class="text-center text-lg text-gray-500">Haz tus predicciones para los partidos de {{
+                    tournament.name
+                }}</p>
         </header>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Match
@@ -29,9 +31,6 @@
                             />
                         </template>
                     </DataView>
-                    <div class="mt-8 text-center">
-                        <Button label="Guardar predicciones" outlined @click="submitBet" :disabled="!bettingComplete"/>
-                    </div>
                 </template>
             </Card>
         </section>
@@ -39,16 +38,18 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue';
-import Match           from '~/Components/Predictor/Match.vue';
-import Summary         from '~/Components/Predictor/Summary.vue';
-import Card            from "primevue/card";
-import DataView        from 'primevue/dataview';
-import Button          from 'primevue/button';
-import Default         from "~/Layout/Default.vue";
+import {ref}    from 'vue';
+import Match    from '~/Components/Predictor/Match.vue';
+import Summary  from '~/Components/Predictor/Summary.vue';
+import Card     from "primevue/card";
+import DataView from 'primevue/dataview';
+import Default   from "~/Layout/Default.vue";
+import {useForm} from "@inertiajs/vue3";
+import { useToast } from "primevue/usetoast";
 
 defineOptions({layout: Default})
 
+const toast = useToast();
 const props = defineProps({
     tournament: {
         type: Object,
@@ -60,42 +61,47 @@ const props = defineProps({
     }
 });
 
-
 const matches = ref(props.games.map(game => {
     return {
-            home: game.team_home.name,
-            away: game.team_away.name,
-            homeIso: game.team_home.iso,
-            awayIso: game.team_away.iso,
-            date: new Date(game.date),
-            stage: game.round,
-            selection: null,
-            homeScore: null,
-            awayScore: null,
-            drawScore: null,
-            error: null
-        }
+        predictor_game_id: game.id,
+        home: game.team_home.name,
+        away: game.team_away.name,
+        homeIso: game.team_home.iso,
+        awayIso: game.team_away.iso,
+        date: new Date(game.date),
+        stage: game.round,
+        selection: null,
+        homeScore: null,
+        awayScore: null,
+        drawScore: null,
+        error: null
+    }
 }));
 
-const updateMatch = (index, updatedMatch) => {
-    matches.value[index] = {...matches.value[index], ...updatedMatch};
-};
-
-const bettingComplete = computed(() => {
-    return matches.value.every(match =>
-        match.selection &&
-        ((match.selection==='X' && match.drawScore!==null) ||
-            (match.selection!=='X' && match.homeScore!==null && match.awayScore!==null)) &&
-        !match.error
-    );
+const form = useForm({
+    matches: matches.value
 });
 
-const submitBet = () => {
-    if (bettingComplete.value) {
-        // Aquí iría la lógica para enviar la porra al backend
-        alert('¡Porra enviada con éxito!');
-    } else {
-        alert('Por favor, completa todos los partidos y predicciones correctamente antes de enviar la porra.');
+const updateMatch = (index, updatedMatch) => {
+    form.matches[index] = {...form.matches[index], ...updatedMatch};
+    const currentMatch = form.matches[index];
+    if (currentMatch.selection!==null && (currentMatch.drawScore!==null || (currentMatch.homeScore!==null && currentMatch.awayScore!==null))) {
+        form.transform(() => {
+            const awayScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.awayScore;
+            const homeScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.homeScore;
+            return {
+                predictor_game_id: currentMatch.predictor_game_id,
+                score_home: homeScore,
+                score_away: awayScore,
+                selection: currentMatch.selection
+            }
+        }).post(route('predictions.save', {slug: props.tournament.slug}), {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast.add({ severity: 'info', summary: 'Predicción realizada', detail: 'Hemos guardado tu predicción. ¡Mucha suerte!', life: 3000 });
+                toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
+            }
+        });
     }
 };
 </script>

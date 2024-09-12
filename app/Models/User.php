@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Prediction\Prediction;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
@@ -70,4 +72,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'updated_at',
         'created_at',
     ];
+
+    public function predictions(): HasMany
+    {
+        return $this->hasMany(Prediction::class);
+    }
 }
