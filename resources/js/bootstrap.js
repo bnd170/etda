@@ -6,6 +6,7 @@ import 'css/variables.css';
 import PrimeVue           from 'primevue/config';
 import Lara               from './presets/lara';
 import ToastService from 'primevue/toastservice';
+import 'primeicons/primeicons.css';
 
 window.axios = axios;
 

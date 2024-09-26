@@ -1,6 +1,7 @@
 export default {
     root: {
         class: [
+            'card',
             //Shape
             'rounded-md',
             'shadow-md',
@@ -11,7 +12,11 @@ export default {
         ]
     },
     body: {
-        class: 'p-5'
+        class: [
+            //Padding
+            'p-5',
+            'card-body'
+        ],
     },
     title: {
         class: 'text-2xl font-bold mb-2'
@@ -29,7 +34,11 @@ export default {
         ]
     },
     content: {
-        class: 'py-5' // Vertical padding.
+        class: [
+            // Vertical padding
+            'py-5',
+            'card-content'
+        ]
     },
     footer: {
         class: 'pt-5' // Top padding.
