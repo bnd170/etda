@@ -16,22 +16,27 @@
                     <span class="font-semibold">{{ match.away }}</span>
                 </div>
             </div>
-            <div class="flex flex-col justify-around items-center py-5 bg-black/25">
+            <div class="flex flex-col justify-around items-center py-5 bg-slate-950/80">
                 <p class="mb-2">
                     ☝🏼. Predice el <b>resultado</b> del encuentro
                 </p>
 
                 <section class="card flex justify-center">
-                    <ButtonGroup>
-                    <Button rounded severity="secondary" label="1" @click="selectResult('1')" :disabled="match.selection === '1'" />
-                    <Button rounded severity="secondary" label="X" @click="selectResult('X')" :disabled="match.selection === 'X'" />
-                    <Button rounded severity="secondary" label="2" @click="selectResult('2')" :disabled="match.selection === '2'" />
-                        </ButtonGroup>
+                    <InputGroup>
+                        <Button rounded severity="secondary" label="1" @click="selectResult('1')" :disabled="match.selection === '1'" />
+                        <Button rounded severity="secondary" label="X" @click="selectResult('X')" :disabled="match.selection === 'X'" />
+                        <Button rounded severity="secondary" label="2" @click="selectResult('2')" :disabled="match.selection === '2'" />
+                    </InputGroup>
                 </section>
             </div>
-            <div class="flex flex-col justify-around items-center py-5 bg-black/55">
+            <div class="flex flex-col justify-around items-center py-5 bg-slate-900">
                 <p class="mb-2">
-                    ✌🏼. Predice el <b>marcador</b> del encuentro
+                    <template v-if="match.selection === 'X'">
+                        <span>👇🏼. Predice el <b>a cuantos goles</b>  empatarán</span>
+                    </template>
+                    <template v-else>
+                        <span>👇🏼. Predice el <b>marcador</b> del encuentro</span>
+                    </template>
                 </p>
                 <div v-if="match.selection === 'X'" class="flex justify-center mb-4">
                     <div class="bg-gray-800 text-white px-4 py-2 rounded-lg text-2xl font-bold">
@@ -74,7 +79,7 @@ import {ref, watch} from 'vue';
 import { getFlagUrl } from '~/Utils/flags.js';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
-import ButtonGroup from 'primevue/buttongroup';
+import InputGroup from 'primevue/inputgroup';
 
 const props = defineProps({
     match: {
@@ -146,7 +151,7 @@ const formatDate = (date) => {
 
 <style>
 .card-match {
-    @apply overflow-hidden;
+    @apply overflow-hidden border-2 border-slate-600;
 }
 
 .card-match .card-body {
