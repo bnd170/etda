@@ -2,25 +2,24 @@
 
 namespace Tests\Unit\Services\Predictor;
 
-use App\Models\Prediction\Prediction;
 use App\Repositories\PredictionRepositoryInterface;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Mockery\MockInterface;
+use PHPUnit\Framework\TestCase;
 use Tests\CreatesApplication;
 
-abstract class PredictorTestCase extends BaseTestCase
+abstract class PredictorTestCase extends TestCase
 {
     use CreatesApplication;
 
-    private MockInterface $repository;
+    private MockInterface $predictionRepository;
 
-    public function repository(): MockInterface
+    public function predictionRepository(): PredictionRepositoryInterface
     {
-        return $this->repository ??= $this->mock(PredictionRepositoryInterface::class);
+        return $this->predictionRepository ??= \Mockery::mock(PredictionRepositoryInterface::class);
     }
 
     public function shouldFindPredictionsByGameId(int $gameId, array $predictions): void
     {
-        $this->repository()->shouldReceive('findByGameId')->with($gameId)->andReturn($predictions);
+        $this->predictionRepository()->shouldReceive('findByGameId')->with($gameId)->andReturn($predictions);
     }
 }

@@ -1,20 +1,31 @@
 <?php
 
-use Tests\Unit\Model\Predictor\GameMother;
+namespace Tests\Unit\Services\Predictor;
+
+use App\Services\Predictor\PointsDistributor;
+use Tests\Unit\Model\Predictor\GameBuilder;
 use Tests\Unit\Model\Predictor\PredictionMother;
 
-beforeEach(function () {
-    $this->pointsDistributorService = new PointsDistributorService($this->repository());
-});
+class PointsDistributorServiceTest extends PredictorTestCase
+{
+    private PointsDistributor $pointsDistributorService;
 
-describe('PointsDistributorService', function () {
-    it('distributes points correctly', function () {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->pointsDistributorService = new PointsDistributor(
+            $this->predictionRepository()
+        );
+    }
+
+    public function test_distributes_points_correctly(): void
+    {
         $prediction = PredictionMother::localWins();
-        $game = GameMother::create();
+        $game       = GameBuilder::create()->localWins()->build();
         $this->shouldFindPredictionsByGameId($game->id, [$prediction]);
 
         $this->pointsDistributorService->distributeFor($game);
 
-
-    });
-});
+        $this->assertEquals(3, $prediction->points);
+    }
+}

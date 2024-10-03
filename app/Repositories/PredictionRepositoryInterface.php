@@ -8,4 +8,5 @@ interface PredictionRepositoryInterface
 {
     public function save(Prediction $prediction): void;
     public function find(int $id): ?Prediction;
+    public function findByGameId(int $gameId): array;
 }

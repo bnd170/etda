@@ -19,4 +19,9 @@ class PredictionRepository implements PredictionRepositoryInterface
     {
         return $this->model->find($id);
     }
+
+    public function findByGameId(int $gameId): array
+    {
+        return $this->model->where('predictor_game_id', $gameId)->get()->all();
+    }
 }
