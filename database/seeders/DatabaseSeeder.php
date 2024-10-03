@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             [
                 TournamentSeeder::class,
                 GroupStageSeeder::class,
+                DevelopmentUserSeeder::class,
             ]
         );
     }

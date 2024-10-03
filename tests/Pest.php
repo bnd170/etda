@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Tests\Unit\Services\Predictor\PredictorTestCase;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use Tests\TestCase;
 */
 
 uses(TestCase::class, RefreshDatabase::class)->in('Feature');
+
+uses(PredictorTestCase::class)->in('./Unit/Services/Predictor');
 
 /*
 |--------------------------------------------------------------------------

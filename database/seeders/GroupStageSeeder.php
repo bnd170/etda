@@ -41,13 +41,15 @@ class GroupStageSeeder extends Seeder
         foreach ($groups as $group => $groupTeams) {
             for ($i = 0, $iMax = count($groupTeams); $i < $iMax; $i++) {
                 for ($j = $i + 1, $jMax = count($groupTeams); $j < $jMax; $j++) {
-                    Game::create(
-                        'Fase de grupos - Grupo ' . $group,
+                    $game = Game::create(
+                        'Fase de grupos - Grupo '.$group,
                         $worldCup->id,
                         new Game\Team($groupTeams[$i]['name'], $groupTeams[$i]['iso']),
                         new Game\Team($groupTeams[$j]['name'], $groupTeams[$j]['iso']),
                         now()->addDays(random_int(1, 10))
                     );
+
+                    $game->save();
                 }
             }
         }
