@@ -23,8 +23,8 @@ class SavePredictionRequest extends FormRequest
     {
         return [
             'predictor_game_id' => 'exists:predictor_games,id',
-            'score_home' => 'integer',
-            'score_away' => 'integer',
+            'home_score' => 'integer',
+            'away_score' => 'integer',
             'selection' => 'in:1,X,2',
         ];
     }

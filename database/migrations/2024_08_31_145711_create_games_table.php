@@ -18,8 +18,8 @@ return new class extends Migration
             $table->dateTime('date');
             $table->jsonb('team_home');
             $table->jsonb('team_away');
-            $table->integer('score_home')->nullable();
-            $table->integer('score_away')->nullable();
+            $table->integer('home_score')->nullable();
+            $table->integer('away_score')->nullable();
             $table->timestamps();
         });
     }

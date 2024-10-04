@@ -25,30 +25,30 @@ class Game extends Model
             'away_score',
             'predictor_tournament_id',
             'date',
-            'status'
+            'status',
         ];
 
     protected $casts
         = [
             'team_home' => TeamCast::class,
             'team_away' => TeamCast::class,
-            'status' => Status::class
+            'status'    => Status::class,
         ];
 
     public static function create(
-        string $round,
-        int $predictor_tournament_id,
+        string    $round,
+        int       $predictor_tournament_id,
         Game\Team $team_home,
         Game\Team $team_away,
-        DateTime $date
+        DateTime  $date
     ): self {
-        $game = new self();
-        $game->round = $round;
+        $game                          = new self();
+        $game->round                   = $round;
         $game->predictor_tournament_id = $predictor_tournament_id;
-        $game->team_home = $team_home;
-        $game->team_away = $team_away;
-        $game->date = $date;
-        $game->status = Status::NotStarted;
+        $game->team_home               = $team_home;
+        $game->team_away               = $team_away;
+        $game->date                    = $date;
+        $game->status                  = Status::NotStarted;
 
         return $game;
     }
@@ -61,5 +61,14 @@ class Game extends Model
     public function predictions(): HasMany
     {
         return $this->hasMany(Prediction::class, 'predictor_game_id');
+    }
+
+    public function getSelectionWinner(): string
+    {
+        return match (true) {
+            $this->home_score > $this->away_score => '1',
+            $this->home_score < $this->away_score => '2',
+            default => 'X',
+        };
     }
 }

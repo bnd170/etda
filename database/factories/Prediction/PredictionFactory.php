@@ -16,8 +16,8 @@ class PredictionFactory extends Factory
         return [
             'predictor_game_id' => $this->faker->numberBetween(1, 10),
             'user_id' => $this->faker->numberBetween(1, 10),
-            'score_home' => $this->faker->numberBetween(0, 5),
-            'score_away' => $this->faker->numberBetween(0, 5),
+            'home_score' => $this->faker->numberBetween(0, 5),
+            'away_score' => $this->faker->numberBetween(0, 5),
             'selection' => $this->faker->randomElement(['1', 'X', '2']),
         ];
     }

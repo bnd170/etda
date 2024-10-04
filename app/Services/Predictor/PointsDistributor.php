@@ -3,6 +3,7 @@
 namespace App\Services\Predictor;
 
 use App\Models\Prediction\Game;
+use App\Models\Prediction\Prediction;
 use App\Repositories\PredictionRepositoryInterface;
 
 class PointsDistributor
@@ -17,7 +18,20 @@ class PointsDistributor
         $predictions = $this->predictionRepository->findByGameId($game->id);
 
         foreach ($predictions as $prediction) {
-            $prediction->points = 3;
+            $this->updatePredictionPoints($prediction, $game);
+        }
+    }
+
+    private function updatePredictionPoints(Prediction $prediction, Game $game): void
+    {
+        if ($prediction->isPredictionAccurate($game->getSelectionWinner())) {
+            $prediction->addPoints(3);
+        } else {
+            $prediction->subtractPoints(1);
+        }
+
+        if ($prediction->isScoreAccurate($game->home_score, $game->away_score)) {
+            $prediction->addPoints(5);
         }
     }
 }

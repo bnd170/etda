@@ -24,18 +24,18 @@ class GameBuilder
     ) {
     }
 
-    public function localWins(int $localScore = 1, int $awayScore = 0): self
+    public function homeWins(int $homeScore = 1, int $awayScore = 0): self
     {
-        $this->homeScore = $localScore;
+        $this->homeScore = $homeScore;
         $this->awayScore = $awayScore;
         $this->status    = Game\Status::Played;
 
         return $this;
     }
 
-    public function awayWins(int $localScore = 0, int $awayScore = 1): self
+    public function awayWins(int $homeScore = 0, int $awayScore = 1): self
     {
-        $this->homeScore = $localScore;
+        $this->homeScore = $homeScore;
         $this->awayScore = $awayScore;
         $this->status    = Game\Status::Played;
 

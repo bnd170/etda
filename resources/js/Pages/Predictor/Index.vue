@@ -66,8 +66,8 @@ const props = defineProps({
 const matches = ref(props.games.map(game => {
     console.log(game);
     const prediction = game.predictions.length ? game.predictions[0]:null;
-    const awayScore = prediction ? prediction.selection==='X' ? null:prediction.score_away:null;
-    const homeScore = prediction ? prediction.selection==='X' ? null:prediction.score_home:null;
+    const awayScore = prediction ? prediction.selection==='X' ? null:prediction.away_score:null;
+    const homeScore = prediction ? prediction.selection==='X' ? null:prediction.home_score:null;
     const drawScore = prediction ? prediction.selection==='X' ? prediction.score_away:null:null;
     return {
         predictor_game_id: game.id,
@@ -121,8 +121,8 @@ const transformMatch = (currentMatch) => {
     const homeScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.homeScore;
     return {
         predictor_game_id: currentMatch.predictor_game_id,
-        score_home: homeScore,
-        score_away: awayScore,
+        home_score: homeScore,
+        away_score: awayScore,
         selection: currentMatch.selection
     };
 }
