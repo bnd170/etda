@@ -18,10 +18,10 @@ class PointsDistributorTest extends PredictorTestCase
         );
     }
 
-    public function test_it_adds_three_points_if_selection_matchs_with_game_winner(): void
+    public function test_it_adds_three_points_if_selection_matches_with_game_winner(): void
     {
         $prediction = PredictionMother::localWins();
-        $game       = GameBuilder::create()->homeWins()->build();
+        $game       = GameBuilder::create()->homeWins(homeScore: 4)->build();
         $this->shouldFindPredictionsByGameId($game->id, [$prediction]);
 
         $this->pointsDistributorService->distributeFor($game);
@@ -40,7 +40,7 @@ class PointsDistributorTest extends PredictorTestCase
         $this->assertEquals(-1, $prediction->points);
     }
 
-    public function test_it_adds_five_points_if_score_matches_with_game_score(): void
+    public function test_it_adds_five_extra_points_if_score_matches_with_game_score(): void
     {
         $prediction = PredictionMother::localWins();
         $game = GameBuilder::create()->homeWins(

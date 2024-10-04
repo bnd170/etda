@@ -6,7 +6,7 @@ use App\Models\Prediction\Game;
 use App\Models\Prediction\Prediction;
 use App\Repositories\PredictionRepositoryInterface;
 
-class PointsDistributor
+readonly class PointsDistributor
 {
     public function __construct(
         private PredictionRepositoryInterface $predictionRepository
