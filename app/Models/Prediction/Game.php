@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 
 class Game extends Model
 {
+    use HasFactory, AsSource, Filterable;
+
     protected $table = 'predictor_games';
-    use HasFactory;
 
     protected $fillable
         = [
@@ -51,6 +54,13 @@ class Game extends Model
         $game->status                  = Status::NotStarted;
 
         return $game;
+    }
+
+    public function finishGame(int $homeScore, int $awayScore): void
+    {
+        $this->home_score = $homeScore;
+        $this->away_score = $awayScore;
+        $this->status     = Status::Played;
     }
 
     public function tournament(): BelongsTo

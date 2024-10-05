@@ -42,6 +42,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Navigation')
                 ->route('platform.news.list'),
 
+            Menu::make('Games')
+                ->icon('bs.plus-slash-minus')
+                ->title('Predictor')
+                ->route('platform.predictor.games.list'),
+
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')

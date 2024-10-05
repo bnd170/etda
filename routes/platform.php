@@ -14,6 +14,7 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
 use App\Orchid\Screens\News\NewsListScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Predictor\GameListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -105,3 +106,5 @@ Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.exam
 
 Route::screen('new/{news?}', NewsEditScreen::class)->name('platform.news.edit');
 Route::screen('news', NewsListScreen::class)->name('platform.news.list');
+
+Route::screen('predictor/games', GameListScreen::class)->name('platform.predictor.games.list');
