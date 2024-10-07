@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Predictor;
 
 use App\Models\Prediction\Game;
+use App\Services\BackOffice\Predictor\UpdateGameResult;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
@@ -14,6 +15,11 @@ use Orchid\Support\Facades\Layout;
 
 class GameListScreen extends Screen
 {
+    public function __construct(
+        private readonly UpdateGameResult $updateGameResult
+    ) {
+    }
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -57,7 +63,7 @@ class GameListScreen extends Screen
             Layout::table('games', [
                 TD::make('round', 'Round'),
                 TD::make('team_home', 'Home')->render(function (Game $game) {
-                    return $game->team_home->name. ' <img src="https://flagsapi.com/'.$game->team_home->iso.'/flat/32.png"> ';
+                    return $game->team_home->name.' <img src="https://flagsapi.com/'.$game->team_home->iso.'/flat/32.png"> ';
                 })->alignRight(),
                 TD::make('score', 'Score')->render(function (Game $game) {
                     return '<h5>'.$game->home_score.' - '.$game->away_score.'</h5>';
@@ -122,11 +128,12 @@ class GameListScreen extends Screen
 
     public function saveGameResult(Request $request)
     {
-        $game = Game::findOrFail($request->get('gameId'));
+        $this->updateGameResult->__invoke(
+            $request->get('gameId'),
+            $request->get('home_score'),
+            $request->get('away_score')
+        );
 
-        $game->finishGame($request->get('home_score'), $request->get('away_score'));
-        $game->save();
-
-        return redirect()->route('platform.predictor.games.list');
+        return redirect()->back();
     }
 }

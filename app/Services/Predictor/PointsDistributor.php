@@ -19,6 +19,8 @@ readonly class PointsDistributor
 
         foreach ($predictions as $prediction) {
             $this->updatePredictionPoints($prediction, $game);
+
+            $this->predictionRepository->save($prediction);
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Prediction;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PredictionFactory extends Factory
@@ -20,5 +21,10 @@ class PredictionFactory extends Factory
             'away_score' => $this->faker->numberBetween(0, 5),
             'selection' => $this->faker->randomElement(['1', 'X', '2']),
         ];
+    }
+
+    public function madeBy(User $user): self
+    {
+        return $this->state(fn() => ['user_id' => $user->id]);
     }
 }
