@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Prediction\Game;
+namespace App\Models\Predictor\Game;
 
 enum Status: string
 {

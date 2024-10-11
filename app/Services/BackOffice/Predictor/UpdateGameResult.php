@@ -3,7 +3,7 @@
 namespace App\Services\BackOffice\Predictor;
 
 use App\Events\BackOffice\Predictor\GameResultWasUpdated;
-use App\Models\Prediction\Game;
+use App\Models\Predictor\Game;
 
 class UpdateGameResult
 {

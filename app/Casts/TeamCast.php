@@ -2,7 +2,7 @@
 
 namespace App\Casts;
 
-use App\Models\Prediction\Game\Team;
+use App\Models\Predictor\Game\Team;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class TeamCast implements CastsAttributes

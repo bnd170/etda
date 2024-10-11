@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SavePredictionRequest;
-use App\Models\Prediction\Tournament;
+use App\Models\Predictor\Tournament;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;

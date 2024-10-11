@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Prediction;
+namespace App\Models\Predictor;
 
 use App\Casts\TeamCast;
-use App\Models\Prediction\Game\Status;
+use App\Models\Predictor\Game\Status;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

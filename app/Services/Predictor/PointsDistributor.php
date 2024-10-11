@@ -2,8 +2,8 @@
 
 namespace App\Services\Predictor;
 
-use App\Models\Prediction\Game;
-use App\Models\Prediction\Prediction;
+use App\Models\Predictor\Game;
+use App\Models\Predictor\Prediction;
 use App\Repositories\PredictionRepositoryInterface;
 
 readonly class PointsDistributor

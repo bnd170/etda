@@ -4,7 +4,7 @@ namespace App\Listeners\BackOffice\Predictor;
 
 
 use App\Events\BackOffice\Predictor\GameResultWasUpdated;
-use App\Models\Game;
+use App\Models\Predictor\Game;
 use App\Services\Predictor\PointsDistributor;
 
 class UpdatePredictionsOnGameResultWasUpdated

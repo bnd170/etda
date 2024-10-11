@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Prediction\Game;
+namespace App\Models\Predictor\Game;
 
 readonly class Team
 {
@@ -14,5 +14,10 @@ readonly class Team
             'name' => $this->name,
             'iso' => $this->iso,
         ];
+    }
+
+    public function toJson(): string
+    {
+        return json_encode($this->toPrimitives(), JSON_THROW_ON_ERROR);
     }
 }

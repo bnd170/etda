@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Prediction\Game;
-use App\Models\Prediction\Tournament;
+use App\Models\Predictor\Game;
+use App\Models\Predictor\Tournament;
 use Illuminate\Database\Seeder;
 
 

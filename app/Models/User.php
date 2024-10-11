@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Prediction\Prediction;
+use App\Models\Predictor\Prediction;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;

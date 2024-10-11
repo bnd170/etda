@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\Predictor;
 
-use App\Models\Prediction\Game;
+use App\Models\Predictor\Game;
 use App\Services\BackOffice\Predictor\UpdateGameResult;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\ModalToggle;

@@ -23,6 +23,7 @@ class PointsDistributorTest extends PredictorTestCase
         $prediction = PredictionMother::localWins();
         $game       = GameBuilder::create()->homeWins(homeScore: 4)->build();
         $this->shouldFindPredictionsByGameId($game->id, [$prediction]);
+        $this->shouldSavePrediction($prediction);
 
         $this->pointsDistributorService->distributeFor($game);
 
@@ -34,6 +35,7 @@ class PointsDistributorTest extends PredictorTestCase
         $prediction = PredictionMother::awayWins();
         $game       = GameBuilder::create()->homeWins()->build();
         $this->shouldFindPredictionsByGameId($game->id, [$prediction]);
+        $this->shouldSavePrediction($prediction);
 
         $this->pointsDistributorService->distributeFor($game);
 
@@ -48,6 +50,7 @@ class PointsDistributorTest extends PredictorTestCase
             awayScore: $prediction->away_score
         )->build();
         $this->shouldFindPredictionsByGameId($game->id, [$prediction]);
+        $this->shouldSavePrediction($prediction);
 
         $this->pointsDistributorService->distributeFor($game);
 

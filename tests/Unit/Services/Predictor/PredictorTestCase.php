@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Services\Predictor;
 
+use App\Models\Predictor\Prediction;
 use App\Repositories\PredictionRepositoryInterface;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
@@ -21,5 +22,10 @@ abstract class PredictorTestCase extends TestCase
     public function shouldFindPredictionsByGameId(int $gameId, array $predictions): void
     {
         $this->predictionRepository()->shouldReceive('findByGameId')->with($gameId)->andReturn($predictions);
+    }
+
+    public function shouldSavePrediction(Prediction $prediction): void
+    {
+        $this->predictionRepository()->shouldReceive('save')->with($prediction);
     }
 }

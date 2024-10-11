@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Prediction;
+namespace App\Models\Predictor;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

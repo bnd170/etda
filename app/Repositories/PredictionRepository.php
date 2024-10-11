@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Prediction\Prediction;
+use App\Models\Predictor\Prediction;
 
 class PredictionRepository implements PredictionRepositoryInterface
 {

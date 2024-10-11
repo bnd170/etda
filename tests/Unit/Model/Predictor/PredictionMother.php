@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Model\Predictor;
 
-use App\Models\Prediction\Prediction;
+use App\Models\Predictor\Prediction;
 
 readonly class PredictionMother
 {

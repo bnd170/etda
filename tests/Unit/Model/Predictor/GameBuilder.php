@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Model\Predictor;
 
-use App\Models\Prediction\Game;
+use App\Models\Predictor\Game;
 use Carbon\Carbon;
 
 class GameBuilder

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\PredictionRepository;
+use App\Repositories\PredictionRepositoryInterface;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \Orchid\Attachment\Models\Attachment::class,
             \App\Models\Attachment::class
+        );
+
+
+        $this->app->bind(
+            PredictionRepositoryInterface::class,
+            PredictionRepository::class
         );
     }
 
