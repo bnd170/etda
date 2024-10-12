@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 use App\Models\Predictor\Prediction;
 
-class PredictionRepository implements PredictionRepositoryInterface
+readonly class PredictionRepository implements PredictionRepositoryInterface
 {
-    public function __construct(private readonly Prediction $model)
+    public function __construct(private Prediction $model)
     {
     }
 

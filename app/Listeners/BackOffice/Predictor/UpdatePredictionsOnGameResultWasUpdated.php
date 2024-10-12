@@ -3,9 +3,11 @@
 namespace App\Listeners\BackOffice\Predictor;
 
 
+use App\Events\BackOffice\Predictor\GamePointsWasDistributed;
 use App\Events\BackOffice\Predictor\GameResultWasUpdated;
 use App\Models\Predictor\Game;
 use App\Services\Predictor\PointsDistributor;
+use Illuminate\Support\Facades\DB;
 
 class UpdatePredictionsOnGameResultWasUpdated
 {
@@ -24,6 +26,16 @@ class UpdatePredictionsOnGameResultWasUpdated
     {
         $game = Game::findOrFail($event->gameId);
 
-        $this->pointsDistributor->distributeFor($game);
+        DB::beginTransaction();
+
+        try {
+            $this->pointsDistributor->distributeFor($game);
+
+            event(new GamePointsWasDistributed($game->predictor_tournament_id));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

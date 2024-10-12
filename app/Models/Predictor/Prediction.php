@@ -17,7 +17,7 @@ class Prediction extends Model
 
     public function game(): BelongsTo
     {
-        return $this->belongsTo(Game::class);
+        return $this->belongsTo(Game::class, 'predictor_game_id');
     }
 
     public function user(): BelongsTo
@@ -25,23 +25,32 @@ class Prediction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function isPredictionAccurate(string $gameWinner): bool
+    public function updatePoints(Game $game): void
+    {
+        $this->isPredictionAccurate($game->getSelectionWinner()) ? $this->addPoints(3) : $this->subtractPoints(1);
+
+        if ($this->isScoreAccurate($game->home_score, $game->away_score)) {
+            $this->addPoints(5);
+        }
+    }
+
+    private function isPredictionAccurate(string $gameWinner): bool
     {
         return $this->selection === $gameWinner;
     }
 
-    public function isScoreAccurate(mixed $gameHomeScore, mixed $gameAwayScore): bool
+    private function isScoreAccurate(mixed $gameHomeScore, mixed $gameAwayScore): bool
     {
         return $this->home_score === $gameHomeScore
             && $this->away_score === $gameAwayScore;
     }
 
-    public function addPoints(int $points): void
+    private function addPoints(int $points): void
     {
         $this->points += $points;
     }
 
-    public function subtractPoints(int $points): void
+    private function subtractPoints(int $points): void
     {
         $this->points -= $points;
     }

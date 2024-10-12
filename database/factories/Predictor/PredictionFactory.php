@@ -20,6 +20,7 @@ class PredictionFactory extends Factory
             'home_score' => $this->faker->numberBetween(0, 5),
             'away_score' => $this->faker->numberBetween(0, 5),
             'selection' => $this->faker->randomElement(['1', 'X', '2']),
+            'points' => $this->faker->numberBetween(0, 10),
         ];
     }
 
