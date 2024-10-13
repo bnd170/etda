@@ -9,7 +9,6 @@ export default {
 
             // Color
             'text-surface-700 dark:text-white/80',
-            'bg-surface-0 dark:bg-surface-800'
         ]
     },
     grid: {

@@ -28,7 +28,3 @@ const active = ref(items.value.findIndex(item => item.route === route().current(
         </template>
     </Tabmenu>
 </template>
-
-<style scoped>
-
-</style>

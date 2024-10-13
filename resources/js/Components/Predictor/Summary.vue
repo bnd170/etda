@@ -1,16 +1,18 @@
 <template>
-    <article class="ml-0 grid grid-cols-4 items-center p-2 rounded-lg w-full">
-        <div class="flex flex-col items-center col-span-1">
-            <img :src="getFlagUrl(match.homeIso, 32)" :alt="match.home + ' flag'" class="w-[32px] object-cover">
-            <p>{{ match.home }}</p>
-        </div>
-        <p class="text-center col-span-1">vs</p>
-        <div class="flex flex-col items-center col-span-1">
-            <img :src="getFlagUrl(match.awayIso, 32)" :alt="match.away + ' flag'" class="w-[32px] object-cover">
-            <p>{{ match.away }}</p>
-        </div>
-        <span class="font-medium px-3 py-3 rounded-full text-sm text-center col-span-1"
-              :class="match.selection ? 'bg-surface-900 text-xl font-black' : 'bg-surface-900/70 text-white-500'">
+    <article class="ml-0 flex flex-row justify-between p-2 rounded-lg w-full">
+        <section class="flex flex-row">
+            <div class="team-container flex flex-col items-center col-span-1">
+                <img :src="getFlagUrl(match.homeIso, 32)" :alt="match.home + ' flag'" class="w-[32px] object-cover">
+                <p class="text-lg">{{ match.home }}</p>
+            </div>
+            <p class="text-center col-span-1">vs</p>
+            <div class="team-container flex flex-col items-center col-span-1">
+                <img :src="getFlagUrl(match.awayIso, 32)" :alt="match.away + ' flag'" class="w-[32px] object-cover">
+                <p class="text-lg">{{ match.away }}</p>
+            </div>
+        </section>
+        <span class="font-medium px-3 py-3 rounded-full text-sm text-center col-span-1 w-1/3"
+              :class="match.selection ? 'bg-surface-950 text-xl font-black' : 'bg-surface-800/70 text-white-500'">
           {{ formatPrediction(match) }}
         </span>
     </article>
@@ -32,3 +34,9 @@ const formatPrediction = (match) => {
     return `${match.homeScore} - ${match.awayScore}`;
 };
 </script>
+
+<style scoped>
+.team-container {
+    min-width: 120px;
+}
+</style>

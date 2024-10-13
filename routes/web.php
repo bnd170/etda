@@ -47,8 +47,10 @@ Route::prefix('/')->group(static function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::prefix('/porra/{tournament:slug}')->group(static function () {
-            Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictions.index');
-            Route::post('/guardar', [PredictorController::class, 'savePrediction'])->name('predictions.save');
+            Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictor.index');
+            Route::post('/guardar', [PredictorController::class, 'savePrediction'])->name('predictor.prediction.save');
+            Route::get('/clasificacion', [PredictorController::class, 'tournamentRanking'])->name('predictor.ranking');
+            Route::get('/mis-predicciones', [PredictorController::class, 'tournamentMyPredictions'])->name('predictor.my-predictions');
         });
     });
 });

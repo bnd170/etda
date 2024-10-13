@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Predictor\Game;
+use App\Models\Predictor\Prediction;
 use App\Models\Predictor\Tournament;
+use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 
@@ -11,6 +14,8 @@ class GroupStageSeeder extends Seeder
 {
     public function run()
     {
+        $faker = Faker::create();
+
         $worldCup = Tournament::where('name', 'IFCPF World Cup Salou 2024')->first();
 
         $teams = [
@@ -38,6 +43,8 @@ class GroupStageSeeder extends Seeder
             'D' => [$teams['IR'], $teams['IE'], $teams['VE'], $teams['DE']],
         ];
 
+        $users = User::all();
+
         foreach ($groups as $group => $groupTeams) {
             for ($i = 0, $iMax = count($groupTeams); $i < $iMax; $i++) {
                 for ($j = $i + 1, $jMax = count($groupTeams); $j < $jMax; $j++) {
@@ -50,6 +57,26 @@ class GroupStageSeeder extends Seeder
                     );
 
                     $game->save();
+
+                    foreach ($users as $user) {
+                        $selection = $faker->randomElement(['1', 'X', '2']);
+                        if ($selection === 'X') {
+                            $homeScore = random_int(0, 5);
+                            $awayScore = $homeScore;
+                        } else {
+                            $homeScore = $selection === '1' ? random_int(1, 5) : random_int(0, 5);
+                            $awayScore = $selection === '2' ? random_int(1, 5) : random_int(0, 5);
+                        }
+                        Prediction::create(
+                            [
+                                'user_id'           => $user->id,
+                                'predictor_game_id' => $game->id,
+                                'selection'         => $faker->randomElement(['1', 'X', '2']),
+                                'home_score'        => $homeScore,
+                                'away_score'        => $awayScore,
+                            ]
+                        );
+                    }
                 }
             }
         }

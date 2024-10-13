@@ -45,7 +45,7 @@
                     <span class="font-medium"><a>El podcast</a></span>
                 </a>
 
-                <a v-ripple :href="route('predictions.index', {'slug': 'ifcpf-world-cup-salou-2024'})"
+                <a v-ripple :href="route('predictor.index', {'slug': 'ifcpf-world-cup-salou-2024'})"
                    class="menu-item hover:bg-surface-200 dark:hover:bg-surface-900 p-ripple">
                     <span class="font-medium"><a>La Porra</a></span>
                 </a>

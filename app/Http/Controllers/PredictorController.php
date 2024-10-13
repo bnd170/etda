@@ -15,11 +15,38 @@ class PredictorController extends Controller
     {
         return Inertia::render('Predictor/Index', [
             'tournament' => $tournament,
-            'games'      => $tournament->games()->with([
-                                                           'predictions' => function ($query) {
-                                                               $query->where('user_id', Auth::user()->id);
-                                                           },
-                                                       ])->orderBy('date')->get(),
+            'games'      => $tournament->games()->with(
+                [
+                    'predictions' => function ($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    },
+                ]
+            )->orderBy('date')->get(),
+        ]);
+    }
+
+    public function tournamentMyPredictions(Tournament $tournament): Response
+    {
+        return Inertia::render('Predictor/MyPredictions', [
+            'tournament' => $tournament,
+            'games'      => $tournament->games()->with(
+                [
+                    'predictions' => function ($query) {
+                        $query->where('user_id', Auth::user()->id);
+                    },
+                ]
+            )->orderBy('date')->get(),
+        ]);
+    }
+
+
+    public function tournamentRanking(Tournament $tournament): Response
+    {
+        return Inertia::render('Predictor/Ranking', [
+            'tournament' => $tournament,
+            'rankings'   => $tournament->rankings()->with(['user' => function ($query) {
+                $query->select('id', 'name');
+            }])->get(),
         ]);
     }
 
@@ -31,6 +58,6 @@ class PredictorController extends Controller
 
         );
 
-        return redirect()->route('predictions.index', $tournament);
+        return redirect()->route('predictor.index', $tournament);
     }
 }

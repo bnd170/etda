@@ -17,4 +17,9 @@ class Tournament extends Model
     {
         return $this->hasMany(Game::class, 'predictor_tournament_id');
     }
+
+    public function rankings(): HasMany
+    {
+        return $this->hasMany(Ranking::class, 'predictor_tournament_id');
+    }
 }
