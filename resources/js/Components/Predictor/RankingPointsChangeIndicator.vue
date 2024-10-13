@@ -19,7 +19,7 @@ const props = defineProps({
 const change = computed(() => {
     if (props.lastPoints===null) return props.currentPoints;
 
-    return props.lastPoints - props.currentPoints;
+    return props.currentPoints - props.lastPoints;
 });
 
 const getColor = computed(() => {
