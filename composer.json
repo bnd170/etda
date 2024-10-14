@@ -13,6 +13,7 @@
         "lambdish/phunctional": "^2.1",
         "laravel/framework": "^11",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
         "league/csv": "^9.0",
         "league/flysystem-aws-s3-v3": "^3.0",
@@ -20,6 +21,7 @@
         "orchid/platform": "^14.17",
         "phpoffice/phpspreadsheet": "^1.29",
         "sentry/sentry-laravel": "^4.1",
+        "socialiteproviders/instagram": "^5.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Attachment;
 use App\Repositories\PredictionRepository;
 use App\Repositories\PredictionRepositoryInterface;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use SocialiteProviders\Instagram\Provider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->forceHttpsInProd($url);
         $this->app->bind(
             \Orchid\Attachment\Models\Attachment::class,
-            \App\Models\Attachment::class
+            Attachment::class
         );
 
 
@@ -33,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
             PredictionRepositoryInterface::class,
             PredictionRepository::class
         );
+
+
+        Event::listen(function (SocialiteWasCalled $event) {
+            $event->extendSocialite('instagram', Provider::class);
+        });
     }
 
     protected function forceHttpsInProd($url): void
