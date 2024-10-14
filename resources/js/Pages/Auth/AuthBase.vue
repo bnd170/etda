@@ -5,10 +5,9 @@ import Card    from "primevue/card";
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col md:flex-row  bg-pitch">
+    <div class="min-h-screen flex flex-col md:flex-row bg-pitch">
         <div class="hidden md:block w-full md:w-1/2 bg-navy-900 p-8 flex items-center justify-center">
-            <div class="w-full max-w-md">
-            </div>
+            <div class="w-full max-w-md"></div>
         </div>
 
         <div class="md:w-1/2">
