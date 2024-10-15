@@ -16,6 +16,5 @@ class SocialAuthController extends Controller
     {
         $user = Socialite::driver('instagrambasic')->user();
 
-        dd($user);
     }
 }
