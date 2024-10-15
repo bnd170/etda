@@ -2,12 +2,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
-    ],
-    safelist: [
-        'bg-black/85',
+        './resources/**/*.{blade.php,js,vue}',
+        './resources/js/Pages/**/*.vue',
     ],
     theme: {
         extend: {
