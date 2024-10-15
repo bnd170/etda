@@ -11,7 +11,7 @@ import Card    from "primevue/card";
         </div>
 
         <div class="md:w-1/2">
-            <div class="h-full w-full bg-black/85 flex items-center justify-center">
+            <div class="h-full w-full transp flex items-center justify-center">
                 <section class="flex items-center flex-col justify-center min-h-screen overflow-hidden">
                     <Card class="w-full">
                         <template #title>
@@ -37,5 +37,8 @@ import Card    from "primevue/card";
     .bg-pitch {
         background-image: url('/img/fondo-auth-new.webp');
         @apply bg-cover bg-center;
+    }
+    .transp {
+        background-color: rgba(0, 0, 0, 0.8);
     }
 </style>
