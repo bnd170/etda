@@ -6,6 +6,9 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
+    safelist: [
+        'bg-black/85',
+    ],
     theme: {
         extend: {
             fontFamily: {
