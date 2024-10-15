@@ -9,13 +9,13 @@ class SocialAuthController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('instagram')->redirect();
+        return Socialite::driver('instagrambasic')->redirect();
     }
 
     public function callback()
     {
-        $user = Socialite::driver('instagram')->user();
+        $user = Socialite::driver('instagrambasic')->user();
 
-        // $user->token
+        dd($user);
     }
 }

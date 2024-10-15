@@ -12,8 +12,20 @@ export default defineConfig({
             script: {
                 defineModel: true
             },
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
         })
     ],
+    server: {
+        hmr: {
+            host: 'kodiak-content-awfully.ngrok-free.app',
+            protocol: 'wss',
+        },
+    },
     publicDir: 'public',
     resolve: {
         alias: {

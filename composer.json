@@ -22,6 +22,7 @@
         "phpoffice/phpspreadsheet": "^1.29",
         "sentry/sentry-laravel": "^4.1",
         "socialiteproviders/instagram": "^5.0",
+        "socialiteproviders/instagram-basic": "^4.2",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

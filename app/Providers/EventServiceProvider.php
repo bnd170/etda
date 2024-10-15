@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Instagram\InstagramExtendSocialite;
+use SocialiteProviders\InstagramBasic\InstagramBasicExtendSocialite;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class EventServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
                 SendEmailVerificationNotification::class,
             ],
             SocialiteWasCalled::class => [
-                InstagramExtendSocialite::class.'@handle',
+                InstagramBasicExtendSocialite::class.'@handle',
             ],
         ];
 
