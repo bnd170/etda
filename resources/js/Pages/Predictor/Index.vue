@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>#LaPorra de {{ tournament.name }}</title>
+    </Head>
     <Toast/>
     <PredictorHeader :tournament="tournament"/>
     <section class="container mx-auto">
@@ -22,6 +25,7 @@ import {ref}            from 'vue';
 import {useForm}        from "@inertiajs/vue3";
 import Toast            from 'primevue/toast';
 import {useToast}       from "primevue/usetoast";
+import {Head}           from '@inertiajs/vue3'
 
 defineOptions({layout: Default})
 
