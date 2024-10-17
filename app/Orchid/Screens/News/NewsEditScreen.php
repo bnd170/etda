@@ -97,9 +97,9 @@ class NewsEditScreen extends Screen
     {
         $request->validate(
             [
-                'news.title'   => 'required|max:255',
-                'news.content' => 'required',
-                'news.cover_id'   => 'required|exists:attachments,id',
+                'news.title'    => 'required|max:255',
+                'news.content'  => 'required',
+                'news.cover_id' => 'required|exists:attachments,id',
             ]
         );
 
