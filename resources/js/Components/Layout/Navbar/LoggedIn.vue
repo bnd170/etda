@@ -1,7 +1,7 @@
 <template>
     <h2 class=" mb-4 text-lg">👋 Hola, {{ $page.props.auth.user.name }}</h2>
     <fieldset
-        class="block px-4 pt-1 inline-size-min rounded-md border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 text-surface-700 dark:text-surface-0/80"
+        class="hidden block px-4 pt-1 inline-size-min rounded-md border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 text-surface-700 dark:text-surface-0/80"
         data-pc-name="fieldset" data-pc-section="root">
         <legend
             class="font-bold leading-none p-2 rounded-md text-surface-700 dark:text-surface-0/80 border border-surface-200 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 transition-none"

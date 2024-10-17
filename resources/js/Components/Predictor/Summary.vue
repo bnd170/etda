@@ -12,7 +12,7 @@
             </div>
         </section>
         <span class="font-medium px-3 py-3 rounded-full text-sm text-center col-span-1 w-1/3"
-              :class="match.selection ? 'bg-surface-950 text-xl font-black' : 'bg-surface-800/70 text-white-500'">
+              :class="match.selection ? 'dark:bg-surface-950 bg-stone-200 text-xl font-black' : 'bg-surface-800/70 text-white-500'">
           {{ formatPrediction(match) }}
         </span>
     </article>
