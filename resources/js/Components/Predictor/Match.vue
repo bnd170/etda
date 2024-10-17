@@ -6,7 +6,7 @@
                     <span class="text-sm font-medium text-primary-foreground">{{ match.stage }}</span>
                     <p class="text-xs text-primary-foreground/80 mt-1">{{ formatDate(match.date) }}</p>
                 </div>
-                <div class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200">
+                <div class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200 dark:from-slate-900 dark:to-slate-700">
                     <div class="flex flex-col items-center flex-1 justify-center">
                         <img :src="getFlagUrl(match.homeIso)" :alt="match.home + ' flag'"
                              class="w-75 h-25 object-cover">
