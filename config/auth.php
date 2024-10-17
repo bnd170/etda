@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'verification' => [
+        'expire' => 1440, // One year in minutes - enter as many minutes as you would like here
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -111,5 +114,6 @@ return [
     */
 
     'password_timeout' => 10800,
+
 
 ];
