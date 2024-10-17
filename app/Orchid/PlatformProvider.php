@@ -23,9 +23,6 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-        if (config('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
         // ...
     }
 
