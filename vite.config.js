@@ -20,12 +20,12 @@ export default defineConfig({
             },
         })
     ],
-    server: {
-        hmr: {
-            host: 'kodiak-content-awfully.ngrok-free.app',
-            protocol: 'wss',
-        },
-    },
+    // server: {
+    //     hmr: {
+    //         host: 'kodiak-content-awfully.ngrok-free.app',
+    //         protocol: 'wss',
+    //     },
+    // },
     publicDir: 'public',
     resolve: {
         alias: {

@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>#LaPorra de {{ tournament.name }}</title>
+        <title>La Quini de {{ tournament.name }}</title>
     </Head>
     <Toast/>
     <PredictorHeader :tournament="tournament"/>
