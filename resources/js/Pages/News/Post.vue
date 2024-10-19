@@ -38,7 +38,7 @@ const createdAt = computed(() => {
             <h1 class="text-3xl md:text-5xl font-[Cabin] font-extrabold">{{ news.title }}</h1>
             <p class="mt-3">{{ createdAt }}</p>
             <spacer/>
-            <div class="body" v-html="news.content"></div>
+            <div class="news-body" v-html="news.content"></div>
         </template>
     </Card>
 </template>
@@ -48,15 +48,21 @@ article {
     @apply lg:mx-64;
 }
 
-.body > p {
-    @apply md:text-xl leading-7 text-justify;
-}
-
 .container {
     @apply max-w-[80rem];
 }
 
-h2 {
+.news-body > p {
+    @apply md:text-xl;
+    line-height: 2.5rem;
+}
+
+.news-body h2 {
     @apply text-3xl font-[Cabin] font-bold mt-10;
 }
+
+.news-body a {
+    @apply text-blue-500 underline;
+}
+
 </style>
