@@ -38,3 +38,11 @@ body {
         margin: 0;
     }
 }
+
+.static {
+    @apply text-lg;
+}
+
+.static .title {
+    @apply text-2xl font-bold mt-10;
+}

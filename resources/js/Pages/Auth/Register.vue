@@ -15,7 +15,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
-    privacy_policy: false,
+    privacy_policy_accepted: false,
 });
 
 const processing = ref(false);
@@ -81,24 +81,26 @@ const submit = () => {
                 </label>
 
                 <label class="flex flex-col text-surface-900 dark:text-surface-0 font-medium text-lg mb-5">
-                    Contraseña
-                    <Password v-model="form.password"
+                    Repite la contraseña
+                    <Password v-model="form.password_confirmation"
                               class="mt-1 block w-full w-full md:w-[25rem]"
                               required
                               autocomplete="new-password"
-                              placeholder="Shhh... no la compartas"
+                              placeholder="Otra vez a escribir lo mismo..."
                               :toggleMask="true"
                               :feedback="false"/>
                     <InputError class="mt-2" :message="form.errors.password"/>
                 </label>
 
-                <label class="flex flex-row gap-3 text-surface-900 dark:text-surface-0 font-medium text-lg mb-2">
-                    <Checkbox v-model="form.privacy_policy" required/>
+                <label class="flex flex-row gap-3 text-surface-900 dark:text-surface-0 font-medium">
+                    <Checkbox v-model="form.privacy_policy_accepted" binary required/>
                     <span>
-                        He leído y acepto la <Link href="/politica-de-privacidad"
-                                                                  class="text-primary-500">política de privacidad</Link></span>
+                        He leído y acepto la
+                        <a :href="route('static.privacy.index')" target="_blank"
+                              class="text-primary-500">política de privacidad</a>
+                    </span>
                 </label>
-                <InputError class="mt-2" :message="form.errors.password_confirmation"/>
+                <InputError class="mt-2" :message="form.errors.privacy_policy_accepted"/>
 
                 <PrimaryButton class="w-full mt-12 font-bold text-xl" :class="{ 'opacity-25': processing }"
                                :disabled="processing">
