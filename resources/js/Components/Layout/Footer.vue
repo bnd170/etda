@@ -18,6 +18,9 @@
             <a href="#" class="link link-hover text-gray-500">Cookies</a>
             <a href="#" class="link link-hover text-gray-500">Términos y condiciones</a>
         </section>
+        <section class="container mx-auto mt-2 flex justify-center">
+            <a href="/" class="link link-hover">El talon de Aquiles 🥅 desde 2024</a>
+        </section>
     </footer>
 </template>
 <script setup>
