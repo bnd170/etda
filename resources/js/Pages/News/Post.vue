@@ -55,4 +55,8 @@ article {
 .container {
     @apply max-w-[80rem];
 }
+
+h2 {
+    @apply text-3xl font-[Cabin] font-bold mt-10;
+}
 </style>
