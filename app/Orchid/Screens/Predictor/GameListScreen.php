@@ -63,13 +63,13 @@ class GameListScreen extends Screen
             Layout::table('games', [
                 TD::make('round', 'Round'),
                 TD::make('team_home', 'Home')->render(function (Game $game) {
-                    return $game->team_home->name.' <img src="https://flagsapi.com/'.$game->team_home->iso.'/flat/32.png"> ';
+                    return $game->team_home->name.' <img src="https://flagcdn.com/w40/'.strtolower($game->team_home->iso).'.webp"> ';
                 })->alignRight(),
                 TD::make('score', 'Score')->render(function (Game $game) {
                     return '<h5>'.$game->home_score.' - '.$game->away_score.'</h5>';
                 })->alignCenter(),
                 TD::make('team_away', 'Away')->render(function (Game $game) {
-                    return '<img src="https://flagsapi.com/'.$game->team_away->iso.'/flat/32.png"> '.$game->team_away->name;
+                    return '<img src="https://flagcdn.com/w40/'.strtolower($game->team_away->iso).'.webp"> '.$game->team_away->name;
                 }),
                 TD::make('date', 'Date')
                     ->usingComponent(
