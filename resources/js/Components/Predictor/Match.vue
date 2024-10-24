@@ -8,15 +8,15 @@
                 </div>
                 <div class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200 dark:from-slate-900 dark:to-slate-700">
                     <div class="flex flex-col items-center flex-1 justify-center">
-                        <img :src="getFlagUrl(match.homeIso)" :alt="match.home + ' flag'"
-                             class="w-75 h-25 object-cover">
-                        <span class="font-semibold">{{ match.home }}</span>
+                        <img :src="getFlagUrl(match.homeIso)" :alt="match.home + ' flag'" width="64"
+                             class="aspect-[64/48] object-cover">
+                        <span class="font-semibold mt-2">{{ match.home }}</span>
                     </div>
                     <div class="font-bold text-xl  mx-2">VS</div>
                     <div class="flex flex-col items-center flex-1 justify-center">
-                        <img :src="getFlagUrl(match.awayIso)" :alt="match.away + ' flag'"
-                             class="w-75 h-25 object-cover">
-                        <span class="font-semibold">{{ match.away }}</span>
+                        <img :src="getFlagUrl(match.awayIso)" :alt="match.away + ' flag'" width="64"
+                             class="aspect-[64/48] object-cover">
+                        <span class="font-semibold mt-2">{{ match.away }}</span>
                     </div>
                 </div>
                 <div class="flex flex-col justify-around items-center py-5 dark:bg-slate-950/80 bg-stone-200/50">

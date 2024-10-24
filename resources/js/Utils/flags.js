@@ -1,6 +1,6 @@
 
 export const getFlagUrl = (isoCode, size) => {
-    const flagSize = size || 64;
-    return `https://flagsapi.com/${isoCode.toUpperCase()}/flat/${flagSize}.png`;
+    const flagSize = size || 80;
+    return `https://flagcdn.com/w${flagSize}/${isoCode.toLowerCase()}.webp`;
 };
 
