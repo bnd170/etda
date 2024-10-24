@@ -6,11 +6,12 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Metrics\Chartable;
 
 class Prediction extends Model
 {
     protected $table = 'predictor_predictions';
-    use HasFactory;
+    use HasFactory, Chartable;
 
     protected $fillable = ['predictor_game_id', 'user_id', 'home_score', 'away_score', 'selection'];
     protected $hidden = ['predictor_game_id', 'user_id'];

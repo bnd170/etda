@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use App\Models\Predictor\Prediction;
+use App\Models\User;
+use App\Orchid\Layouts\Predictor\PredictionsChartLayout;
+use App\Orchid\Layouts\User\UsersChartLayout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -16,7 +20,10 @@ class PlatformScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        return [
+            'registrations' => [User::countByDays()->toChart('Users')],
+            'predictions'   => [Prediction::countByDays()->toChart('Predictions')],
+        ];
     }
 
     /**
@@ -24,7 +31,7 @@ class PlatformScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Get Started';
+        return 'Control panel';
     }
 
     /**
@@ -32,7 +39,7 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'Welcome to the control panel';
     }
 
     /**
@@ -53,8 +60,12 @@ class PlatformScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::view('platform::partials.update-assets'),
-            Layout::view('platform::partials.welcome'),
+            Layout::columns(
+                [
+                    UsersChartLayout::make('registrations', 'New registrations'),
+                    PredictionsChartLayout::make('predictions', 'New predictions'),
+                ]
+            ),
         ];
     }
 }
