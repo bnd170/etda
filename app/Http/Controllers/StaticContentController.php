@@ -15,4 +15,8 @@ class StaticContentController extends Controller
     {
         return Inertia::render('Static/Privacy');
     }
+    public function laQuiniGameRules(): Response
+    {
+        return Inertia::render('Static/LaQuiniGameRules');
+    }
 }

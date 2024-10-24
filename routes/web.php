@@ -26,6 +26,7 @@ Route::prefix('/')->group(static function () {
     Route::get('/privacidad', [StaticContentController::class, 'privacy'])->name('static.privacy.index');
 
 
+
     Route::prefix('/liga-nacional')->group(static function () {
         Route::get('/clasificacion', [NationalLeagueController::class, 'classification'])->name('national-league.classification');
         Route::get('/estadisticas', [NationalLeagueController::class, 'stats'])->name('national-league.stats');
@@ -49,11 +50,12 @@ Route::prefix('/')->group(static function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        Route::prefix('/la-quini/{tournament:slug}')->group(static function () {
-            Route::get('', [PredictorController::class, 'tournamentGames'])->name('predictor.index');
+        Route::prefix('/la-quini')->group(static function () {
+            Route::get('/reglas', [StaticContentController::class, 'laQuiniGameRules'])->name('predictor.rules');
             Route::post('/guardar', [PredictorController::class, 'savePrediction'])->name('predictor.prediction.save');
             Route::get('/clasificacion', [PredictorController::class, 'tournamentRanking'])->name('predictor.ranking');
             Route::get('/mis-predicciones', [PredictorController::class, 'tournamentMyPredictions'])->name('predictor.my-predictions');
+            Route::get('{tournament:slug}', [PredictorController::class, 'tournamentGames'])->name('predictor.index');
         });
     });
 });

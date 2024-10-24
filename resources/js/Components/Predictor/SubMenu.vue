@@ -23,6 +23,12 @@ const items = ref([
         route: 'predictor.my-predictions',
         params: {tournament: page.props.tournament.slug}
     },
+    {
+        label: 'Reglas',
+        icon: 'pi pi-info',
+        route: 'predictor.rules',
+        params: {}
+    }
 ]);
 
 const active = ref(items.value.findIndex(item => item.route===route().current()));
