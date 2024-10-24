@@ -5,7 +5,7 @@
     <Toast/>
     <PredictorHeader :tournament="tournament"/>
     <section class="container mx-auto">
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
             <Match
                 v-for="(match, index) in matches"
                 :key="index"
@@ -60,7 +60,6 @@ const updateMatch = (index, updatedMatch) => {
             preserveScroll: true,
             onSuccess: () => showSuccessMessage(),
         });
-
 };
 const isPredictionFullFilled = (currentMatch) => {
     return currentMatch.selection!==null || (currentMatch.drawScore!==null && (currentMatch.homeScore!==null || currentMatch.awayScore!==null));
@@ -78,7 +77,7 @@ const transformMatch = (currentMatch) => {
     const awayScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.awayScore;
     const homeScore = currentMatch.selection==='X' ? currentMatch.drawScore:currentMatch.homeScore;
     return {
-        predictor_game_id: currentMatch.predictor_game_id,
+        predictor_game_id: currentMatch.game_info.id,
         home_score: homeScore,
         away_score: awayScore,
         selection: currentMatch.selection

@@ -82,12 +82,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
-        Schema::dropIfExists('players');
-        Schema::dropIfExists('seasons');
-        Schema::dropIfExists('team_awards');
-        Schema::dropIfExists('player_awards');
-        Schema::dropIfExists('games');
         Schema::dropIfExists('rankings');
+        Schema::dropIfExists('games');
+        Schema::dropIfExists('player_awards');
+        Schema::dropIfExists('team_awards');
+        Schema::dropIfExists('players');
+        Schema::dropIfExists('teams');
+        Schema::dropIfExists('seasons');
     }
 };

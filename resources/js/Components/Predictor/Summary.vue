@@ -2,13 +2,13 @@
     <article class="ml-0 flex flex-row justify-between p-2 rounded-lg w-full">
         <section class="flex flex-row">
             <div class="team-container flex flex-col items-center col-span-1">
-                <img :src="getFlagUrl(match.homeIso, 32)" :alt="match.home + ' flag'" class="w-[32px] object-cover">
-                <p class="text-lg">{{ match.home }}</p>
+                <img :src="getFlagUrl(match.game_info.homeIso)" :alt="match.game_info.home + ' flag'" class="w-[40px] object-cover">
+                <p class="text-lg">{{ match.game_info.home }}</p>
             </div>
             <p class="text-center col-span-1">vs</p>
             <div class="team-container flex flex-col items-center col-span-1">
-                <img :src="getFlagUrl(match.awayIso, 32)" :alt="match.away + ' flag'" class="w-[32px] object-cover">
-                <p class="text-lg">{{ match.away }}</p>
+                <img :src="getFlagUrl(match.game_info.awayIso)" :alt="match.game_info.away + ' flag'" class="w-[40px] object-cover">
+                <p class="text-lg">{{ match.game_info.away }}</p>
             </div>
         </section>
         <span class="font-medium px-3 py-3 rounded-full text-sm text-center col-span-1 w-1/3"
