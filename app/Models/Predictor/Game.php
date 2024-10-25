@@ -36,6 +36,7 @@ class Game extends Model
             'team_home' => TeamCast::class,
             'team_away' => TeamCast::class,
             'status'    => Status::class,
+            'date'      => 'datetime',
         ];
 
     public static function create(

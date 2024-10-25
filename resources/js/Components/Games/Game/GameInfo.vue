@@ -18,7 +18,6 @@ const day = computed(() => formatDate(props.game.date, {weekday: 'short'}));
 const date = computed(() => formatDate(props.game.date, {day: '2-digit', month: 'short', year: 'numeric'}).replace(/\//g, '.'));
 const hour = computed(() => formatDate(props.game.date, {hour: '2-digit', minute: '2-digit'}));
 const status = computed(() => {
-    console.log(props.game.status)
     switch (props.game.status) {
         case 'pending':
             return 'Pendiente';

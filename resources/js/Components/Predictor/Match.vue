@@ -6,7 +6,7 @@
         <template #content>
             <div class="dark:bg-slate-950 bg-stone-300/80 p-3 text-center">
                 <span class="text-sm font-medium text-primary-foreground">{{ match.game_info.stage }}</span>
-                <p class="text-xs text-primary-foreground/80 mt-1">{{ formatDate(match.game_info.date) }}</p>
+                <p class="text-xs text-primary-foreground/80 mt-1">{{ game_date }}</p>
             </div>
             <div
                 class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200 dark:from-slate-900 dark:to-slate-700">
@@ -33,6 +33,7 @@ import {getFlagUrl}           from '~/Utils/flags.js';
 import Card                   from 'primevue/card';
 import NotPlayedMatchControls from "@/Components/Predictor/Match/NotPlayedMatchControls.vue";
 import PlayedMatchControls    from "@/Components/Predictor/Match/PlayedMatchControls.vue";
+import {formatDate} from "~/Utils/date.js";
 
 const props = defineProps({
     match: {
@@ -49,16 +50,14 @@ const alreadyPlayed = props.match.game_info.status==='played';
 const emitUpdatedMatch = (match) => {
     emit('update:match', match);
 };
-
-const formatDate = (date) => {
-    return new Intl.DateTimeFormat('es-ES', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    }).format(date);
-};
+console.log(props.match);
+const game_date = formatDate(props.match.game_info.date, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+}).replace(/\//g, '.');
 </script>
 
 <style>

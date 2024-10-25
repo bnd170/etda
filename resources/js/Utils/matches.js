@@ -21,7 +21,7 @@ export const matchProccesor = (game => {
         homeScore,
         awayScore,
         drawScore,
-        points: game.predictions[0].points,
+        points: game.predictions.length ? game.predictions[0].points:null,
         error: null
     }
 });
