@@ -50,7 +50,7 @@ const alreadyPlayed = props.match.game_info.status==='played';
 const emitUpdatedMatch = (match) => {
     emit('update:match', match);
 };
-console.log(props.match);
+
 const game_date = formatDate(props.match.game_info.date, {
     year: 'numeric',
     month: 'long',
