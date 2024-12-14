@@ -81,6 +81,7 @@ class UpdateGameResultTest extends TestCase
     public function test_it_update_ranking_position(): void
     {
         $anotherUser = User::factory()->create();
+        $anotherUser2 = User::factory()->create();
         $this->game->predictions()->create(
             [
                 'user_id'    => $this->user->id,
@@ -97,6 +98,14 @@ class UpdateGameResultTest extends TestCase
                 'selection'  => '2',
             ]
         );
+        $this->game->predictions()->create(
+            [
+                'user_id'    => $anotherUser2->id,
+                'home_score' => 3,
+                'away_score' => 2,
+                'selection'  => '1',
+            ]
+        );
 
         (new UpdateGameResult())($this->game->id, 1, 2);
 
@@ -104,12 +113,21 @@ class UpdateGameResultTest extends TestCase
             'user_id'                 => $this->user->id,
             'predictor_tournament_id' => $this->tournament->id,
             'position'                => 1,
+            'points'                  => 8,
         ]);
 
         $this->assertDatabaseHas('predictor_rankings', [
             'user_id'                 => $anotherUser->id,
             'predictor_tournament_id' => $this->tournament->id,
             'position'                => 2,
+            'points'                  => 3,
+        ]);
+
+        $this->assertDatabaseHas('predictor_rankings', [
+            'user_id'                 => $anotherUser2->id,
+            'predictor_tournament_id' => $this->tournament->id,
+            'position'                => 3,
+            'points'                  => -1,
         ]);
     }
 }

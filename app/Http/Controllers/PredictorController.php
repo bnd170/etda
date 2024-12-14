@@ -48,7 +48,7 @@ class PredictorController extends Controller
             'tournament' => $tournament,
             'rankings'   => $tournament->rankings()->with(['user' => function ($query) {
                 $query->select('id', 'name');
-            }])->get(),
+            }])->orderBy('position')->get(),
         ]);
     }
 
