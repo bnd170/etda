@@ -12,15 +12,15 @@
                 class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200 dark:from-slate-900 dark:to-slate-700">
                 <div class="flex flex-col items-center flex-1 justify-center">
                     <img :src="getImage(match.game_info.homeIso)" :alt="match.game_info.home + ' flag'"
-                         :width="match.game_info.awayIso.startsWtih('http') ? 100 : 64"
-                         class="object-cover" :class="{'aspect-[64/48]': !match.game_info.awayIso.startsWtih('http')}">
+                         :width="match.game_info.awayIso.startsWith('http') ? 100 : 64"
+                         class="object-cover" :class="{'aspect-[64/48]': !match.game_info.awayIso.startsWith('http')}">
                     <span class="font-semibold mt-4 text-center">{{ match.game_info.home }}</span>
                 </div>
                 <div class="font-bold text-xl  mx-2">VS</div>
                 <div class="flex flex-col items-center flex-1 justify-center">
                     <img :src="getImage(match.game_info.awayIso)" :alt="match.game_info.away + ' flag'"
-                         :width="match.game_info.awayIso.startsWtih('http') ? 100 : 64"
-                         class="object-cover" :class="{'aspect-[64/48]': !match.game_info.awayIso.startsWtih('http')}">
+                         :width="match.game_info.awayIso.startsWith('http') ? 100 : 64"
+                         class="object-cover" :class="{'aspect-[64/48]': !match.game_info.awayIso.startsWith('http')}">
                     <span class="font-semibold mt-4 text-center">{{ match.game_info.away }}</span>
                 </div>
             </div>
