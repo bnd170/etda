@@ -31,7 +31,7 @@
 </template>
 <script setup>
 import Sidebar from 'primevue/sidebar';
-import Menu    from "~/Components/Layout/Navbar/Menu.vue";
+import Menu    from "@/Components/Layout/Navbar/Menu.vue";
 import {ref}   from "vue";
 import Logo    from "./Logo.vue";
 
