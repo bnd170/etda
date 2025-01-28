@@ -11,13 +11,13 @@
             <div
                 class="flex items-center justify-around py-5 bg-gradient-to-r from-stone-50 to-zinc-200 dark:from-slate-900 dark:to-slate-700">
                 <div class="flex flex-col items-center flex-1 justify-center">
-                    <img :src="getFlagUrl(match.game_info.homeIso)" :alt="match.game_info.home + ' flag'" width="64"
+                    <img :src="getImage(match.game_info.homeIso)" :alt="match.game_info.home + ' flag'" width="64"
                          class="aspect-[64/48] object-cover">
                     <span class="font-semibold mt-2">{{ match.game_info.home }}</span>
                 </div>
                 <div class="font-bold text-xl  mx-2">VS</div>
                 <div class="flex flex-col items-center flex-1 justify-center">
-                    <img :src="getFlagUrl(match.game_info.awayIso)" :alt="match.game_info.away + ' flag'" width="64"
+                    <img :src="getImage(match.game_info.awayIso)" :alt="match.game_info.away + ' flag'" width="64"
                          class="aspect-[64/48] object-cover">
                     <span class="font-semibold mt-2">{{ match.game_info.away }}</span>
                 </div>
@@ -29,8 +29,8 @@
 </template>
 
 <script setup>
-import {getFlagUrl}           from '~/Utils/flags.js';
-import Card                   from 'primevue/card';
+import {getImage} from '@/Utils/flags.js';
+import Card       from 'primevue/card';
 import NotPlayedMatchControls from "@/Components/Predictor/Match/NotPlayedMatchControls.vue";
 import PlayedMatchControls    from "@/Components/Predictor/Match/PlayedMatchControls.vue";
 import {formatDate} from "~/Utils/date.js";

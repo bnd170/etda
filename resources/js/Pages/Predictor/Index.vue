@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-import Default          from "~/Layout/Default.vue";
-import Match            from '~/Components/Predictor/Match.vue';
+import Default          from "@/Layout/Default.vue";
+import Match            from '@/Components/Predictor/Match.vue';
 import {matchProccesor} from "@/Utils/matches.js";
 import PredictorHeader  from "@/Components/Predictor/PredictorHeader.vue";
 import {ref}            from 'vue';
