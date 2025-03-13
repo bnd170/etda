@@ -75,7 +75,11 @@ class NationalLeagueController extends Controller
 
     public function teams(): Response
     {
-        return Inertia::render('Teams/Index');
+        $teams = Team::where('season_id', Season::where('in_progress', true)->first()->id)->get();
+
+        return Inertia::render('Teams/Index', [
+            'teams' => $teams,
+        ]);
     }
 
     public function club(Request $request): Response
