@@ -33,7 +33,7 @@ Route::prefix('/')->group(static function () {
         Route::get('/actualidad', [NationalLeagueController::class, 'news'])->name('national-league.news');
         Route::get('/equipos', [NationalLeagueController::class, 'teams'])->name('national-league.teams');
         Route::get('/calendario', [NationalLeagueController::class, 'calendar'])->name('national-league.calendar');
-        Route::get('/equipo/{team:sheet_name}', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
+        Route::get('/equipo/{sheet_name}', [NationalLeagueController::class, 'club'])->name('national-league.teams.club');
         Route::get('/partido/{game:slug}', [NationalLeagueController::class, 'game'])->name('national-league.game');
     });
 
