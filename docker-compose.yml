@@ -21,7 +21,6 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
-            - testing_net
         depends_on:
             - postgres
             - redis
@@ -42,7 +41,6 @@ services:
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
             - sail
-            - testing_net
         healthcheck:
             test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
             retries: 3
@@ -97,23 +95,10 @@ services:
         networks:
             - sail
 
-    ngrok:
-        image: 'ngrok/ngrok:alpine'
-        environment:
-            NGROK_AUTHTOKEN: '${NGROK_AUTHTOKEN}'
-        command: 'http --url=kodiak-content-awfully.ngrok-free.app laravel.test:80'
-        ports:
-            - '4040:4040'
-        networks:
-            - sail
-        depends_on:
-            - laravel.test
 
 networks:
     sail:
         driver: bridge
-    testing_net:
-        external: true
 
 volumes:
     sail-mysql:
