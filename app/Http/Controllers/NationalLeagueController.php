@@ -32,14 +32,15 @@ class NationalLeagueController extends Controller
             'ranking' => $ranking,
         ]);
     }
+
     public function calendar(): Response
     {
-        $season  = Season::where('in_progress', true)->first();
-        $games  = Game::where('season_id', $season->id)->orderBy('date', 'asc')->get();
+        $season      = Season::where('in_progress', true)->first();
+        $games       = Game::where('season_id', $season->id)->orderBy('date', 'asc')->get();
         $gamesByDate = $games->groupBy(fn($game) => $game->date->format('Y-m-d'));
 
         return Inertia::render('League/Calendar', [
-            'games'  => $gamesByDate,
+            'games' => $gamesByDate,
         ]);
     }
 
@@ -55,7 +56,7 @@ class NationalLeagueController extends Controller
     public function stats(NationalLeagueStatsRequest $request, TeamStatsArranger $teamStatsArranger): Response
     {
         $stats = $teamStatsArranger(day: $request->day);
-        $days = Game::getDaysWithStatus();
+        $days  = Game::getDaysWithStatus();
 
         return Inertia::render('League/Stats', [
             'stats'     => $stats->stats(),
@@ -77,8 +78,11 @@ class NationalLeagueController extends Controller
         return Inertia::render('Teams/Index');
     }
 
-    public function club(Team $team): Response
+    public function club(Request $request): Response
     {
+        $season = Season::where('in_progress', true)->first();
+        $team   = Team::where('sheet_name', $request->sheet_name)->andWhere('season_id', $season->id)->first();
+
         return Inertia::render('Teams/Club', [
             'team' => $team,
         ]);
