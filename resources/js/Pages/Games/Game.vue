@@ -125,7 +125,7 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
 }
 
 .match-summary .match-summary__stats--container-scorers {
-    @apply w-full flex flex-row items-start bg-white pb-5 pt-20 -mt-14 z-0 rounded-b-3xl dark:bg-surface-0;
+    @apply w-full flex flex-row items-start bg-white pb-5 pt-20 -mt-14 z-0 rounded-b-3xl dark:bg-surface-900 dark:text-surface-0;
 }
 
 .match-summary__stats--container-global {
@@ -133,11 +133,11 @@ const statsLoaded = ref(props.game.stats['home'].passes!==0);
 }
 
 .match-summary__stats--container-global__players {
-    @apply flex flex-col w-full lg:w-3/6 bg-white py-10 px-5 rounded-2xl dark:bg-surface-0;
+    @apply flex flex-col w-full lg:w-3/6 bg-white py-10 px-5 rounded-2xl dark:bg-surface-900 dark:text-surface-0;
 }
 
 .match-summary__stats--container-global__generic {
-    @apply flex bg-white rounded-2xl flex-col w-full py-10 px-5 dark:bg-surface-0;
+    @apply flex bg-white rounded-2xl flex-col w-full py-10 px-5 dark:bg-surface-900 dark:text-surface-0;
 }
 
 .match-summary__title {
