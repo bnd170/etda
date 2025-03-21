@@ -171,6 +171,7 @@ class ImportData extends Command implements PromptsForMissingInput
     private function importGameStats(Sheet $sheet)
     {
         $match_id  = 'match_'.$sheet->getProperties()->getTitle();
+        dump('Match ID: ',$match_id);
         $goals     = $this->parseGameGoals($sheet);
         $gameStats = $sheet->getProperties()->getTitle().'!A9:F18';
         $response  = $this->service->spreadsheets_values->get($this->sheetId, $gameStats);
@@ -185,6 +186,11 @@ class ImportData extends Command implements PromptsForMissingInput
         $rows['goals']['away'] = $goals['away'];
 
         $game = Game::where('sheet_id', $match_id)->first();
+
+        if ($game === null) {
+            return;
+        }
+
         $game->update(['stats' => $this->parseGameStats($rows)]);
     }
 
