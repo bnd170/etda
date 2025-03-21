@@ -57,6 +57,7 @@ class TeamStats
             yellowCards: 0,
             redCards: 0,
             penalties: 0,
+            goals: [],
             games: 0
         );
     }
