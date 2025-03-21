@@ -87,6 +87,10 @@ class ImportData extends Command implements PromptsForMissingInput
         $rows     = $this->rowsToJson($response->getValues());
 
         foreach ($rows as $row) {
+            if ($row['GOLES LOCAL'] === '-' && $row['GOLES VISITANTE'] === '-') {
+                continue;
+            }
+
             Game::updateOrCreate(
                 [
                     'season_id' => $season->id,
