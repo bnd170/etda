@@ -107,7 +107,7 @@ class TeamStats
     {
         try {
             return round($this->effectivity / $this->games);
-        } catch (\Exception) {
+        } catch (\Exception|\Throwable) {
             return 0;
         }
     }
