@@ -36,7 +36,7 @@ defineProps({
                       :per-page-custom="[[320,1]]">
                 <slide v-for="article in news">
                     <a :href="route('news.post', {'slug': article.slug})">
-                        <div class="relative  transition duration-300 ease-out">
+                        <div class="relative transition duration-300 ease-out">
                             <img
                                 :src="article.cover"
                                 class="object-cover w-full h-[300px] lg:h-[600px]" alt="Campeon de Liga"/>
